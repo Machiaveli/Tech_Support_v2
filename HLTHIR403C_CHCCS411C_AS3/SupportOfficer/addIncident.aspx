@@ -6,6 +6,7 @@ private void AddIncident(object source, EventArgs e) {
     {
         txtLastModified.Text = DateTime.Now.ToString("MM/dd/yyyy");
         txtJobStatus.Text = "Open";
+        string jobStatus = "Open";
         SqlDataSource3.Insert();
         SqlDataSource5.Insert();
     }
