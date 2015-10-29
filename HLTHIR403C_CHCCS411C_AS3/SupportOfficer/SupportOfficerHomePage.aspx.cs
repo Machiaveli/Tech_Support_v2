@@ -93,6 +93,12 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
             }
         }
 
+        protected void btnAddIncident_Click(object sender, EventArgs e)
+        {
+            Session["selectedCustomer"] = GridViewCustomers.SelectedValue;
+            Response.Redirect("addIncident.aspx");
+        }
+
         
 
         
