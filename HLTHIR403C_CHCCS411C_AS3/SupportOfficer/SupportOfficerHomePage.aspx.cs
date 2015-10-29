@@ -1,4 +1,9 @@
-﻿using System;
+﻿/**
+ * Bugs to be fixed:
+ * Sorting creates error
+ * paging creates error
+ * */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,8 +16,8 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblHiddenUserName.Visible = false;
-            lblHiddenUserName.Text = User.Identity.Name.ToString();
+            //lblHiddenUserName.Visible = false;
+            //lblHiddenUserName.Text = User.Identity.Name.ToString();
             
         }
 
@@ -20,16 +25,32 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
         {
             if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("customerID"))
             {
-                GridView1.DataSourceID = "";
-                GridView1.DataSource = SqlDataSource1;
-                GridView1.DataBind();
+                try
+                {
+                    GridViewCustomers.DataSourceID = "";
+                    GridViewCustomers.DataSource = DataSourceSearchCustByID;
+                    GridViewCustomers.DataBind();
+                    
+                }
+                catch (Exception) { }
+                finally
+                {
+                    // switch data source
+                }
             }
             else if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("customerLastName"))
             {
-                GridView1.DataSourceID = "";
-                GridView1.DataSource = SqlDataSourceSearchByCustLastName;
-                GridView1.DataBind();   
-                // added comment
+                try
+                {
+                    GridViewCustomers.DataSourceID = "";
+                    GridViewCustomers.DataSource = DataSourceSearchCustByLastName;
+                    GridViewCustomers.DataBind();
+                }
+                catch (Exception)  { }
+                finally
+                {
+                    // switch datasource
+                }
             }
         }
     }
