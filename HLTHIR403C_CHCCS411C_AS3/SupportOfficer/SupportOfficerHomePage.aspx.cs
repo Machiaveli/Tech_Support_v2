@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 
 namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
 {
@@ -53,5 +54,47 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
                 }
             }
         }
+
+        private string ConvertSortDirectionToSql(SortDirection sortDirection)
+        {
+            string newSortDirection = String.Empty;
+
+            switch (sortDirection)
+            {
+                case SortDirection.Ascending:
+                    newSortDirection = "ASC";
+                    break;
+
+                case SortDirection.Descending:
+                    newSortDirection = "DESC";
+                    break;
+            }
+
+            return newSortDirection;
+        }
+
+        protected void GridViewCustomers_PageIndexChanged(object sender, GridViewPageEventArgs e)
+        {
+            GridViewCustomers.PageIndex = e.NewPageIndex;
+            GridViewCustomers.DataBind();
+        }
+
+        protected void GridViewCustomers_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            DataTable dataTable = GridViewCustomers.DataSource as DataTable;
+
+            if (dataTable != null)
+            {
+                DataView dataView = new DataView(dataTable);
+                dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+                GridViewCustomers.DataSource = dataView;
+                GridViewCustomers.DataBind();
+            }
+        }
+
+        
+
+        
     }
 }
