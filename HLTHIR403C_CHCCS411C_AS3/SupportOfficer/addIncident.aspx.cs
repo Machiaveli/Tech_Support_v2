@@ -12,7 +12,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void btnAddIncident_Click(object sender, EventArgs e)
@@ -26,6 +26,12 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
             DropDownList2.DataSourceID = "SqlDataSource2";
             DropDownList2.DataBind();
         }
+
+        protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList3.SelectedIndex = -1;
+        }
+
 
     }
 }

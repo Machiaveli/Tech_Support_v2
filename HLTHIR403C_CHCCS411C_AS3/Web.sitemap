@@ -6,5 +6,6 @@
     <siteMapNode url="Admin/registration.aspx" title="New User Registration"  description="New User Registration" />
     <siteMapNode url="Admin/addCustomer.aspx" title="Admin New Customer"  description="Add new customer" roles="Editors"  />
     <siteMapNode url="Admin/customers.aspx" title="Admin View Customers"  description="View customer" roles="Editors"  />
+    <siteMapNode url="SupportOfficer/SupportOfficerHomePage.aspx" title="View Customers"  description="View customer" roles="Editors"  />
   </siteMapNode>
 </siteMap>
