@@ -1,4 +1,10 @@
-﻿using System;
+﻿// Author: Yusuf Bhyat - 4105558614
+// Purpose: ASP.NET C# Web_Based Application - TechSupport Project 
+//          Master page controling content pages 
+// Known bugs: None at the time of testing
+// Version: 1.0
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,10 +17,7 @@ namespace HLTHIR403C_CHCCS411C_AS3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!Page.User.IsInRole(""))
-            //{
-            //    menuPanel.Visible = false;
-            //}
+           
         }
     }
 }
