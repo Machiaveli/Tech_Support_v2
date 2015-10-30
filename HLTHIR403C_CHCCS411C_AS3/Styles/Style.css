@@ -1,4 +1,12 @@
-﻿body {
+﻿/* Author: Yusuf Bhyat - 4105558614
+// Purpose: ASP.NET C# Web_Based Application - TechSupport Project 
+//          This page styles the Masterpage which applies a common style to the entire site
+// Known bugs: None at the time of testing
+// Version: 1.0 */
+
+
+
+body {
     color: #FFFF00;
     font-family: Arial, Helvetica, sans-serif;
     font-size: .80em;

@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="accountManagement.aspx" />
     <Content Include="Admin\addCustomer.aspx" />
     <Content Include="Admin\customers.aspx" />
     <Content Include="Admin\insertCustomer.aspx" />
@@ -86,6 +87,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="accountManagement.aspx.cs">
+      <DependentUpon>accountManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="accountManagement.aspx.designer.cs">
+      <DependentUpon>accountManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\addCustomer.aspx.cs">
       <DependentUpon>addCustomer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
