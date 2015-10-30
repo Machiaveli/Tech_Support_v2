@@ -13,21 +13,21 @@ namespace HLTHIR403C_CHCCS411C_AS3 {
     public partial class accountManagement {
         
         /// <summary>
-        /// Label2 control.
+        /// ChangePassword3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.ChangePassword ChangePassword3;
         
         /// <summary>
-        /// ChangePassword2 control.
+        /// SqlDataSource1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ChangePassword ChangePassword2;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
     }
 }
