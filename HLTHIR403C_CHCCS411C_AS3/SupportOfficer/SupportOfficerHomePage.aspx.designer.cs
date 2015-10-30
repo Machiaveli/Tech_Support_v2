@@ -13,13 +13,31 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
     public partial class SupportOfficerHomePage {
         
         /// <summary>
-        /// Label1 control.
+        /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
+        /// lblSearchRecords control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSearchRecords;
         
         /// <summary>
         /// txtSearchQuery control.
@@ -49,6 +67,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
+        /// lblOpenIncidents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOpenIncidents;
+        
+        /// <summary>
         /// GridViewCustomers control.
         /// </summary>
         /// <remarks>
@@ -67,6 +94,24 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         protected global::System.Web.UI.WebControls.SqlDataSource DataSourceListMyIncidents;
         
         /// <summary>
+        /// lblCustomerRegistrationResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCustomerRegistrationResults;
+        
+        /// <summary>
+        /// GridViewDisplayCustomers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewDisplayCustomers;
+        
+        /// <summary>
         /// DataSourceSearchCustByLastName control.
         /// </summary>
         /// <remarks>
@@ -74,15 +119,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource DataSourceSearchCustByLastName;
-        
-        /// <summary>
-        /// btnAddIncident control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddIncident;
         
         /// <summary>
         /// SqlDataSource1 control.
@@ -119,6 +155,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource DataSourceSelectedCustomersIncidents;
+        
+        /// <summary>
+        /// btnAddIncident control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddIncident;
         
         /// <summary>
         /// lblHiddenUserName control.
