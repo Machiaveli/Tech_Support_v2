@@ -9,20 +9,20 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <br />
     
-    <table width="100%" class="auto-style3">
+    <table  class="auto-style3">
         <tr>
-            <td width="33.3%" >&nbsp;</td>
-            <td width="33.3%" >
+            <td  >&nbsp;</td>
+            <td  >
                 &nbsp;</td>
-            <td width="33.3%" >
+            <td  >
     <asp:Label ID="Label2" runat="server" Text="Account Management" Font-Bold="False" Font-Size="Larger" style="text-align: left"></asp:Label>
             </td>
         </tr>
         <tr>
-            <td width="33.3%" >&nbsp;</td>
-            <td width="33.3%" >
+            <td  >&nbsp;</td>
+            <td  >
                 &nbsp;</td>
-            <td width="33.3%" >
+            <td  >
                 <asp:ChangePassword ID="ChangePassword2" runat="server" BackColor="#F7F6F3" BorderColor="#E6E2D8" BorderPadding="4" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="Medium" ForeColor="#0066FF" style="text-align: left">
                     <CancelButtonStyle BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#284775" />
                     <ChangePasswordButtonStyle BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#284775" />
