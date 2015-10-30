@@ -4,26 +4,18 @@
         .auto-style3 {
             width: 733px;
         }
+        .auto-style6 {
+            width: 243px;
+        }
+        .auto-style7 {
+        }
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <br />
-    
-    <table  class="auto-style3">
-        <tr>
-            <td  >&nbsp;</td>
-            <td  >
-                &nbsp;</td>
-            <td  >
-    <asp:Label ID="Label2" runat="server" Text="Account Management" Font-Bold="False" Font-Size="Larger" style="text-align: left"></asp:Label>
-            </td>
-        </tr>
-        <tr>
-            <td  >&nbsp;</td>
-            <td  >
-                &nbsp;</td>
-            <td  >
-                <asp:ChangePassword ID="ChangePassword2" runat="server" BackColor="#F7F6F3" BorderColor="#E6E2D8" BorderPadding="4" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="Medium" ForeColor="#0066FF" style="text-align: left">
+    <h1>Account Management</h1>
+
+    <div style="width: 400px; margin-left: auto; margin-right:auto;">
+                <asp:ChangePassword ID="ChangePassword3" runat="server" BackColor="#F7F6F3" BorderColor="#E6E2D8" BorderPadding="4" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="Medium" ForeColor="#003366" style="text-align: left" CancelDestinationPageUrl="~/landingPage.aspx" ContinueDestinationPageUrl="~/landingPage.aspx">
                     <CancelButtonStyle BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#284775" />
                     <ChangePasswordButtonStyle BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#284775" />
                     <ContinueButtonStyle BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#284775" />
@@ -32,9 +24,9 @@
                     <TextBoxStyle Font-Size="0.8em" />
                     <TitleTextStyle BackColor="#5D7B9D" Font-Bold="True" Font-Size="0.9em" ForeColor="White" />
                 </asp:ChangePassword>
-            </td>
-        </tr>
-    </table>
-    <br />
-    <br />
+            </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 </asp:Content>
