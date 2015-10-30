@@ -171,6 +171,7 @@
     </Compile>
     <Compile Include="Technician\searchCustomer.aspx.cs">
       <DependentUpon>searchCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Technician\searchCustomer.aspx.designer.cs">
       <DependentUpon>searchCustomer.aspx</DependentUpon>

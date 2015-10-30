@@ -49,31 +49,40 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// GridView1 control.
+        /// GridViewCustomers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.GridView GridViewCustomers;
         
         /// <summary>
-        /// SqlDataSourceSearchByCustLastName control.
+        /// DataSourceListMyIncidents control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceSearchByCustLastName;
+        protected global::System.Web.UI.WebControls.SqlDataSource DataSourceListMyIncidents;
         
         /// <summary>
-        /// SqlDataSource1 control.
+        /// DataSourceSearchCustByLastName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.SqlDataSource DataSourceSearchCustByLastName;
+        
+        /// <summary>
+        /// DataSourceSearchCustByID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DataSourceSearchCustByID;
         
         /// <summary>
         /// DetailsView1 control.
@@ -85,13 +94,13 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         protected global::System.Web.UI.WebControls.DetailsView DetailsView1;
         
         /// <summary>
-        /// sqlDataSourceListIncidents control.
+        /// DataSourceSelectedCustomersIncidents control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlDataSourceListIncidents;
+        protected global::System.Web.UI.WebControls.SqlDataSource DataSourceSelectedCustomersIncidents;
         
         /// <summary>
         /// lblHiddenUserName control.
