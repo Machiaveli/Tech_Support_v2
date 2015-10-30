@@ -82,7 +82,6 @@
     <Content Include="SupportOfficer\SupportOfficerHomePage.aspx" />
     <Content Include="Technician\searchCustomer.aspx" />
     <Content Include="Technician\technician.aspx" />
-    <Content Include="Technician\WebForm1.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -191,13 +190,6 @@
     </Compile>
     <Compile Include="Technician\technician.aspx.designer.cs">
       <DependentUpon>technician.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Technician\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Technician\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
