@@ -35,54 +35,28 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            //clear the current datasourceID
+            GridViewDisplayCustomers.DataSourceID = "";
             // binds the correct data source to the correct GridView depending on the dropdownlist Selection
             if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("customerID"))
-            {
-                try
-                {
-                    // bind the new data source to the GridView
-                    GridViewDisplayCustomers.DataSourceID = "";
-                    GridViewDisplayCustomers.DataSource = DataSourceSearchCustByID;
-                    GridViewDisplayCustomers.DataBind();
-
-                    GridViewCustomers.Visible = false;
-                    GridViewDisplayCustomers.Visible = true;
-                    lblOpenIncidents.Visible = false;
-                    lblCustomerRegistrationResults.Visible = true;
+            {              
+                GridViewDisplayCustomers.DataSourceID = "DataSourceSearchCustByID";
+                GridViewDisplayCustomers.DataBind();
+                GridViewCustomers.Visible = false;
+                GridViewDisplayCustomers.Visible = true;
+                lblOpenIncidents.Visible = false;
+                lblCustomerRegistrationResults.Visible = true;
                     
-                }
-                catch (Exception) { } // no error logging so no need to handle exception?
-                finally
-                {
-                    // use TryParse in order to determine what type of input (string or numeric) the user entered,
-                    // based on input type, switch data source so that a "Smart Search" feature is enabled,
-                    // which predicts what type of search the customer was trying to make (last name or ID)
-                    // created for convenience in case the customer forgot to change the dropdown list for the type
-                    // of search they wanted to do.
-                }
             }
+
             else if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("customerLastName"))
             {
-                try
-                {
-                    GridViewDisplayCustomers.DataSourceID = "";
-                    GridViewDisplayCustomers.DataSource = DataSourceSearchCustByLastName;
+                    GridViewDisplayCustomers.DataSourceID = "DataSourceSearchCustByLastName";
                     GridViewDisplayCustomers.DataBind();
-
                     GridViewCustomers.Visible = false;
                     GridViewDisplayCustomers.Visible = true;
                     lblOpenIncidents.Visible = false;
                     lblCustomerRegistrationResults.Visible = true;
-                }
-                catch (Exception) { } // no error logging so no need to handle exception?
-                finally
-                {
-                    // use TryParse in order to determine what type of input (string or numeric) the user entered,
-                    // based on input type, switch data source so that a "Smart Search" feature is enabled,
-                    // which predicts what type of search the customer was trying to make (last name or ID)
-                    // created for convenience in case the customer forgot to change the dropdown list for the type
-                    // of search they wanted to do.
-                }
             }
             else if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("ListMyIncidents"))
             {
