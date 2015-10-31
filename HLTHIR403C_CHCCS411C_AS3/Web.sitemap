@@ -1,12 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <siteMapNode url="landingPage.aspx" title="Home">
-    <siteMapNode url="SupportOfficer/addIncident.aspx" title="Support Officer"  description="Support Officer" roles="SupportOfficer" />
+    <siteMapNode url="SupportOfficer/addIncident.aspx" title="Add Incident"  description="Add new Incident" roles="SupportOfficer" />
     <siteMapNode url="Technician/technician.aspx" title="Technician"  description="Technicians Incidents" roles="Technician" />
-    <siteMapNode url="Admin/registration.aspx" title="New User Registration"  description="New User Registration" roles="Admin" />
+    <siteMapNode url="Admin/registration.aspx" title="User Registration"  description="New User Registration" roles="Admin" />
     <siteMapNode url="Admin/addCustomer.aspx" title="Admin New Customer"  description="Add new customer" roles="Admin"  />
     <siteMapNode url="Admin/customers.aspx" title="Admin View Customers"  description="View customer" roles="Admin"  />
     <siteMapNode url="SupportOfficer/SupportOfficerHomePage.aspx" title="View Customers"  description="View customer" roles="SupportOfficer"  />
-    <siteMapNode url="accountManagement.aspx" title="Account Management"  description="Reset your password"  />
-  </siteMapNode>
+    <siteMapNode url="AccountManagement/accountManagement.aspx" title="Account Management"  description="Reset your password"  />
+    <siteMapNode url="Admin/manageAllUsers.aspx" title="Management Accounts"  description="Administer all user accounts"  />
+   </siteMapNode>
 </siteMap>
+
+

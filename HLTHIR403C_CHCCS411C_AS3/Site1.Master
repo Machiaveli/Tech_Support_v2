@@ -54,10 +54,10 @@
                 </LoggedInTemplate>
             </asp:LoginView>
 
-            </br>
-            </br>
+            <br />
+            <br />
             <asp:LoginStatus ID="LoginStatus1" runat="server" LoginText="" LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/default.aspx" />
-            </br>
+            <br />
         </div>
 
 

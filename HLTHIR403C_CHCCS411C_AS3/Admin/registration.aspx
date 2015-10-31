@@ -11,6 +11,21 @@
     &nbsp;<br />
     <h1>New Account Registration</h1>
     <div style="width: 400px; margin-left: auto; margin-right:auto;">
+        <br />
+        <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" CellPadding="4" DataSourceID="lastUsedUserName" ForeColor="#003366" GridLines="None" Height="50px" Width="350px">
+            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+            <CommandRowStyle BackColor="#E2DED6" Font-Bold="True" />
+            <EditRowStyle BackColor="#999999" />
+            <FieldHeaderStyle BackColor="#E9ECF1" Font-Bold="True" />
+            <Fields>
+                <asp:BoundField DataField="UserName" HeaderText="Last Used User Name" SortExpression="UserName" />
+            </Fields>
+            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+        </asp:DetailsView>
+        <br />
         <asp:CreateUserWizard ID="CreateUserWizard2" runat="server" OnCreatedUser="CreateUserWizard2_CreatedUser" BackColor="#F7F6F3" BorderColor="#E6E2D8" BorderStyle="Solid" BorderWidth="1px" ContinueDestinationPageUrl="~/Admin/registration.aspx" Font-Names="Verdana" Font-Size="Medium" ForeColor="#003366" LoginCreatedUser="False">
             <ContinueButtonStyle BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" ForeColor="#284775" />
             <CreateUserButtonStyle BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" ForeColor="#284775" />
@@ -28,7 +43,8 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="UserName" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="CreateUserWizard2">*</asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="CreateUserWizard2" Display="Dynamic">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="UserName" Display="Dynamic" ErrorMessage="User Name must be Numeric" ValidationExpression="^\d+$" ValidationGroup="CreateUserWizard2">*</asp:RegularExpressionValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -136,6 +152,7 @@
                             <tr>
                                 <td align="center" colspan="2" style="color:Red;">
                                     <asp:Literal ID="ErrorMessage" runat="server" EnableViewState="False"></asp:Literal>
+                                    <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="CreateUserWizard2" />
                                 </td>
                             </tr>
                         </table>
@@ -183,5 +200,7 @@
             <asp:Parameter Name="UserID" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
+    
+    <asp:SqlDataSource ID="lastUsedUserName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [UserName] FROM [Users] ORDER BY [UserName] DESC"></asp:SqlDataSource>
     
 </asp:Content>
