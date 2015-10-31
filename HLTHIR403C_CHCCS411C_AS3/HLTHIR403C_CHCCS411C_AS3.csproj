@@ -57,7 +57,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="accountManagement.aspx" />
+    <Content Include="AccountManagement\accountManagement.aspx" />
+    <Content Include="Admin\manageAllUsers.aspx" />
     <Content Include="Admin\addCustomer.aspx" />
     <Content Include="Admin\customers.aspx" />
     <Content Include="Admin\insertCustomer.aspx" />
@@ -70,6 +71,7 @@
       <DependentUpon>TechSupport.mdf</DependentUpon>
     </Content>
     <Content Include="default.aspx" />
+    <Content Include="disabled.aspx" />
     <Content Include="Global.asax" />
     <Content Include="images\pc.jpg" />
     <Content Include="images\tech support logo.png" />
@@ -87,12 +89,19 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="accountManagement.aspx.cs">
+    <Compile Include="AccountManagement\accountManagement.aspx.cs">
       <DependentUpon>accountManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="accountManagement.aspx.designer.cs">
+    <Compile Include="AccountManagement\accountManagement.aspx.designer.cs">
       <DependentUpon>accountManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\manageAllUsers.aspx.cs">
+      <DependentUpon>manageAllUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\manageAllUsers.aspx.designer.cs">
+      <DependentUpon>manageAllUsers.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\addCustomer.aspx.cs">
       <DependentUpon>addCustomer.aspx</DependentUpon>
@@ -130,6 +139,13 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="disabled.aspx.cs">
+      <DependentUpon>disabled.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="disabled.aspx.designer.cs">
+      <DependentUpon>disabled.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
