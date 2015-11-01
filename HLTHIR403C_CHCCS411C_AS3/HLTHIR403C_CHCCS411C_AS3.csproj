@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AccManage\pswReset.aspx" />
     <Content Include="Admin\manageAllUsers.aspx" />
     <Content Include="Admin\addCustomer.aspx" />
     <Content Include="Admin\customers.aspx" />
@@ -72,7 +73,6 @@
     <Content Include="default.aspx" />
     <Content Include="disabled.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="images\pc.jpg" />
     <Content Include="images\tech support logo.png" />
     <Content Include="images\tech support logo_sml.png" />
     <Content Include="landingPage.aspx" />
@@ -88,6 +88,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccManage\pswReset.aspx.cs">
+      <DependentUpon>pswReset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccManage\pswReset.aspx.designer.cs">
+      <DependentUpon>pswReset.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\manageAllUsers.aspx.cs">
       <DependentUpon>manageAllUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -206,6 +213,7 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
     <Content Include="Admin\Web.config" />
+    <Content Include="AccManage\web.config" />
     <None Include="DataSet1.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -226,9 +234,7 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AccManage\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
