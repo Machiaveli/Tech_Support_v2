@@ -19,7 +19,7 @@
             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
             <asp:BoundField DataField="Version" HeaderText="Version" SortExpression="Version" />
             <asp:BoundField DataField="ReleaseDate" HeaderText="ReleaseDate" SortExpression="ReleaseDate" DataFormatString="{0:d}"/>   
-            <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />       
+            <asp:CommandField ShowEditButton="True" />       
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
