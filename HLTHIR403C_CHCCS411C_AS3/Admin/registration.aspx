@@ -18,7 +18,7 @@
             <EditRowStyle BackColor="#999999" />
             <FieldHeaderStyle BackColor="#E9ECF1" Font-Bold="True" />
             <Fields>
-                <asp:BoundField DataField="UserName" HeaderText="Last Used User Name" SortExpression="UserName" />
+                <asp:BoundField DataField="UserName" HeaderText="Last Used User ID:" SortExpression="UserName" />
             </Fields>
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
             <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -201,6 +201,6 @@
         </UpdateParameters>
     </asp:SqlDataSource>
     
-    <asp:SqlDataSource ID="lastUsedUserName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [UserName] FROM [Users] ORDER BY [UserName] DESC"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="lastUsedUserName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [UserName] FROM [Users] ORDER BY [UserID] DESC"></asp:SqlDataSource>
     
 </asp:Content>
