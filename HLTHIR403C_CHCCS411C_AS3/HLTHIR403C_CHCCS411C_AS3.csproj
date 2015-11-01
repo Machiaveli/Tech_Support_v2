@@ -194,7 +194,6 @@
     </Compile>
     <Compile Include="Technician\technician.aspx.cs">
       <DependentUpon>technician.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Technician\technician.aspx.designer.cs">
       <DependentUpon>technician.aspx</DependentUpon>
