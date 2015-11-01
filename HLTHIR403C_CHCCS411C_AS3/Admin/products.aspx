@@ -79,10 +79,31 @@
     </asp:GridView>
     <br />
              
-    <asp:SqlDataSource ID="sqlSearchProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Products] WHERE ([ProductCode] = @ProductCode)">
+    <asp:SqlDataSource ID="sqlSearchProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Products] WHERE ([ProductCode] = @ProductCode)" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Products] WHERE [ProductCode] = @original_ProductCode AND [Name] = @original_Name AND [Version] = @original_Version AND [ReleaseDate] = @original_ReleaseDate" InsertCommand="INSERT INTO [Products] ([ProductCode], [Name], [Version], [ReleaseDate]) VALUES (@ProductCode, @Name, @Version, @ReleaseDate)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Products] SET [Name] = @Name, [Version] = @Version, [ReleaseDate] = @ReleaseDate WHERE [ProductCode] = @original_ProductCode AND [Name] = @original_Name AND [Version] = @original_Version AND [ReleaseDate] = @original_ReleaseDate">
+        <DeleteParameters>
+            <asp:Parameter Name="original_ProductCode" Type="String" />
+            <asp:Parameter Name="original_Name" Type="String" />
+            <asp:Parameter Name="original_Version" Type="Decimal" />
+            <asp:Parameter Name="original_ReleaseDate" Type="DateTime" />
+        </DeleteParameters>
+        <InsertParameters>
+            <asp:Parameter Name="ProductCode" Type="String" />
+            <asp:Parameter Name="Name" Type="String" />
+            <asp:Parameter Name="Version" Type="Decimal" />
+            <asp:Parameter Name="ReleaseDate" Type="DateTime" />
+        </InsertParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="txtSearch" Name="ProductCode" PropertyName="Text" Type="String" />
         </SelectParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="Name" Type="String" />
+            <asp:Parameter Name="Version" Type="Decimal" />
+            <asp:Parameter Name="ReleaseDate" Type="DateTime" />
+            <asp:Parameter Name="original_ProductCode" Type="String" />
+            <asp:Parameter Name="original_Name" Type="String" />
+            <asp:Parameter Name="original_Version" Type="Decimal" />
+            <asp:Parameter Name="original_ReleaseDate" Type="DateTime" />
+        </UpdateParameters>
     </asp:SqlDataSource>
              
 </asp:Content>

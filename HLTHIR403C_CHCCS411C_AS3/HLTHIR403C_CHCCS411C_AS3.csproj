@@ -59,6 +59,7 @@
   <ItemGroup>
     <Content Include="AccManage\pswReset.aspx" />
     <Content Include="Admin\addProduct.aspx" />
+    <Content Include="Admin\link.aspx" />
     <Content Include="Admin\manageAllUsers.aspx" />
     <Content Include="Admin\addCustomer.aspx" />
     <Content Include="Admin\customers.aspx" />
@@ -95,6 +96,13 @@
     </Compile>
     <Compile Include="Admin\addProduct.aspx.designer.cs">
       <DependentUpon>addProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\link.aspx.cs">
+      <DependentUpon>link.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\link.aspx.designer.cs">
+      <DependentUpon>link.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\manageAllUsers.aspx.cs">
       <DependentUpon>manageAllUsers.aspx</DependentUpon>
