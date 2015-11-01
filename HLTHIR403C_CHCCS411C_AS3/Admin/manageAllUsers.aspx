@@ -4,6 +4,20 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>User Administration</h1>
     <div style="width: 900px; margin-left: auto; margin-right:auto;">
+        <asp:Label ID="Label3" runat="server" Text="Search users:"></asp:Label>
+
+    &nbsp;
+
+    <asp:TextBox ID="txtSearch" runat="server" style="margin-bottom: 0px" Width="181px"></asp:TextBox>
+                   &nbsp;
+                   <asp:DropDownList ID="dropDownSearchFilter" runat="server" AutoPostBack="true">
+                <asp:ListItem Value="userLastName" Selected="True">Last Name</asp:ListItem>
+                <asp:ListItem Value="userID">User ID</asp:ListItem>
+            </asp:DropDownList>
+    &nbsp;
+            <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" Width="74px" />
+        <br />
+        <br />
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -79,7 +93,18 @@
                 <asp:Parameter Name="UserID" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
-        <br />
-        <br />
+        <asp:SqlDataSource ID="sqlSearchLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+            SelectCommand="SELECT [UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus] FROM [Users] WHERE ([LastName] LIKE '%' + @LastName + '%')">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="txtSearch" Name="LastName" PropertyName="Text" Type="String" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="sqlSearchUserID" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+            SelectCommand="SELECT [UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus] FROM [Users] WHERE ([UserID] = @UserID)">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="txtSearch" Name="UserID" PropertyName="Text" Type="Int32" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+
     </div>
 </asp:Content>

@@ -19,5 +19,10 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
         {
 
         }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
