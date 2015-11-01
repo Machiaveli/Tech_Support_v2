@@ -7,7 +7,7 @@
     <siteMapNode url="Admin/addCustomer.aspx" title="Admin New Customer"  description="Add new customer" roles="Admin"  />
     <siteMapNode url="Admin/customers.aspx" title="Admin View Customers"  description="View customer" roles="Admin"  />
     <siteMapNode url="SupportOfficer/SupportOfficerHomePage.aspx" title="View Customers"  description="View customer" roles="SupportOfficer"  />
-    <siteMapNode url="AccountManagement/accountManagement.aspx" title="Account Management"  description="Reset your password"  />
+    <siteMapNode url="AccManage/pswReset.aspx" title="Account Management"  description="Reset your password"  />
     <siteMapNode url="Admin/manageAllUsers.aspx" title="Management Accounts"  description="Administer all user accounts"  />
    </siteMapNode>
 </siteMap>
