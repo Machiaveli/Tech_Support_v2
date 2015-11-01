@@ -11,7 +11,14 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            gvProducts.Visible = true;
+            gvSearch.Visible = false;
+        }
 
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            gvProducts.Visible = false;
+            gvSearch.Visible = true;
         }
     }
 }
