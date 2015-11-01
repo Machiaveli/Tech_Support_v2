@@ -8,7 +8,7 @@
 // Update command for after a user has selected an incident, and has selected "Edit" in the details view, i have gotten it so that the title can be updated
 // however i cannot select any other fields for it to update. To see what i mean, Select "DataSourceDetailsView" and look at its properties.
 // Looks at the "UpdateQuery" property and open it then select query builder. You are only able to select column from the Incidents table, meaning i can only update those.
-// Let me know if you have any questions or find a solution, - Kevin
+// Let me know if you have any questions or find a solution, - Kevin 
 
 using System;
 using System.Collections.Generic;
@@ -63,7 +63,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician
 
             else if (dropDownFilter.SelectedValue.ToString().Trim().Equals("ListAllClosedIncidents"))
             {
-
+                GridViewIncidentsDisplay.DataSourceID = "DataSourceAllClosedIncidents";
                 lblDisplayedInfoMessage.Text = "All Closed Incidents";
             }
             //Bind new data source to the GridView
