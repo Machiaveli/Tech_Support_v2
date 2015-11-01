@@ -71,7 +71,7 @@ a:link, a:visited {
                 <td width="33.3%">&nbsp;</td>
                 <td width="33.3%" align="center"> 
                     
-    <asp:Login ID="Login5" runat="server" Height="229px" Width="454px" CreateUserUrl="~/Admin/registration.aspx" DestinationPageUrl="~/landingPage.aspx" DisplayRememberMe="False">
+    <asp:Login ID="Login5" runat="server" Height="229px" Width="454px" CreateUserUrl="~/Admin/registration.aspx" DestinationPageUrl="~/landingPage.aspx" DisplayRememberMe="False" OnLoggedIn="Login5_LoggedIn">
         <LayoutTemplate>
             <table cellpadding="1" cellspacing="0" style="border-collapse:collapse;">
                 <tr>
