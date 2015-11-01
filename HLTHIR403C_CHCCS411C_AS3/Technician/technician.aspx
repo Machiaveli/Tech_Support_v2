@@ -63,7 +63,7 @@
             <asp:Label ID="lblDisplayedInfoMessage" runat="server" Font-Size="Large" Text="Your Open Incidents"></asp:Label>
             <br />
             <asp:GridView ID="GridViewIncidentsDisplay" runat="server" AllowPaging="True" AllowSorting="True" OnSorting="GridViewIncidentsDisplay_Sorting" AutoGenerateColumns="False" DataSourceID="DataSourceMyOpenIncidents" CellPadding="4" DataKeyNames="IncidentID" ForeColor="#333333" GridLines="None">
-                <AlternatingRowStyle BackColor="White" />
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:BoundField DataField="IncidentID" HeaderText="IncidentID" InsertVisible="False" ReadOnly="True" SortExpression="IncidentID" />
                     <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" SortExpression="CustomerID" />
@@ -78,16 +78,16 @@
                     <asp:BoundField DataField="UserName" HeaderText="UserName" SortExpression="UserName" />
                     <asp:CommandField ShowSelectButton="True" />
                 </Columns>
-                <EditRowStyle BackColor="#2461BF" />
-                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#EFF3FB" />
-                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-                <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                <EditRowStyle BackColor="#999999" />
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
             <asp:SqlDataSource ID="DataSourceMyOpenIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Incidents.IncidentID, Incidents.CustomerID, Incidents.ProductCode, Incidents.Title, IncidentsHistory.UserID, IncidentsHistory.LastModified, IncidentsHistory.Description, IncidentsHistory.JobStatus, Customers.FirstName, Customers.LastName, Users.UserName FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID INNER JOIN Customers ON Incidents.CustomerID = Customers.CustomerID INNER JOIN Users ON IncidentsHistory.UserID = Users.UserID WHERE (Users.UserName = @techName) AND (IncidentsHistory.JobStatus = 'Open')">
                 <SelectParameters>
