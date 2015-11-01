@@ -14,5 +14,18 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
         }
 
+        protected void InsertProduct(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlDataSource1.Insert();
+                Response.Redirect("products.aspx");
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
+        }
+
     }
 }

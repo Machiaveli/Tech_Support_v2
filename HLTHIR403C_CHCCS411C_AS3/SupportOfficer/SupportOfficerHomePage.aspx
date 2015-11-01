@@ -65,7 +65,7 @@
             <asp:Label ID="lblOpenIncidents" runat="server" Font-Size="Large" Text="Your Open Incidents"></asp:Label>
             <br />
             <asp:GridView ID="GridViewCustomers" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="IncidentID,Expr2" DataSourceID="DataSourceListMyIncidents" OnPageIndexChanging="GridViewCustomers_PageIndexChanged" OnSorting="GridViewCustomers_Sorting" CellPadding="4" ForeColor="#333333" GridLines="None">
-                <AlternatingRowStyle BackColor="White" />
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:BoundField DataField="IncidentID" HeaderText="IncidentID" InsertVisible="False" ReadOnly="True" SortExpression="IncidentID" />
                     <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" SortExpression="ProductCode" />
@@ -77,16 +77,16 @@
                     <asp:BoundField DataField="SolutionApplied" HeaderText="SolutionApplied" SortExpression="SolutionApplied" />
                     <asp:BoundField DataField="Expr2" HeaderText="Expr2" SortExpression="Expr2" ReadOnly="True" />
                 </Columns>
-                <EditRowStyle BackColor="#2461BF" />
-                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#EFF3FB" />
-                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-                <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                <EditRowStyle BackColor="#999999" />
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
             <br />
             <asp:SqlDataSource ID="DataSourceListMyIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Incidents.IncidentID, Incidents.ProductCode, Incidents.Title, Incidents.CustomerID, IncidentsHistory.LastModified, IncidentsHistory.JobStatus, IncidentsHistory.Description, IncidentsHistory.SolutionApplied, Users.UserID AS Expr2 FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID INNER JOIN Users ON IncidentsHistory.UserID = Users.UserID AND IncidentsHistory.UserID = Users.UserID WHERE (Users.UserName = @userName) AND (IncidentsHistory.JobStatus = 'Open')">
@@ -130,10 +130,10 @@
             </asp:SqlDataSource>
             <br />
             <asp:DetailsView ID="DetailsView1" runat="server" AllowPaging="True" AutoGenerateRows="False" DataKeyNames="IncidentID" DataSourceID="DataSourceSelectedCustomersIncidents" Height="50px" Width="735px" OnPageIndexChanged="DetailsView1_PageIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
-                <AlternatingRowStyle BackColor="White" />
-                <CommandRowStyle BackColor="#D1DDF1" Font-Bold="True" />
-                <EditRowStyle BackColor="#2461BF" />
-                <FieldHeaderStyle BackColor="#DEE8F5" Font-Bold="True" />
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                <CommandRowStyle BackColor="#E2DED6" Font-Bold="True" />
+                <EditRowStyle BackColor="#999999" />
+                <FieldHeaderStyle BackColor="#E9ECF1" Font-Bold="True" />
                 <Fields>
                     <asp:BoundField DataField="IncidentID" HeaderText="Incident ID" InsertVisible="False" ReadOnly="True" SortExpression="IncidentID" />
                     <asp:BoundField DataField="CustomerID" HeaderText="Customer ID" SortExpression="CustomerID" />
@@ -147,10 +147,10 @@
                     <asp:BoundField DataField="SolutionApplied" HeaderText="Solution Applied" SortExpression="SolutionApplied" />
                     <asp:BoundField DataField="UserID" HeaderText="User ID" SortExpression="UserID" />
                 </Fields>
-                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#EFF3FB" />
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
             </asp:DetailsView>
             <asp:SqlDataSource ID="DataSourceSelectedCustomersIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Incidents.IncidentID, Incidents.CustomerID, Incidents.ProductCode, Incidents.Title, IncidentsHistory.UserID, IncidentsHistory.LastModified, IncidentsHistory.Description, IncidentsHistory.JobStatus, IncidentsHistory.SolutionApplied, Customers.FirstName, Customers.LastName FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID INNER JOIN Customers ON Incidents.CustomerID = Customers.CustomerID WHERE (Incidents.CustomerID = @selectedCustID)">
                 <SelectParameters>
