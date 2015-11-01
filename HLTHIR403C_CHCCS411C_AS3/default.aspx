@@ -28,6 +28,10 @@ a:link, a:visited {
             font-size: 20pt;
         }
 
+        .auto-style5 {
+            width: 43px;
+        }
+
     </style>
 </head>
 <body>
@@ -76,43 +80,49 @@ a:link, a:visited {
             <table cellpadding="1" cellspacing="0" style="border-collapse:collapse;">
                 <tr>
                     <td>
-                        <table cellpadding="0" style="height:229px;width:454px;">
+                        <table cellpadding="0" style="height:229px;width:454px; margin-right: 0px;">
                             <tr>
-                                <td align="center" colspan="3" class="auto-style3"><strong><span class="auto-style4">Business Management System</span><br />
+                                <td align="center" colspan="2" class="auto-style3"><strong><span class="auto-style4">Business Management System</span><br />
                                     <br />
                                     </strong></td>
                             </tr>
                             <tr>
-                                <td align="right">
+                                <td colspan="1">
+
                                     <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">User Name:</asp:Label>
+
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="UserName" runat="server"></asp:TextBox>
+
+                                    <asp:TextBox ID="UserName" runat="server" style="text-align: left" Width="170px" TabIndex="1"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="Login5">*</asp:RequiredFieldValidator>
-                                </td>
-                                <td rowspan="2">
-                                    <asp:Button ID="LoginButton0" runat="server" CommandName="Login" style="text-align: right" Text="Log In" ValidationGroup="Login5" />
+
                                 </td>
                             </tr>
+
                             <tr>
-                                <td align="right">
+                                <td colspan="1">
+                                    
                                     <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
+
                                 </td>
-                                <td>
-                                    <asp:TextBox ID="Password" runat="server" TextMode="Password"></asp:TextBox>
+                                <td ;>
+                                       <asp:TextBox ID="Password" runat="server" TextMode="Password" Width="170px" style="text-align: left" TabIndex="2"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" ErrorMessage="Password is required." ToolTip="Password is required." ValidationGroup="Login5">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
+    <tr>
+       <td></td><td><asp:Button ID="LoginButton0" runat="server" CommandName="Login" Text="Log In" ValidationGroup="Login5" style="text-align: right; margin-left: 0px" Height="27px" TabIndex="3" /></td>
+         
+    </tr>                        
+                          
                             <tr>
                                 <td align="center" colspan="2" style="color:Red;">
                                     <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
                                 </td>
-                                <td align="center" style="color:Red;">&nbsp;</td>
+                          
                             </tr>
-                            <tr>
-                                <td align="right" colspan="2" style="text-align: center">&nbsp;</td>
-                                <td align="right" style="text-align: center">&nbsp;</td>
-                            </tr>
+                            
                         </table>
                     </td>
                 </tr>

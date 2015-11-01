@@ -6,7 +6,7 @@
     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" >
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
-            <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+            
             <asp:TemplateField HeaderText="CustomerID" InsertVisible="False" SortExpression="CustomerID">
                 <EditItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Eval("CustomerID") %>'></asp:Label>
@@ -87,6 +87,7 @@
                     <asp:Label ID="Label8" runat="server" Text='<%# Bind("Email") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

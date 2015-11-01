@@ -50,7 +50,7 @@
         <ContentTemplate>
             &nbsp;
             <br />
-            <asp:Label ID="lblSearchRecords" runat="server" Text="Search Records: "></asp:Label>
+            <asp:Label ID="lblSearchRecords" runat="server" Text="Search all customers: "></asp:Label>
             &nbsp;<asp:TextBox ID="txtSearchQuery" runat="server" style="margin-bottom: 0px" Width="181px"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;
             <asp:DropDownList ID="dropDownSearchFilter" runat="server" OnSelectedIndexChanged="dropDownSearchFilter_SelectedIndexChanged" AutoPostBack="true">
@@ -70,10 +70,10 @@
                     <asp:BoundField DataField="IncidentID" HeaderText="IncidentID" InsertVisible="False" ReadOnly="True" SortExpression="IncidentID" />
                     <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" SortExpression="ProductCode" />
                     <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
-                    <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" SortExpression="CustomerID" />
-                    <asp:BoundField DataField="LastModified" HeaderText="LastModified" SortExpression="LastModified" />
-                    <asp:BoundField DataField="JobStatus" HeaderText="JobStatus" SortExpression="JobStatus" />
                     <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
+                    <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" SortExpression="CustomerID" />
+                    <asp:BoundField DataField="JobStatus" HeaderText="JobStatus" SortExpression="JobStatus" />
+                    <asp:BoundField DataField="LastModified" HeaderText="LastModified" SortExpression="LastModified" />
                     <asp:BoundField DataField="SolutionApplied" HeaderText="SolutionApplied" SortExpression="SolutionApplied" />
                     <asp:BoundField DataField="Expr2" HeaderText="Expr2" SortExpression="Expr2" ReadOnly="True" />
                 </Columns>
@@ -95,7 +95,7 @@
                 </SelectParameters>
             </asp:SqlDataSource>
             <br />
-            <asp:Label ID="lblCustomerRegistrationResults" runat="server" Font-Size="Large" Text="The Following Customer Registrations Matched Your Search"></asp:Label>
+            <asp:Label ID="lblCustomerRegistrationResults" runat="server" Font-Size="Large" Text="The following customers matched your search:"></asp:Label>
             <br />
             <asp:GridView ID="GridViewDisplayCustomers" runat="server" AllowPaging="True" AllowSorting="True" DataKeyNames="CustomerID" DataSourceID="DataSourceSearchCustByLastName" OnSelectedIndexChanged="GridViewDisplayCustomers_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White" />

@@ -43,7 +43,7 @@
             <br />
         </div>
 
-        <div align="right" style="text-align: right; font-size: 18px">
+        <div align="right" style="text-align: right; font-size: 18px; padding-right:1em;">
             <asp:LoginView ID="LoginView1" runat="server">
                 <AnonymousTemplate>
                     &nbsp;
