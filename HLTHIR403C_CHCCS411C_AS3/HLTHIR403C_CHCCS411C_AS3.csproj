@@ -58,10 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AccManage\pswReset.aspx" />
+    <Content Include="Admin\addProduct.aspx" />
     <Content Include="Admin\manageAllUsers.aspx" />
     <Content Include="Admin\addCustomer.aspx" />
     <Content Include="Admin\customers.aspx" />
     <Content Include="Admin\insertCustomer.aspx" />
+    <Content Include="Admin\products.aspx" />
     <Content Include="App_Data\ASPNETDB.MDF" />
     <Content Include="App_Data\aspnetdb_log.ldf">
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
@@ -95,6 +97,13 @@
     <Compile Include="AccManage\pswReset.aspx.designer.cs">
       <DependentUpon>pswReset.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\addProduct.aspx.cs">
+      <DependentUpon>addProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\addProduct.aspx.designer.cs">
+      <DependentUpon>addProduct.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\manageAllUsers.aspx.cs">
       <DependentUpon>manageAllUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -122,6 +131,13 @@
     </Compile>
     <Compile Include="Admin\insertCustomer.aspx.designer.cs">
       <DependentUpon>insertCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\products.aspx.cs">
+      <DependentUpon>products.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\products.aspx.designer.cs">
+      <DependentUpon>products.aspx</DependentUpon>
     </Compile>
     <Compile Include="DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
