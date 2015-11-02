@@ -9,6 +9,12 @@
  * Known Bugs:
  * -MINOR- When system is displaying list of customers registrations and the user switches the search filter drop down list to "List My Incidents"
  *         the label above the customers registrations disappears
+ *         
+ * Edited: Sasha Graham - 5105498214
+ * 
+ * Added: ConvertSortDirectionToSql, GridViewCustomers_PageIndexChanged, GridViewCustomers_Sorting
+ * 
+ * Changed: SqlDataSource - DataSourceSearchCustByLastName, changed the sql select query.
  * */
 using System;
 using System.Collections.Generic;
