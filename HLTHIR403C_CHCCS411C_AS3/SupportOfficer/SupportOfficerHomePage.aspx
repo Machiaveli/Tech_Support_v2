@@ -1,44 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="SupportOfficerHomePage.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.SupportOfficer.SupportOfficerHomePage" %>
-<%@ Import Namespace="System.Data" %>
-<script runat="server">
-    private string ConvertSortDirectionToSql(SortDirection sortDirection)
-    {
-        string newSortDirection = String.Empty;
-
-        switch (sortDirection)
-        {
-            case SortDirection.Ascending:
-                newSortDirection = "ASC";
-                break;
-
-            case SortDirection.Descending:
-                newSortDirection = "DESC";
-                break;
-        }
-
-        return newSortDirection;
-    }
-
-    protected void GridViewCustomers_PageIndexChanging(object sender, GridViewPageEventArgs e)
-    {
-        GridViewCustomers.PageIndex = e.NewPageIndex;
-        GridViewCustomers.DataBind();
-    }
-
-    protected void GridViewCustomers_Sorting(object sender, GridViewSortEventArgs e)
-    {
-        DataTable dataTable = GridViewCustomers.DataSource as DataTable;
-
-        if (dataTable != null)
-        {
-            DataView dataView = new DataView(dataTable);
-            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
-
-            GridViewCustomers.DataSource = dataView;
-            GridViewCustomers.DataBind();
-        }
-    }
-</script>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -113,7 +73,7 @@
                 <SortedDescendingCellStyle BackColor="#E9EBEF" />
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
-            <asp:SqlDataSource ID="DataSourceSearchCustByLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Registrations.CustomerID, Registrations.ProductCode, Registrations.RegistrationDate, Customers.FirstName, Customers.LastName, Customers.Address, Customers.City, Customers.State, Customers.ZipCode, Customers.Phone, Customers.Email FROM Registrations INNER JOIN Customers ON Registrations.CustomerID = Customers.CustomerID WHERE (Customers.LastName LIKE '%' + @custLastName + '%')">
+            <asp:SqlDataSource ID="DataSourceSearchCustByLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM Customers WHERE (Customers.LastName LIKE '%' + @custLastName + '%')">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="txtSearchQuery" Name="custLastName" PropertyName="Text" />
                 </SelectParameters>
