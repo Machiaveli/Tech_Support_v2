@@ -11,10 +11,11 @@
  *         the label above the customers registrations disappears
  *         
  * Edited: Sasha Graham - 5105498214
+ * Last Edit: 11/2/2015
  * 
  * Added: ConvertSortDirectionToSql, GridViewCustomers_PageIndexChanged, GridViewCustomers_Sorting
  * 
- * Changed: SqlDataSource - DataSourceSearchCustByLastName, changed the sql select query.
+ * Changed: SqlDataSource - DataSourceSearchCustByLastName and DataSourceSearchCustByID, changed the sql select query.
  * */
 using System;
 using System.Collections.Generic;
