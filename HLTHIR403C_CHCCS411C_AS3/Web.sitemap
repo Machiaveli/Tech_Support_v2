@@ -3,14 +3,14 @@
   <siteMapNode url="landingPage.aspx" title="Home">
     <!--support officer only--> 
     <siteMapNode url="SupportOfficer/SupportOfficerHomePage.aspx" title="Search Customers"  description="Search customer" roles="SupportOfficer"  />
-    <siteMapNode url="SupportOfficer/addIncident.aspx" title="Add Incident"  description="Add new incident" roles="SupportOfficer" />
+    <!--<siteMapNode url="SupportOfficer/addIncident.aspx" title="Add Incident"  description="Add new incident" roles="SupportOfficer" />-->
     <!--technician only-->
     <siteMapNode url="Technician/technician.aspx" title="Technician"  description="Technician incidents" roles="Technician" />
     <!--admin only-->
     <siteMapNode url="Admin/addCustomer.aspx" title="Add Customer"  description="Add new customer" roles="Admin"  />
     <siteMapNode url="Admin/addProduct.aspx" title="Add Product"  description="Add new product" roles="Admin"  />
     <siteMapNode url="Admin/registration.aspx" title="Add User"  description="New user registration" roles="Admin" />
-    <siteMapNode url="Admin/link.aspx" title="Link Customer to Product"  description="Link customer to product" roles="Admin" />
+    <!--<siteMapNode url="Admin/link.aspx" title="Link Customer to Product"  description="Link customer to product" roles="Admin" />-->
     <siteMapNode url="Admin/customers.aspx" title="Manage Customers"  description="View and edit all customer accounts" roles="Admin"  />
     <siteMapNode url="Admin/products.aspx" title="Manage Products"  description="View and edit all products" roles="Admin"  />
     <siteMapNode url="Admin/manageAllUsers.aspx" title="Manage Users"  description="View and edit all user accounts"  roles="Admin" />
