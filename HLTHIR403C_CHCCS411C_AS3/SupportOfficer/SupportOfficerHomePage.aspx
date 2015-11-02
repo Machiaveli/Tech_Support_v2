@@ -84,7 +84,7 @@
                     <asp:ControlParameter ControlID="GridViewCustomers" Name="CustomerID" PropertyName="SelectedValue" />
                 </SelectParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="DataSourceSearchCustByID" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Customers.CustomerID, Customers.FirstName, Customers.LastName, Customers.Address, Customers.City, Customers.State, Customers.ZipCode, Customers.Phone, Customers.Email, Registrations.ProductCode, Registrations.RegistrationDate FROM Customers INNER JOIN Registrations ON Customers.CustomerID = Registrations.CustomerID WHERE (Customers.CustomerID = @custID)">
+            <asp:SqlDataSource ID="DataSourceSearchCustByID" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM Customers WHERE (Customers.CustomerID = @custID)">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="txtSearchQuery" Name="custID" PropertyName="Text" />
                 </SelectParameters>
