@@ -74,7 +74,7 @@
                 <SortedDescendingCellStyle BackColor="#E9EBEF" />
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
-            <asp:SqlDataSource ID="DataSourceSearchCustByLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Registrations.CustomerID, Registrations.ProductCode, Registrations.RegistrationDate, Customers.FirstName, Customers.LastName, Customers.Address, Customers.City, Customers.State, Customers.ZipCode, Customers.Phone, Customers.Email FROM Registrations INNER JOIN Customers ON Registrations.CustomerID = Customers.CustomerID WHERE (Customers.LastName LIKE '%' + @custLastName + '%')">
+            <asp:SqlDataSource ID="DataSourceSearchCustByLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM Customers WHERE (Customers.LastName LIKE '%' + @custLastName + '%')">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="txtSearchQuery" Name="custLastName" PropertyName="Text" />
                 </SelectParameters>
