@@ -58,9 +58,19 @@
             <br />
             <asp:Label ID="lblCustomerRegistrationResults" runat="server" Font-Size="Large" Text="The following customers matched your search:"></asp:Label>
             <br />
-            <asp:GridView ID="GridViewDisplayCustomers" runat="server" AllowPaging="True" AllowSorting="True" DataKeyNames="CustomerID" DataSourceID="DataSourceSearchCustByLastName" OnSelectedIndexChanged="GridViewDisplayCustomers_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <asp:GridView ID="GridViewDisplayCustomers" runat="server" AllowPaging="True" AllowSorting="True" DataKeyNames="CustomerID" DataSourceID="DataSourceSearchCustByLastName" OnSelectedIndexChanged="GridViewDisplayCustomers_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False">
                 <AlternatingRowStyle BackColor="White" />
-                <Columns>
+                <Columns>         
+                    <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" InsertVisible="false" ReadOnly="true" SortExpression="CustomerID" />
+                    <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
+                    <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
+                    <asp:BoundField DataField="Address" HeaderText="Address" SortExpression="Address" />
+                    <asp:BoundField DataField="City" HeaderText="City" SortExpression="City" />
+                    <asp:BoundField DataField="State" HeaderText="State" SortExpression="State" />
+                    <asp:BoundField DataField="ZipCode" HeaderText="ZipCode" SortExpression="ZipCode" />
+                    <asp:BoundField DataField="Phone" HeaderText="Phone" SortExpression="Phone" />
+                    <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                    <asp:BoundField DataField="AccountStatus" HeaderText="AccountStatus" SortExpression="AccountStatus" />
                     <asp:CommandField ShowSelectButton="True" />
                 </Columns>
                 <EditRowStyle BackColor="#2461BF" />
@@ -74,7 +84,7 @@
                 <SortedDescendingCellStyle BackColor="#E9EBEF" />
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
-            <asp:SqlDataSource ID="DataSourceSearchCustByLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM Customers WHERE (Customers.LastName LIKE '%' + @custLastName + '%')">
+            <asp:SqlDataSource ID="DataSourceSearchCustByLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT CustomerID, FirstName, LastName, Address, City, State, ZipCode, Phone, Email, AccountStatus FROM Customers WHERE (LastName LIKE '%' + @custLastName + '%')">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="txtSearchQuery" Name="custLastName" PropertyName="Text" />
                 </SelectParameters>
@@ -120,6 +130,8 @@
             </asp:SqlDataSource>
             <br />
             <asp:Button ID="btnAddIncident" runat="server" OnClick="btnAddIncident_Click" Text="Add Incident" />
+            &nbsp;&nbsp;&nbsp;
+            <asp:Label ID="lblinactiveAccount" runat="server" ForeColor="#CC0000" Text="Label"></asp:Label>
             <br />
         </ContentTemplate>
         <Triggers>

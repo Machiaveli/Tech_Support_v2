@@ -13,6 +13,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
     public partial class addIncident {
         
         /// <summary>
+        /// lblCurrentUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCurrentUser;
+        
+        /// <summary>
         /// lblCustomerID control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         protected global::System.Web.UI.WebControls.TextBox txtTitle;
         
         /// <summary>
+        /// RequiredFieldValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        
+        /// <summary>
         /// lblDescription control.
         /// </summary>
         /// <remarks>
@@ -94,6 +112,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         protected global::System.Web.UI.WebControls.TextBox txtDescription;
         
         /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        
+        /// <summary>
         /// btnAddIncident control.
         /// </summary>
         /// <remarks>
@@ -101,15 +128,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddIncident;
-        
-        /// <summary>
-        /// DropDownList3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList3;
         
         /// <summary>
         /// SqlDataSource3 control.

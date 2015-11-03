@@ -37,6 +37,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
 
             lblCustomerRegistrationResults.Visible = false;
             btnAddIncident.Visible = false;
+            lblinactiveAccount.Visible = false;
             
         }
 
@@ -103,11 +104,24 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
         {
             //store the selected cutomers ID in a session in order to auto fill the add incident page
             Session["selectedCustomer"] = GridViewDisplayCustomers.SelectedValue;
+            Session["currentUser"] = lblHiddenUserName.Text.Trim();
+            string accountStatus = GridViewDisplayCustomers.SelectedRow.Cells[9].Text;
 
             lblCustomerRegistrationResults.Visible = true;
             lblOpenIncidents.Visible = false;
             if (GridViewDisplayCustomers.SelectedIndex != -1)
             {
+                if (!accountStatus.Equals("Active")) // ensures the selected customers account status is active
+                {
+                    lblinactiveAccount.Visible = true;
+                    lblinactiveAccount.Text = "The selected customers account status is " + accountStatus;
+                    btnAddIncident.Enabled = false;
+                }
+                else
+                {
+                    lblinactiveAccount.Visible = false;
+                    btnAddIncident.Enabled = true;
+                }
                 btnAddIncident.Visible = true;
                 DetailsView1.Visible = true;
             }

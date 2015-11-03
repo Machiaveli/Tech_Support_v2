@@ -8,6 +8,13 @@
         {
             txtCustomerID.Text = Session["selectedCustomer"].ToString();
         }
+        else
+            Response.Redirect("SupportOfficerHomePage.aspx"); // ensures this page cannot be accessed unless going through SupportOfficerHomePage.aspx 
+
+        if (Session["currentUser"] != null)
+        {
+            lblCurrentUser.Text = Session["currentUser"].ToString();
+        }
         
         string userName = string.Empty;
 
@@ -30,6 +37,7 @@ private void AddIncident(object source, EventArgs e) {
         txtJobStatus.Text = "Open";
         SqlDataSource3.Insert();
         SqlDataSource5.Insert();
+        Session["selectedCustomer"] = null;
         Response.Redirect("SupportOfficerHomePage.aspx");
     }
     catch (Exception ex)
@@ -52,7 +60,9 @@ private void AddIncident(object source, EventArgs e) {
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <br />
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <h1>Add Incident</h1><br />
+    <h1>Add Incident</h1>
+    <asp:Label ID="lblCurrentUser" runat="server" Text="Label"></asp:Label>
+    <br />
     <br />
     <br />
     <table class="auto-style3">
@@ -84,6 +94,8 @@ private void AddIncident(object source, EventArgs e) {
             </td>
             <td>
                 <asp:TextBox ID="txtTitle" runat="server"></asp:TextBox>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Title is a required field" ForeColor="Red" ControlToValidate="txtTitle"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -91,15 +103,15 @@ private void AddIncident(object source, EventArgs e) {
                 <asp:Label ID="lblDescription" runat="server" Text="Description:"></asp:Label>
             </td>
             <td>
-                <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine"></asp:TextBox>
+                <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" Height="88px" Width="379px"></asp:TextBox>
+            &nbsp;&nbsp;&nbsp;
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Description is a required field" ForeColor="Red" ControlToValidate="txtDescription"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
             <td class="auto-style4">&nbsp;</td>
             <td>
                 <asp:Button ID="btnAddIncident" runat="server" OnClick="AddIncident" Text="Add Incident" />
-                <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource4" DataTextField="UserID" DataValueField="UserID" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged">
-                </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO Incidents(CustomerID, ProductCode, Title) VALUES (@CustomerID, @ProductCode, @Title)" SelectCommand="SELECT * FROM [Incidents]">
                     <InsertParameters>
                         <asp:ControlParameter ControlID="txtCustomerID" Name="CustomerID" PropertyName="Text" />
@@ -118,7 +130,7 @@ private void AddIncident(object source, EventArgs e) {
                 <asp:TextBox ID="txtJobStatus" runat="server" Text='<% "Open"; %>' Visible="False"></asp:TextBox>
                 <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO IncidentsHistory(UserID, LastModified, Description, JobStatus, SolutionApplied) VALUES (@UserID, @LastModified, @Description, @JobStatus, @SolutionApplied)" SelectCommand="SELECT * FROM [IncidentsHistory]">
                     <InsertParameters>
-                        <asp:ControlParameter ControlID="DropDownList3" Name="UserID" PropertyName="SelectedValue" />
+                        <asp:ControlParameter ControlID="lblCurrentUser" Name="UserID" PropertyName="Text" />
                         <asp:ControlParameter ControlID="txtLastModified" Name="LastModified" PropertyName="Text" />
                         <asp:ControlParameter ControlID="txtDescription" Name="Description" PropertyName="Text" />
                         <asp:ControlParameter ControlID="txtJobStatus" Name="JobStatus" PropertyName="Text" />
