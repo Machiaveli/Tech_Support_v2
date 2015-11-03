@@ -3,16 +3,17 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>User Administration</h1>
-    <div style="width: 900px; margin-left: auto; margin-right:auto;">
-        <asp:Label ID="Label3" runat="server" Text="Search users:"></asp:Label>
+    <div style="width: 900px; margin-left: auto; margin-right:auto; font-weight: 700;">
+        <asp:Label ID="lblSearch" runat="server" Text="Search users:"></asp:Label>
 
     &nbsp;
 
     <asp:TextBox ID="txtSearch" runat="server" style="margin-bottom: 0px" Width="181px"></asp:TextBox>
                    &nbsp;
-                   <asp:DropDownList ID="dropDownSearchFilter" runat="server" AutoPostBack="true">
+                   <asp:DropDownList ID="dropDownSearchFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropDownSearchFilter_SelectedIndexChanged">
                 <asp:ListItem Value="userLastName" Selected="True">Last Name</asp:ListItem>
                 <asp:ListItem Value="userID">User ID</asp:ListItem>
+                               <asp:ListItem Value="ListAllUsers">List All Users</asp:ListItem>
             </asp:DropDownList>
     &nbsp;
             <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" Width="74px" />
@@ -93,17 +94,111 @@
                 <asp:Parameter Name="UserID" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
+        <br />
+            <asp:Label ID="lblMatch" runat="server" Font-Size="Large" Text="The following users matched your search:" Visible="False"></asp:Label>
+
+        <br />
+
+    <asp:GridView ID="GridViewDisplayUsers" runat="server" AllowPaging="True" AllowSorting="True" CellPadding="4" DataSourceID="sqlSearchLastName" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="UserID" Visible="False" >
+        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+        <Columns>
+            <asp:BoundField DataField="UserID" HeaderText="UserID" ReadOnly="True" SortExpression="UserID" />
+            <asp:BoundField DataField="UserName" HeaderText="UserName" SortExpression="UserName" />
+            <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
+            <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
+            <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+            <asp:BoundField DataField="UserType" HeaderText="UserType" SortExpression="UserType" />
+            <asp:BoundField DataField="AccountStatus" HeaderText="AccountStatus" SortExpression="AccountStatus" />
+            <asp:CommandField ShowEditButton="True" />
+        </Columns>
+        <EditRowStyle BackColor="#999999" />
+        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+    </asp:GridView>
         <asp:SqlDataSource ID="sqlSearchLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            SelectCommand="SELECT [UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus] FROM [Users] WHERE ([LastName] LIKE '%' + @LastName + '%')">
+            SelectCommand="SELECT [UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus] FROM [Users] WHERE ([LastName] LIKE '%' + @LastName + '%') ORDER BY [LastName]" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Users] WHERE [UserID] = @original_UserID AND (([UserName] = @original_UserName) OR ([UserName] IS NULL AND @original_UserName IS NULL)) AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND (([UserType] = @original_UserType) OR ([UserType] IS NULL AND @original_UserType IS NULL)) AND (([AccountStatus] = @original_AccountStatus) OR ([AccountStatus] IS NULL AND @original_AccountStatus IS NULL))" InsertCommand="INSERT INTO [Users] ([UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus]) VALUES (@UserID, @UserName, @FirstName, @LastName, @Email, @UserType, @AccountStatus)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Users] SET [UserName] = @UserName, [FirstName] = @FirstName, [LastName] = @LastName, [Email] = @Email, [UserType] = @UserType, [AccountStatus] = @AccountStatus WHERE [UserID] = @original_UserID AND (([UserName] = @original_UserName) OR ([UserName] IS NULL AND @original_UserName IS NULL)) AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND (([UserType] = @original_UserType) OR ([UserType] IS NULL AND @original_UserType IS NULL)) AND (([AccountStatus] = @original_AccountStatus) OR ([AccountStatus] IS NULL AND @original_AccountStatus IS NULL))">
+            <DeleteParameters>
+                <asp:Parameter Name="original_UserID" Type="Int32" />
+                <asp:Parameter Name="original_UserName" Type="String" />
+                <asp:Parameter Name="original_FirstName" Type="String" />
+                <asp:Parameter Name="original_LastName" Type="String" />
+                <asp:Parameter Name="original_Email" Type="String" />
+                <asp:Parameter Name="original_UserType" Type="String" />
+                <asp:Parameter Name="original_AccountStatus" Type="String" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="UserID" Type="Int32" />
+                <asp:Parameter Name="UserName" Type="String" />
+                <asp:Parameter Name="FirstName" Type="String" />
+                <asp:Parameter Name="LastName" Type="String" />
+                <asp:Parameter Name="Email" Type="String" />
+                <asp:Parameter Name="UserType" Type="String" />
+                <asp:Parameter Name="AccountStatus" Type="String" />
+            </InsertParameters>
             <SelectParameters>
                 <asp:ControlParameter ControlID="txtSearch" Name="LastName" PropertyName="Text" Type="String" />
             </SelectParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="UserName" Type="String" />
+                <asp:Parameter Name="FirstName" Type="String" />
+                <asp:Parameter Name="LastName" Type="String" />
+                <asp:Parameter Name="Email" Type="String" />
+                <asp:Parameter Name="UserType" Type="String" />
+                <asp:Parameter Name="AccountStatus" Type="String" />
+                <asp:Parameter Name="original_UserID" Type="Int32" />
+                <asp:Parameter Name="original_UserName" Type="String" />
+                <asp:Parameter Name="original_FirstName" Type="String" />
+                <asp:Parameter Name="original_LastName" Type="String" />
+                <asp:Parameter Name="original_Email" Type="String" />
+                <asp:Parameter Name="original_UserType" Type="String" />
+                <asp:Parameter Name="original_AccountStatus" Type="String" />
+            </UpdateParameters>
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="sqlSearchUserID" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            SelectCommand="SELECT [UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus] FROM [Users] WHERE ([UserID] = @UserID)">
+            SelectCommand="SELECT [UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus] FROM [Users] WHERE ([UserID] = @UserID) ORDER BY [UserID]" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Users] WHERE [UserID] = @original_UserID AND (([UserName] = @original_UserName) OR ([UserName] IS NULL AND @original_UserName IS NULL)) AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND (([UserType] = @original_UserType) OR ([UserType] IS NULL AND @original_UserType IS NULL)) AND (([AccountStatus] = @original_AccountStatus) OR ([AccountStatus] IS NULL AND @original_AccountStatus IS NULL))" InsertCommand="INSERT INTO [Users] ([UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus]) VALUES (@UserID, @UserName, @FirstName, @LastName, @Email, @UserType, @AccountStatus)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Users] SET [UserName] = @UserName, [FirstName] = @FirstName, [LastName] = @LastName, [Email] = @Email, [UserType] = @UserType, [AccountStatus] = @AccountStatus WHERE [UserID] = @original_UserID AND (([UserName] = @original_UserName) OR ([UserName] IS NULL AND @original_UserName IS NULL)) AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND (([UserType] = @original_UserType) OR ([UserType] IS NULL AND @original_UserType IS NULL)) AND (([AccountStatus] = @original_AccountStatus) OR ([AccountStatus] IS NULL AND @original_AccountStatus IS NULL))">
+            <DeleteParameters>
+                <asp:Parameter Name="original_UserID" Type="Int32" />
+                <asp:Parameter Name="original_UserName" Type="String" />
+                <asp:Parameter Name="original_FirstName" Type="String" />
+                <asp:Parameter Name="original_LastName" Type="String" />
+                <asp:Parameter Name="original_Email" Type="String" />
+                <asp:Parameter Name="original_UserType" Type="String" />
+                <asp:Parameter Name="original_AccountStatus" Type="String" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="UserID" Type="Int32" />
+                <asp:Parameter Name="UserName" Type="String" />
+                <asp:Parameter Name="FirstName" Type="String" />
+                <asp:Parameter Name="LastName" Type="String" />
+                <asp:Parameter Name="Email" Type="String" />
+                <asp:Parameter Name="UserType" Type="String" />
+                <asp:Parameter Name="AccountStatus" Type="String" />
+            </InsertParameters>
             <SelectParameters>
                 <asp:ControlParameter ControlID="txtSearch" Name="UserID" PropertyName="Text" Type="Int32" />
             </SelectParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="UserName" Type="String" />
+                <asp:Parameter Name="FirstName" Type="String" />
+                <asp:Parameter Name="LastName" Type="String" />
+                <asp:Parameter Name="Email" Type="String" />
+                <asp:Parameter Name="UserType" Type="String" />
+                <asp:Parameter Name="AccountStatus" Type="String" />
+                <asp:Parameter Name="original_UserID" Type="Int32" />
+                <asp:Parameter Name="original_UserName" Type="String" />
+                <asp:Parameter Name="original_FirstName" Type="String" />
+                <asp:Parameter Name="original_LastName" Type="String" />
+                <asp:Parameter Name="original_Email" Type="String" />
+                <asp:Parameter Name="original_UserType" Type="String" />
+                <asp:Parameter Name="original_AccountStatus" Type="String" />
+            </UpdateParameters>
         </asp:SqlDataSource>
 
     </div>
