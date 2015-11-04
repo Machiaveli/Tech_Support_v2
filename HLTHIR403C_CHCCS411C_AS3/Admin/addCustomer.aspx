@@ -5,10 +5,11 @@ private void InsertCustomer (object source, EventArgs e) {
     try
     {
         SqlDataSource3.Insert();
+        Response.Redirect("customers.aspx");
     }
-    catch (Exception ex)
+    catch (Exception)
     {
-        lblError.Text = "The person you are trying to insert already exists in the database." + ex.Message;
+        lblError.Text = "The person you are trying to insert already exists in the database.";
     }
 }
 </script>
@@ -28,6 +29,13 @@ private void InsertCustomer (object source, EventArgs e) {
         .auto-style6 {
             height: 26px;
         }
+        .auto-style7 {
+            width: 245px;
+            height: 29px;
+        }
+        .auto-style8 {
+            height: 29px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -39,6 +47,7 @@ private void InsertCustomer (object source, EventArgs e) {
             <td>
                 <asp:DropDownList ID="dLCountries" runat="server" DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="CountryCode" AutoPostBack="True" OnSelectedIndexChanged="dLCountries_SelectedIndexChanged">
                 </asp:DropDownList>
+                <asp:RequiredFieldValidator ID="RequiredFieldCountries" runat="server" ControlToValidate="dLCountries" ErrorMessage="You must select a country" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [CountryCode], [Name] FROM [Countries] ORDER BY [Name]" OnSelecting="SqlDataSource1_Selecting"></asp:SqlDataSource>
             </td>
         </tr>
@@ -48,14 +57,16 @@ private void InsertCustomer (object source, EventArgs e) {
             </td>
             <td>
                 <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldFirstName" runat="server" ControlToValidate="txtFirstName" ErrorMessage="You must enter a first name" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
-            <td class="auto-style4">
+            <td class="auto-style7">
                 <asp:Label ID="lblLastName" runat="server" Text="Last Name:"></asp:Label>
             </td>
-            <td>
+            <td class="auto-style8">
                 <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldLastName" runat="server" ControlToValidate="txtLastName" ErrorMessage="You must enter a last name" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -64,6 +75,7 @@ private void InsertCustomer (object source, EventArgs e) {
             </td>
             <td>
                 <asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldAddress" runat="server" ControlToValidate="txtAddress" ErrorMessage="You must enter an address" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -72,6 +84,7 @@ private void InsertCustomer (object source, EventArgs e) {
             </td>
             <td class="auto-style6">
                 <asp:TextBox ID="txtCity" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldCity" runat="server" ControlToValidate="txtCity" ErrorMessage="You must enter a city" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -81,6 +94,7 @@ private void InsertCustomer (object source, EventArgs e) {
             <td>
                 <asp:DropDownList ID="dLStates" runat="server" DataSourceID="SqlDataSource2" DataTextField="StateName" DataValueField="StateCode" AutoPostBack="True">
                 </asp:DropDownList>
+                <asp:RequiredFieldValidator ID="RequiredFieldState" runat="server" ControlToValidate="dLStates" ErrorMessage="You must select a state" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [StateCode], [CountryCode], [StateName] FROM [States] WHERE ([CountryCode] = @CountryCode) ORDER BY [StateName]">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="dLCountries" Name="CountryCode" PropertyName="SelectedValue" Type="String" />
@@ -94,6 +108,7 @@ private void InsertCustomer (object source, EventArgs e) {
             </td>
             <td>
                 <asp:TextBox ID="txtZipCode" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldZipCode" runat="server" ControlToValidate="txtZipCode" ErrorMessage="You must enter a zip code" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -102,6 +117,7 @@ private void InsertCustomer (object source, EventArgs e) {
             </td>
             <td>
                 <asp:TextBox ID="txtPhone" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldPhone" runat="server" ControlToValidate="txtPhone" ErrorMessage="You must enter a phone number" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -110,6 +126,7 @@ private void InsertCustomer (object source, EventArgs e) {
             </td>
             <td class="auto-style6">
                 <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="You must enter an email address" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -123,7 +140,7 @@ private void InsertCustomer (object source, EventArgs e) {
                 </td>
                 <td>
                     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-                        InsertCommand="INSERT INTO Customers(FirstName, LastName, Address, City, State, ZipCode, Phone, Email) VALUES (@FirstName, @LastName, @Address, @City, @State, @ZipCode, @Phone, @Email)" SelectCommand="SELECT * FROM [Customers]" >
+                        InsertCommand="INSERT INTO Customers(FirstName, LastName, Address, City, State, ZipCode, Phone, Email, AccountStatus) VALUES (@FirstName, @LastName, @Address, @City, @State, @ZipCode, @Phone, @Email, 'Active')" SelectCommand="SELECT * FROM [Customers]" >
                         <InsertParameters>
                             <asp:ControlParameter ControlID="txtFirstName" Name="FirstName" PropertyName="Text" />
                             <asp:ControlParameter ControlID="txtLastName" Name="LastName" PropertyName="Text" />

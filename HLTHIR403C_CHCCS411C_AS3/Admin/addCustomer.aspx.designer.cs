@@ -31,6 +31,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         protected global::System.Web.UI.WebControls.DropDownList dLCountries;
         
         /// <summary>
+        /// RequiredFieldCountries control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldCountries;
+        
+        /// <summary>
         /// SqlDataSource1 control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtFirstName;
         
         /// <summary>
+        /// RequiredFieldFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldFirstName;
+        
+        /// <summary>
         /// lblLastName control.
         /// </summary>
         /// <remarks>
@@ -74,6 +92,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLastName;
+        
+        /// <summary>
+        /// RequiredFieldLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldLastName;
         
         /// <summary>
         /// lblAddress control.
@@ -94,6 +121,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtAddress;
         
         /// <summary>
+        /// RequiredFieldAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldAddress;
+        
+        /// <summary>
         /// lblCity control.
         /// </summary>
         /// <remarks>
@@ -112,6 +148,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtCity;
         
         /// <summary>
+        /// RequiredFieldCity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldCity;
+        
+        /// <summary>
         /// lblState control.
         /// </summary>
         /// <remarks>
@@ -128,6 +173,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dLStates;
+        
+        /// <summary>
+        /// RequiredFieldState control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldState;
         
         /// <summary>
         /// SqlDataSource2 control.
@@ -157,6 +211,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtZipCode;
         
         /// <summary>
+        /// RequiredFieldZipCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldZipCode;
+        
+        /// <summary>
         /// lblPhone control.
         /// </summary>
         /// <remarks>
@@ -175,6 +238,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtPhone;
         
         /// <summary>
+        /// RequiredFieldPhone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldPhone;
+        
+        /// <summary>
         /// lblEmail control.
         /// </summary>
         /// <remarks>
@@ -191,6 +263,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        
+        /// <summary>
+        /// RequiredFieldEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldEmail;
         
         /// <summary>
         /// btnAddCustomer control.
