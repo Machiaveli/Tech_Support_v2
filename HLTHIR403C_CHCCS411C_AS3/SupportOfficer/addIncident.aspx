@@ -130,13 +130,11 @@ private void AddIncident(object source, EventArgs e) {
                 </asp:SqlDataSource>
                 <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO IncidentsHistory(UserID, LastModified, Description, JobStatus, SolutionApplied) VALUES (@UserID, @LastModified, @Description, 'Open', NULL)" SelectCommand="SELECT * FROM [IncidentsHistory]">
                     <InsertParameters>
-                        <asp:ControlParameter ControlID="DropDownList3" Name="UserID" PropertyName="SelectedValue" />
+                        <asp:ControlParameter ControlID="lblCurrentUser" Name="UserID" PropertyName="Text" />
                         <asp:ControlParameter ControlID="lblLastModified" Name="LastModified" PropertyName="Text" Type="DateTime" />
                         <asp:ControlParameter ControlID="txtDescription" Name="Description" PropertyName="Text" />
                     </InsertParameters>
                 </asp:SqlDataSource>
-                <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource4" DataTextField="UserID" DataValueField="UserID" Visible="False">
-                </asp:DropDownList>
             </td>
         </tr>
     </table>

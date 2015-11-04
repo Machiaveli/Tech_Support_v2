@@ -1,4 +1,12 @@
-﻿using System;
+﻿/**
+ * Author: Sasha Graham - 5105498214
+ * 
+ * Purpose: Allows the user to register a new incident for a customer
+ * 
+ * Known Bugs: None
+ * */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
