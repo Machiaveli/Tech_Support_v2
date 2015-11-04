@@ -133,8 +133,6 @@ private void AddIncident(object source, EventArgs e) {
                         <asp:ControlParameter ControlID="DropDownList3" Name="UserID" PropertyName="SelectedValue" />
                         <asp:ControlParameter ControlID="lblLastModified" Name="LastModified" PropertyName="Text" Type="DateTime" />
                         <asp:ControlParameter ControlID="txtDescription" Name="Description" PropertyName="Text" />
-                        <asp:ControlParameter ControlID="txtJobStatus" Name="JobStatus" PropertyName="Text" />
-                        <asp:QueryStringParameter Name="SolutionApplied" QueryStringField="null" ConvertEmptyStringToNull="true" />
                     </InsertParameters>
                 </asp:SqlDataSource>
                 <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource4" DataTextField="UserID" DataValueField="UserID" Visible="False">
