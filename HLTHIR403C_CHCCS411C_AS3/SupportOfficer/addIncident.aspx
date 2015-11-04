@@ -4,6 +4,7 @@
 
     private void Page_Load(object source, EventArgs e)
     {
+        lblLastModified.Text = DateTime.Now.ToString("MM/dd/yyyy");
         if (Session["selectedCustomer"] != null)
         {
             txtCustomerID.Text = Session["selectedCustomer"].ToString();
@@ -25,7 +26,6 @@
             if (usr != null)
             {
                 userName = usr.UserName;
-                txtUserName.Text = userName;
             }
         }
     }
@@ -33,8 +33,9 @@
 private void AddIncident(object source, EventArgs e) {
     try
     {
-        txtLastModified.Text = DateTime.Now.ToString("MM/dd/yyyy");
-        txtJobStatus.Text = "Open";
+        //txtLastModified.Text = DateTime.Now.ToString("MM/dd/yyyy");
+        
+        string LastModified = DateTime.Now.ToString("MM/dd/yyyy");
         SqlDataSource3.Insert();
         SqlDataSource5.Insert();
         Session["selectedCustomer"] = null;
@@ -109,7 +110,9 @@ private void AddIncident(object source, EventArgs e) {
             </td>
         </tr>
         <tr>
-            <td class="auto-style4">&nbsp;</td>
+            <td class="auto-style4">
+                <asp:Label ID="lblLastModified" runat="server" Visible="False"></asp:Label>
+            </td>
             <td>
                 <asp:Button ID="btnAddIncident" runat="server" OnClick="AddIncident" Text="Add Incident" />
                 <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO Incidents(CustomerID, ProductCode, Title) VALUES (@CustomerID, @ProductCode, @Title)" SelectCommand="SELECT * FROM [Incidents]">
@@ -119,24 +122,23 @@ private void AddIncident(object source, EventArgs e) {
                         <asp:ControlParameter ControlID="txtTitle" Name="Title" PropertyName="Text" />
                     </InsertParameters>
                 </asp:SqlDataSource>
-                <asp:TextBox ID="txtUserName" runat="server" Enabled="False" Visible="False"></asp:TextBox>
-                <asp:TextBox ID="txtLastModified" runat="server" Text='<% DateTime.Now.ToString(); %>' Visible="False"></asp:TextBox>
                 <asp:Label ID="lblError" runat="server"></asp:Label>
-                <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [UserID] FROM [Users] WHERE ([FirstName] = @FirstName)">
+                <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [UserID] FROM [Users] WHERE ([UserName] = @UserName)">
                     <SelectParameters>
-                        <asp:ControlParameter ControlID="txtUserName" Name="FirstName" PropertyName="Text" Type="String" />
+                        <asp:ControlParameter ControlID="lblCurrentUser" Name="UserName" PropertyName="Text" Type="String" />
                     </SelectParameters>
                 </asp:SqlDataSource>
-                <asp:TextBox ID="txtJobStatus" runat="server" Text='<% "Open"; %>' Visible="False"></asp:TextBox>
-                <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO IncidentsHistory(UserID, LastModified, Description, JobStatus, SolutionApplied) VALUES (@UserID, @LastModified, @Description, @JobStatus, @SolutionApplied)" SelectCommand="SELECT * FROM [IncidentsHistory]">
+                <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO IncidentsHistory(UserID, LastModified, Description, JobStatus, SolutionApplied) VALUES (@UserID, @LastModified, @Description, 'Open', NULL)" SelectCommand="SELECT * FROM [IncidentsHistory]">
                     <InsertParameters>
-                        <asp:ControlParameter ControlID="lblCurrentUser" Name="UserID" PropertyName="Text" />
-                        <asp:ControlParameter ControlID="txtLastModified" Name="LastModified" PropertyName="Text" />
+                        <asp:ControlParameter ControlID="DropDownList3" Name="UserID" PropertyName="SelectedValue" />
+                        <asp:ControlParameter ControlID="lblLastModified" Name="LastModified" PropertyName="Text" Type="DateTime" />
                         <asp:ControlParameter ControlID="txtDescription" Name="Description" PropertyName="Text" />
                         <asp:ControlParameter ControlID="txtJobStatus" Name="JobStatus" PropertyName="Text" />
-                        <asp:QueryStringParameter Name="SolutionApplied" QueryStringField="null" />
+                        <asp:QueryStringParameter Name="SolutionApplied" QueryStringField="null" ConvertEmptyStringToNull="true" />
                     </InsertParameters>
                 </asp:SqlDataSource>
+                <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource4" DataTextField="UserID" DataValueField="UserID" Visible="False">
+                </asp:DropDownList>
             </td>
         </tr>
     </table>

@@ -14,7 +14,7 @@
     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" Width="74px" />
     <br />
     <br />
-    <asp:GridView ID="GridViewCustomers" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None">
+    <asp:GridView ID="GridViewCustomers" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridViewCustomers_SelectedIndexChanged">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" InsertVisible="False" ReadOnly="True" SortExpression="CustomerID" />
@@ -27,7 +27,6 @@
             <asp:BoundField DataField="Phone" HeaderText="Phone" SortExpression="Phone" />
             <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
             <asp:BoundField DataField="AccountStatus" HeaderText="AccountStatus" SortExpression="AccountStatus" />
-            <asp:CommandField ShowEditButton="True" ShowSelectButton="True" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -41,7 +40,7 @@
         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
     <br />
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Customers] ORDER BY [LastName]" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Customers] WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND [AccountStatus] = @original_AccountStatus" InsertCommand="INSERT INTO [Customers] ([FirstName], [LastName], [Address], [City], [State], [ZipCode], [Phone], [Email], [AccountStatus]) VALUES (@FirstName, @LastName, @Address, @City, @State, @ZipCode, @Phone, @Email, @AccountStatus)" UpdateCommand="UPDATE [Customers] SET [FirstName] = @FirstName, [LastName] = @LastName, [Address] = @Address, [City] = @City, [State] = @State, [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email, [AccountStatus] = @AccountStatus WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND [AccountStatus] = @original_AccountStatus">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [CustomerID], [FirstName], [LastName], [Address], [City], [State], [ZipCode], [Phone], [Email], [AccountStatus] FROM [Customers]" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Customers] WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND [AccountStatus] = @original_AccountStatus" InsertCommand="INSERT INTO [Customers] ([FirstName], [LastName], [Address], [City], [State], [ZipCode], [Phone], [Email], [AccountStatus]) VALUES (@FirstName, @LastName, @Address, @City, @State, @ZipCode, @Phone, @Email, @AccountStatus)" UpdateCommand="UPDATE [Customers] SET [FirstName] = @FirstName, [LastName] = @LastName, [Address] = @Address, [City] = @City, [State] = @State, [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email, [AccountStatus] = @AccountStatus WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND [AccountStatus] = @original_AccountStatus">
         <DeleteParameters>
             <asp:Parameter Name="original_CustomerID" Type="Int32" />
             <asp:Parameter Name="original_FirstName" Type="String" />
@@ -165,6 +164,22 @@
                     <asp:ControlParameter ControlID="txtSearchQuery" Name="CustomerID" PropertyName="Text" Type="Int32" />
                 </SelectParameters>
             </asp:SqlDataSource>
+    <asp:DetailsView ID="DetailsView1" runat="server" AllowPaging="True" CellPadding="4" DataSourceID="SqlDataSource2" ForeColor="#333333" GridLines="None" Height="50px" Width="735px">
+        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+        <CommandRowStyle BackColor="#E2DED6" Font-Bold="True" />
+        <EditRowStyle BackColor="#999999" />
+        <FieldHeaderStyle BackColor="#E9ECF1" Font-Bold="True" />
+        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+    </asp:DetailsView>
+    <asp:Button ID="btnRegister" runat="server" OnClick="btnRegister_Click" Text="Register Product" />
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT c.CustomerID, c.FirstName, c.LastName, r.ProductCode, r.RegistrationDate, p.Name, p.Version, p.ReleaseDate, p.ProductSupported FROM Customers c INNER JOIN Registrations r ON c.CustomerID = r.CustomerID INNER JOIN Products p ON r.ProductCode = p.ProductCode WHERE (c.CustomerID = @selectedCustID)">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="GridViewDisplayCustomers" Name="selectedCustID" PropertyName="SelectedValue" />
+        </SelectParameters>
+    </asp:SqlDataSource>
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="insertValid" />
     <br />
     <br />

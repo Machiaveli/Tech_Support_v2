@@ -121,6 +121,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
+        /// lblLastModified control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLastModified;
+        
+        /// <summary>
         /// btnAddIncident control.
         /// </summary>
         /// <remarks>
@@ -137,24 +146,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource3;
-        
-        /// <summary>
-        /// txtUserName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUserName;
-        
-        /// <summary>
-        /// txtLastModified control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLastModified;
         
         /// <summary>
         /// lblError control.
@@ -175,15 +166,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource4;
         
         /// <summary>
-        /// txtJobStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtJobStatus;
-        
-        /// <summary>
         /// SqlDataSource5 control.
         /// </summary>
         /// <remarks>
@@ -191,5 +173,14 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource5;
+        
+        /// <summary>
+        /// DropDownList3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList3;
     }
 }
