@@ -80,16 +80,17 @@ namespace HLTHIR403C_CHCCS411C_AS3
             
         }
 
-        // Add new user method
+        // Adds new user method (below fields will be inserted in techsupportDB
         private void Add_User()
         {
             String firstName = ((TextBox)CreateUserWizard2.CreateUserStep.ContentTemplateContainer.FindControl("txtFname")).Text;
             String lastName = ((TextBox)CreateUserWizard2.CreateUserStep.ContentTemplateContainer.FindControl("txtLname")).Text;
 
-            SqlDataSource1.InsertParameters["UserID"].DefaultValue = CreateUserWizard2.UserName.ToString();
+            SqlDataSource1.InsertParameters["UserID"].DefaultValue = CreateUserWizard2.UserName.ToString();            
             SqlDataSource1.InsertParameters["UserName"].DefaultValue = CreateUserWizard2.UserName.ToString();
             SqlDataSource1.InsertParameters["FirstName"].DefaultValue = firstName.ToString().ToLower().Trim();
             SqlDataSource1.InsertParameters["LastName"].DefaultValue = lastName.ToString().ToLower().Trim();
+            SqlDataSource1.InsertParameters["Email"].DefaultValue = CreateUserWizard2.Email.ToString();
         }
 
     }
