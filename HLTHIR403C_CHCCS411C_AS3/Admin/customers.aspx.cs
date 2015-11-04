@@ -77,6 +77,18 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
         protected void GridViewDisplayCustomers_SelectedIndexChanged(object sender, EventArgs e)
         {
             //get customer ID and show grid of previous incidents based on this
+            
+        }
+
+        protected void GridViewCustomers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnRegister_Click(object sender, EventArgs e)
+        {
+            Session["selectedCustomer"] = GridViewDisplayCustomers.SelectedValue;
+            Response.Redirect("link.aspx");
         }
 
 

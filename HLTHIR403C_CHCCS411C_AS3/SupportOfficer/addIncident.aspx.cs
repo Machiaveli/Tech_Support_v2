@@ -19,8 +19,10 @@ using System.Data.SqlClient;
 
 namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
 {
+
     public partial class addIncident : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             lblCurrentUser.Visible = false;
@@ -29,7 +31,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
 
         protected void btnAddIncident_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("SupportOfficerHomePage.aspx");
         }
 
         protected void SqlDataSource1_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
@@ -43,6 +45,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
         {
         }
 
+        private bool IsValid()
+        {
+            if (txtTitle.Text == null)
+            {
+                lblError.Text = "You must enter a title.";
+                return false;
+            }
+            return true;
+        }
 
     }
 }
