@@ -1,4 +1,11 @@
-﻿using System;
+﻿/* Author: Eunice Yeh - 6100439115
+ * Last Edit: 05/11/2015
+ * 
+ * Purpose: This page allows admins to add a new product. All fields are validated.
+ * Known bugs: None at time of last edit.
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

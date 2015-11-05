@@ -63,7 +63,8 @@
                 <asp:TextBox ID="txtRelease" runat="server"></asp:TextBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:RequiredFieldValidator ID="rfvRelease" runat="server" ErrorMessage="Release Date is a required field." ControlToValidate="txtRelease" style="color: #FF0000"></asp:RequiredFieldValidator>
-                    &nbsp;</td>
+                    &nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtRelease" ErrorMessage="Please enter a valid date." ForeColor="Red" ValidationExpression="((1[0-2])|(0?[1-9]))/((0?\d)|([1-2]\d)|(3[0-1]))/(\d{4})"></asp:RegularExpressionValidator>
+                    </td>
         </tr>
         <tr>
             <td class="auto-style6"></td>
@@ -73,7 +74,7 @@
     <asp:Button ID="btnAdd" runat="server" Text="Add Product" OnClick="InsertProduct" />
    
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"
-                    InsertCommand="INSERT INTO Products(ProductCode, Name, Version, ReleaseDate) VALUES (@ProductCode, @Name, @Version, @ReleaseDate)" 
+                    InsertCommand="INSERT INTO Products(ProductCode, Name, Version, ReleaseDate,ProductSupported ) VALUES (@ProductCode, @Name, @Version, @ReleaseDate, 'Yes')" 
                     SelectCommand="SELECT * FROM [Products]">
                     <InsertParameters>
                         <asp:ControlParameter ControlID="txtCode" Name="ProductCode" PropertyName="Text"/>
