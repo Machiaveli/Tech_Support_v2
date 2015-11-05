@@ -41,9 +41,9 @@ private void AddIncident(object source, EventArgs e) {
         Session["selectedCustomer"] = null;
         Response.Redirect("SupportOfficerHomePage.aspx");
     }
-    catch (Exception ex)
+    catch (Exception)
     {
-        lblError.Text = "The person you are trying to insert already exists in the database." + ex.Message;
+        lblError.Text = "This product already has an open incident";
     }
 }
 </script>
