@@ -2,7 +2,7 @@
  * Last Edit: 05/11/2015
  * 
  * Purpose: This page allows admins to view all products, search by product ID, and manage products. All fields are validated.
- * Known bugs: Pressing "enter" while updating fires btnSearch instead of update.
+ * Known bugs: "Enter" key has been disabled completely instead of only when editing a row.
  * 
  */
 
@@ -21,6 +21,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
         {
             gvProducts.Visible = true;
             gvSearch.Visible = false;
+            btnSearch.UseSubmitBehavior = true;
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -29,9 +30,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             gvSearch.Visible = true;
         }
 
-        protected void gvProducts_SelectedIndexChanged(object sender, EventArgs e)
+        protected void gvProducts_RowEditing(object sender, GridViewEditEventArgs e)
         {
-           
+            btnSearch.UseSubmitBehavior = false;            
+        
+        }
+
+        protected void gvProducts_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+        {
+            btnSearch.UseSubmitBehavior = true;
         }
     }
 }
