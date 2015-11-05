@@ -130,6 +130,24 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician {
         protected global::System.Web.UI.WebControls.SqlDataSource DataSourceDetailsView;
         
         /// <summary>
+        /// DataSourceIncidents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DataSourceIncidents;
+        
+        /// <summary>
+        /// DataSourceIncidentsHistory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DataSourceIncidentsHistory;
+        
+        /// <summary>
         /// lblUserName control.
         /// </summary>
         /// <remarks>
@@ -137,5 +155,14 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblUserName;
+        
+        /// <summary>
+        /// lblIncidentID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIncidentID;
     }
 }
