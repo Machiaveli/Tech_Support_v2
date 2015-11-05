@@ -155,7 +155,7 @@
     <br />
     <br />
     <br />&nbsp;
-    <asp:Label ID="lblHiddenUserName" runat="server" Text="userName"></asp:Label>
+    <asp:Label ID="lblHiddenUserName" runat="server" Text="userName" Visible="False"></asp:Label>
     <br />
     <br />
 </asp:Content>
