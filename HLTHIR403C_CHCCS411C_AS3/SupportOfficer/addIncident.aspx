@@ -62,7 +62,7 @@ private void AddIncident(object source, EventArgs e) {
     <br />
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <h1>Add Incident</h1>
-    <asp:Label ID="lblCurrentUser" runat="server" Text="Label"></asp:Label>
+    <asp:Label ID="lblCurrentUser" runat="server" Text="Label" Visible="False"></asp:Label>
     <br />
     <br />
     <br />
