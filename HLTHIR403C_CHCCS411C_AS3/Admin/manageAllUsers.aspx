@@ -23,24 +23,51 @@
             <ContentTemplate>
                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                 </asp:ScriptManager>
+                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="editUser" />
                 <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserID" DataSourceID="SqlDataSource1" Font-Size="Medium" ForeColor="#333333" GridLines="None" style="text-align: center" Width="900px">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
 
                         <asp:BoundField DataField="UserID" HeaderText="UserID" ReadOnly="True" SortExpression="UserID" />
                         <asp:BoundField DataField="UserName" HeaderText="UserName" ReadOnly="True" SortExpression="UserName" />
-                        <asp:BoundField DataField="FirstName" HeaderText="FirstName" ReadOnly="True" SortExpression="FirstName" />
-                        <asp:BoundField DataField="LastName" HeaderText="LastName" ReadOnly="True" SortExpression="LastName" />
+                        <asp:TemplateField HeaderText="FirstName" SortExpression="FirstName">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FirstName") %>'></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="First Name is a required field." ForeColor="Red" ValidationGroup="editUser">*</asp:RequiredFieldValidator>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("FirstName") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="LastName" SortExpression="LastName">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("LastName") %>'></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBox2" ErrorMessage="Last name is a required field." ForeColor="Red" ValidationGroup="editUser">*</asp:RequiredFieldValidator>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("LastName") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Email" SortExpression="Email">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Email") %>'></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="TextBox3" ErrorMessage="Email is a required field." ForeColor="Red" ValidationGroup="editUser">*</asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="TextBox3" ErrorMessage="Please provide a valid email." ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="editUser">*</asp:RegularExpressionValidator>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("Email") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="UserType" SortExpression="UserType">
                             <EditItemTemplate>
                                 <asp:DropDownList ID="DropDownList1" runat="server" SelectedValue='<%# Bind("UserType") %>'>
-                                    <asp:ListItem>Admin</asp:ListItem>
                                     <asp:ListItem>Support Officer</asp:ListItem>
                                     <asp:ListItem>Technician</asp:ListItem>
+                                    <asp:ListItem>Admin</asp:ListItem>
                                 </asp:DropDownList>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("UserType") %>'></asp:Label>
+                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("UserType") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="AccountStatus" SortExpression="AccountStatus">
@@ -51,7 +78,7 @@
                                 </asp:DropDownList>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("AccountStatus") %>'></asp:Label>
+                                <asp:Label ID="Label5" runat="server" Text='<%# Bind("AccountStatus") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:CommandField ShowEditButton="True" />
@@ -73,25 +100,39 @@
             </Triggers>
         </asp:UpdatePanel>
         <br />
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Users] WHERE [UserID] = @UserID" InsertCommand="INSERT INTO [Users] ([UserID], [UserName], [FirstName], [LastName], [AccountStatus], [UserType]) VALUES (@UserID, @UserName, @FirstName, @LastName, @AccountStatus, @UserType)" SelectCommand="SELECT [UserID], [UserName], [FirstName], [LastName], [AccountStatus], [UserType] FROM [Users]" UpdateCommand="UPDATE [Users] SET [AccountStatus] = @AccountStatus, [UserType] = @UserType WHERE [UserID] = @UserID">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Users] WHERE [UserID] = @original_UserID AND (([UserName] = @original_UserName) OR ([UserName] IS NULL AND @original_UserName IS NULL)) AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND (([UserType] = @original_UserType) OR ([UserType] IS NULL AND @original_UserType IS NULL)) AND (([AccountStatus] = @original_AccountStatus) OR ([AccountStatus] IS NULL AND @original_AccountStatus IS NULL))" InsertCommand="INSERT INTO [Users] ([UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus]) VALUES (@UserID, @UserName, @FirstName, @LastName, @Email, @UserType, @AccountStatus)" SelectCommand="SELECT [UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus] FROM [Users]" UpdateCommand="UPDATE [Users] SET [FirstName] = @FirstName, [LastName] = @LastName, [Email] = @Email, [UserType] = @UserType, [AccountStatus] = @AccountStatus WHERE [UserID] = @original_UserID AND [UserName] = @original_UserName AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND (([UserType] = @original_UserType) OR ([UserType] IS NULL AND @original_UserType IS NULL)) AND (([AccountStatus] = @original_AccountStatus) OR ([AccountStatus] IS NULL AND @original_AccountStatus IS NULL))" ConflictDetection="CompareAllValues" OldValuesParameterFormatString="original_{0}">
             <DeleteParameters>
-                <asp:Parameter Name="UserID" Type="Int32" />
+                <asp:Parameter Name="original_UserID" Type="Int32" />
+                <asp:Parameter Name="original_UserName" Type="String" />
+                <asp:Parameter Name="original_FirstName" Type="String" />
+                <asp:Parameter Name="original_LastName" Type="String" />
+                <asp:Parameter Name="original_Email" Type="String" />
+                <asp:Parameter Name="original_UserType" Type="String" />
+                <asp:Parameter Name="original_AccountStatus" Type="String" />
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter Name="UserID" Type="Int32" />
                 <asp:Parameter Name="UserName" Type="String" />
                 <asp:Parameter Name="FirstName" Type="String" />
                 <asp:Parameter Name="LastName" Type="String" />
-                <asp:Parameter Name="AccountStatus" Type="String" />
+                <asp:Parameter Name="Email" Type="String" />
                 <asp:Parameter Name="UserType" Type="String" />
+                <asp:Parameter Name="AccountStatus" Type="String" />
             </InsertParameters>
             <UpdateParameters>
                 <asp:Parameter Name="UserName" Type="String" />
                 <asp:Parameter Name="FirstName" Type="String" />
                 <asp:Parameter Name="LastName" Type="String" />
-                <asp:Parameter Name="AccountStatus" Type="String" />
+                <asp:Parameter Name="Email" Type="String" />
                 <asp:Parameter Name="UserType" Type="String" />
-                <asp:Parameter Name="UserID" Type="Int32" />
+                <asp:Parameter Name="AccountStatus" Type="String" />
+                <asp:Parameter Name="original_UserID" Type="Int32" />
+                <asp:Parameter Name="original_UserName" Type="String" />
+                <asp:Parameter Name="original_FirstName" Type="String" />
+                <asp:Parameter Name="original_LastName" Type="String" />
+                <asp:Parameter Name="original_Email" Type="String" />
+                <asp:Parameter Name="original_UserType" Type="String" />
+                <asp:Parameter Name="original_AccountStatus" Type="String" />
             </UpdateParameters>
         </asp:SqlDataSource>
         <br />
@@ -104,11 +145,57 @@
         <Columns>
             <asp:BoundField DataField="UserID" HeaderText="UserID" ReadOnly="True" SortExpression="UserID" />
             <asp:BoundField DataField="UserName" HeaderText="UserName" SortExpression="UserName" />
-            <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
-            <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
-            <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
-            <asp:BoundField DataField="UserType" HeaderText="UserType" SortExpression="UserType" />
-            <asp:BoundField DataField="AccountStatus" HeaderText="AccountStatus" SortExpression="AccountStatus" />
+            <asp:TemplateField HeaderText="FirstName" SortExpression="FirstName">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FirstName") %>'></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="TextBox1" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="editSearchedUser">*</asp:RequiredFieldValidator>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("FirstName") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="LastName" SortExpression="LastName">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("LastName") %>'></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="TextBox2" ErrorMessage="Last name is a required field." ForeColor="Red" ValidationGroup="editSearchedUser">*</asp:RequiredFieldValidator>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("LastName") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Email" SortExpression="Email">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Email") %>'></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="TextBox3" ErrorMessage="Email is a required field." ForeColor="Red" ValidationGroup="editSearchedUser">*</asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="TextBox3" ErrorMessage="Please enter a valid email." ForeColor="Red" ValidationGroup="editSearchedUser">*</asp:RegularExpressionValidator>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("Email") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="UserType" SortExpression="UserType">
+                <EditItemTemplate>
+                    <asp:DropDownList ID="DropDownList3" runat="server" SelectedValue='<%# Bind("UserType") %>'>
+                        <asp:ListItem>Support Officer</asp:ListItem>
+                        <asp:ListItem>Technician</asp:ListItem>
+                        <asp:ListItem>Admin</asp:ListItem>
+                    </asp:DropDownList>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("UserType") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="AccountStatus" SortExpression="AccountStatus">
+                <EditItemTemplate>
+                    <asp:DropDownList ID="DropDownList4" runat="server" SelectedValue='<%# Bind("AccountStatus") %>'>
+                        <asp:ListItem>Active</asp:ListItem>
+                        <asp:ListItem>Inactive</asp:ListItem>
+                    </asp:DropDownList>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label5" runat="server" Text='<%# Bind("AccountStatus") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:CommandField ShowEditButton="True" />
         </Columns>
         <EditRowStyle BackColor="#999999" />

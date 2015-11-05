@@ -2,7 +2,8 @@
   * Author: Yusuf Bhyat - 4105558614
   *  Purpose: ASP.NET C# Web_Based Application - TechSupport Project 
   *  This page is used by the Admin to manage all users accounts
-  *  Known bugs: None at the time of testing
+  *  Known bugs: Allows fields to be updated with null value, even with validator (suspected to be database problem) 
+  *              
   *  Version: 1.0
   
   * Edit: Eunice Yeh - 6100439115

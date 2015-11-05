@@ -15,14 +15,14 @@
     <br />
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="White" ValidationGroup="editProduct" />
     <br />
-    <asp:GridView ID="gvProducts" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ProductCode" DataSourceID="sqlAllProducts" CellPadding="4" ForeColor="#333333" GridLines="None" Width="60%" OnSelectedIndexChanged="gvProducts_SelectedIndexChanged">
+    <asp:GridView ID="gvProducts" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ProductCode" DataSourceID="sqlAllProducts" CellPadding="4" ForeColor="#333333" GridLines="None" Width="60%" OnRowEditing="gvProducts_RowEditing" OnRowUpdated="gvProducts_RowUpdated">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" ReadOnly="True" SortExpression="ProductCode" />
             <asp:TemplateField HeaderText="Name" SortExpression="Name">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="Name is a required field." ForeColor="Red" ValidationGroup="editGroup">*</asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="Name is a required field." ForeColor="Red" ValidationGroup="editProduct">*</asp:RequiredFieldValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
@@ -49,8 +49,10 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="ProductSupported" SortExpression="ProductSupported">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("ProductSupported") %>'></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="TextBox4" ErrorMessage="ProductSupported is a required field." ForeColor="Red" ValidationGroup="editProduct">*</asp:RequiredFieldValidator>
+                    <asp:DropDownList ID="DropDownList1" runat="server" SelectedValue='<%# Bind("ProductSupported") %>'>
+                        <asp:ListItem>Yes</asp:ListItem>
+                        <asp:ListItem>No</asp:ListItem>
+                    </asp:DropDownList>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label4" runat="server" Text='<%# Bind("ProductSupported") %>'></asp:Label>
