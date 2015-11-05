@@ -19,7 +19,14 @@ namespace HLTHIR403C_CHCCS411C_AS3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // gets numeric last UserName and converts it to INT - Kevin
+            int UserName = Convert.ToInt32( DetailsView1.Rows[0].Cells[1].Text.ToString());
+            
+            // increments UserName by 1 - Kevin
+            UserName = UserName + 1;
 
+            // Prefills UserName field on form with Username - Kevin 
+            CreateUserWizard2.UserName = UserName.ToString();   
         }
 
        
