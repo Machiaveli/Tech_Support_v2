@@ -42,7 +42,7 @@
                                     <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">User Name:</asp:Label>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="UserName" runat="server" onkeypress="javascript:return false;"></asp:TextBox>
+                                    <asp:TextBox ID="UserName" runat="server" onkeypress="javascript:return false;" onKeyDown="javascript: return false;" onPaste="javascript: return false;"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="CreateUserWizard2" Display="Dynamic">*</asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="UserName" Display="Dynamic" ErrorMessage="User Name must be Numeric" ValidationExpression="^\d+$" ValidationGroup="CreateUserWizard2">*</asp:RegularExpressionValidator>
                                 </td>
