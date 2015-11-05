@@ -36,7 +36,7 @@
                     <asp:BoundField DataField="JobStatus" HeaderText="JobStatus" SortExpression="JobStatus" />
                     <asp:BoundField DataField="LastModified" HeaderText="LastModified" SortExpression="LastModified" />
                     <asp:BoundField DataField="SolutionApplied" HeaderText="SolutionApplied" SortExpression="SolutionApplied" />
-                    <asp:BoundField DataField="Expr2" HeaderText="Expr2" SortExpression="Expr2" ReadOnly="True" />
+                    <asp:BoundField DataField="Expr2" HeaderText="UserID" SortExpression="Expr2" ReadOnly="True" />
                 </Columns>
                 <EditRowStyle BackColor="#999999" />
                 <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
