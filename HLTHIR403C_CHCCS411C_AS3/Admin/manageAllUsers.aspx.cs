@@ -1,20 +1,21 @@
-﻿ /*
-  * Author: Yusuf Bhyat - 4105558614
-  *  Purpose: ASP.NET C# Web_Based Application - TechSupport Project 
-  *  This page is used by the Admin to manage all users accounts
-  *  Known bugs: Allows fields to be updated with null value, even with validator (suspected to be database problem) 
-  *              
-  *  Version: 1.0
+﻿/*
+ * Author: Yusuf Bhyat - 4105558614
+ *  Purpose: ASP.NET C# Web_Based Application - TechSupport Project 
+ *  This page is used by the Admin to manage all users accounts
+ *  Known bugs: Allows fields to be updated with null value, even with validator (suspected to be database problem) 
+ *              
+ *  Version: 1.0
   
-  * Edit: Eunice Yeh - 6100439115
-  * Added search bar and search function, as well as ability to edit after search
-  * Last Edit Date: 03/11/2015
-  * 
+ * Edit: Eunice Yeh - 6100439115
+ * Added search bar and search function, as well as ability to edit after search
+ * Last Edit Date: 03/11/2015
+ * 
 */
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -73,6 +74,109 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
                 txtSearch.Enabled = true;
                 btnSearch.Text = "Search";
             }
+        }
+        
+
+        protected void GridView1_RowUpdating1(object sender, GridViewUpdateEventArgs e)
+        {
+            
+                // Retrieves updated Account Type from Gridview and updates Role in ASPNETDB
+                DropDownList accountType = (DropDownList)GridView1.Rows[e.RowIndex].FindControl("DropDownList1");
+                string UserAccountType = accountType.SelectedValue.ToString();
+
+                // Retrives value of UserID
+                string userID = GridView1.Rows[GridView1.EditIndex].Cells[0].Text.ToString();
+           
+           
+
+            if (UserAccountType == "Admin")
+            {
+                try
+                {
+                    Roles.RemoveUserFromRoles(userID, Roles.GetRolesForUser(userID));
+                    Roles.AddUserToRole(userID, "Admin");
+                }
+                catch
+                {
+                }
+                
+            }
+
+            else if (UserAccountType == "Support Officer")
+            {
+                try
+                {
+                    Roles.RemoveUserFromRoles(userID, Roles.GetRolesForUser(userID));
+                    Roles.AddUserToRole(userID, "SupportOfficer");
+                }
+                catch
+                {
+                }
+            }
+
+            else if (UserAccountType == "Technician")
+            {
+                try
+                {
+                    Roles.RemoveUserFromRoles(userID, Roles.GetRolesForUser(userID));
+                    Roles.AddUserToRole(userID, "Technician");
+                }
+                catch
+                {
+                }         
+            }
+        }
+
+        
+
+        protected void GridViewDisplayUsers_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            // Retrieves updated Account Type from Gridview and updates Role in ASPNETDB
+            DropDownList accountType = (DropDownList)GridViewDisplayUsers.Rows[e.RowIndex].FindControl("DropDownList3");
+            string UserAccountType = accountType.SelectedValue.ToString();
+
+            // Retrives value of UserID
+            string userID = GridViewDisplayUsers.Rows[GridViewDisplayUsers.EditIndex].Cells[0].Text.ToString();
+
+
+
+            if (UserAccountType == "Admin")
+            {
+                try
+                {
+                    Roles.RemoveUserFromRoles(userID, Roles.GetRolesForUser(userID));
+                    Roles.AddUserToRole(userID, "Admin");
+                }
+                catch
+                {
+                }
+
+            }
+
+            else if (UserAccountType == "Support Officer")
+            {
+                try
+                {
+                    Roles.RemoveUserFromRoles(userID, Roles.GetRolesForUser(userID));
+                    Roles.AddUserToRole(userID, "SupportOfficer");
+                }
+                catch
+                {
+                }
+            }
+
+            else if (UserAccountType == "Technician")
+            {
+                try
+                {
+                    Roles.RemoveUserFromRoles(userID, Roles.GetRolesForUser(userID));
+                    Roles.AddUserToRole(userID, "Technician");
+                }
+                catch
+                {
+                }
+            }
+
         }
     }
 }

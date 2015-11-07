@@ -23,8 +23,7 @@
             <ContentTemplate>
                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                 </asp:ScriptManager>
-                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="editUser" />
-                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserID" DataSourceID="SqlDataSource1" Font-Size="Medium" ForeColor="#333333" GridLines="None" style="text-align: center" Width="900px">
+                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="1" DataKeyNames="UserID" DataSourceID="SqlDataSource1" Font-Size="Medium" ForeColor="#333333" GridLines="None" style="text-align: center" Width="900px" OnRowUpdating="GridView1_RowUpdating1">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
 
@@ -100,7 +99,7 @@
             </Triggers>
         </asp:UpdatePanel>
         <br />
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Users] WHERE [UserID] = @original_UserID AND (([UserName] = @original_UserName) OR ([UserName] IS NULL AND @original_UserName IS NULL)) AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND (([UserType] = @original_UserType) OR ([UserType] IS NULL AND @original_UserType IS NULL)) AND (([AccountStatus] = @original_AccountStatus) OR ([AccountStatus] IS NULL AND @original_AccountStatus IS NULL))" InsertCommand="INSERT INTO [Users] ([UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus]) VALUES (@UserID, @UserName, @FirstName, @LastName, @Email, @UserType, @AccountStatus)" SelectCommand="SELECT [UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus] FROM [Users]" UpdateCommand="UPDATE [Users] SET [FirstName] = @FirstName, [LastName] = @LastName, [Email] = @Email, [UserType] = @UserType, [AccountStatus] = @AccountStatus WHERE [UserID] = @original_UserID AND [UserName] = @original_UserName AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND (([UserType] = @original_UserType) OR ([UserType] IS NULL AND @original_UserType IS NULL)) AND (([AccountStatus] = @original_AccountStatus) OR ([AccountStatus] IS NULL AND @original_AccountStatus IS NULL))" ConflictDetection="CompareAllValues" OldValuesParameterFormatString="original_{0}">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Users] WHERE [UserID] = @original_UserID AND (([UserName] = @original_UserName) OR ([UserName] IS NULL AND @original_UserName IS NULL)) AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND (([UserType] = @original_UserType) OR ([UserType] IS NULL AND @original_UserType IS NULL)) AND (([AccountStatus] = @original_AccountStatus) OR ([AccountStatus] IS NULL AND @original_AccountStatus IS NULL))" InsertCommand="INSERT INTO [Users] ([UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus]) VALUES (@UserID, @UserName, @FirstName, @LastName, @Email, @UserType, @AccountStatus)" SelectCommand="SELECT [UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus] FROM [Users]" UpdateCommand="UPDATE [Users] SET [FirstName] = @FirstName, [LastName] = @LastName, [Email] = @Email, [UserType] = @UserType, [AccountStatus] = @AccountStatus WHERE [UserID] = @original_UserID AND [UserName] = @original_UserName AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND (([UserType] = @original_UserType) OR ([UserType] IS NULL AND @original_UserType IS NULL)) AND (([AccountStatus] = @original_AccountStatus) OR ([AccountStatus] IS NULL AND @original_AccountStatus IS NULL))" ConflictDetection="CompareAllValues" OldValuesParameterFormatString="original_{0}" ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>">
             <DeleteParameters>
                 <asp:Parameter Name="original_UserID" Type="Int32" />
                 <asp:Parameter Name="original_UserName" Type="String" />
@@ -140,7 +139,7 @@
 
         <br />
 
-    <asp:GridView ID="GridViewDisplayUsers" runat="server" AllowPaging="True" AllowSorting="True" CellPadding="4" DataSourceID="sqlSearchLastName" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="UserID" Visible="False" >
+    <asp:GridView ID="GridViewDisplayUsers" runat="server" AllowPaging="True" AllowSorting="True" CellPadding="4" DataSourceID="sqlSearchLastName" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="UserID" Visible="False" OnRowUpdating="GridViewDisplayUsers_RowUpdating" >
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="UserID" HeaderText="UserID" ReadOnly="True" SortExpression="UserID" />
@@ -148,7 +147,7 @@
             <asp:TemplateField HeaderText="FirstName" SortExpression="FirstName">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FirstName") %>'></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="TextBox1" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="editSearchedUser">*</asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="TextBox1" ErrorMessage="First Name is Required" ForeColor="Red" ValidationGroup="userDetails">*</asp:RequiredFieldValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("FirstName") %>'></asp:Label>
@@ -157,7 +156,7 @@
             <asp:TemplateField HeaderText="LastName" SortExpression="LastName">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("LastName") %>'></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="TextBox2" ErrorMessage="Last name is a required field." ForeColor="Red" ValidationGroup="editSearchedUser">*</asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="TextBox2" ErrorMessage="Last name is a required field." ForeColor="Red" ValidationGroup="userDetails">*</asp:RequiredFieldValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("LastName") %>'></asp:Label>
@@ -166,8 +165,8 @@
             <asp:TemplateField HeaderText="Email" SortExpression="Email">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Email") %>'></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="TextBox3" ErrorMessage="Email is a required field." ForeColor="Red" ValidationGroup="editSearchedUser">*</asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="TextBox3" ErrorMessage="Please enter a valid email." ForeColor="Red" ValidationGroup="editSearchedUser">*</asp:RegularExpressionValidator>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="TextBox3" ErrorMessage="Email is a required field." ForeColor="Red" ValidationGroup="userDetails" Display="Dynamic">*</asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="TextBox3" ErrorMessage="Please enter a valid email." ForeColor="Red" ValidationGroup="userDetails" Display="Dynamic">*</asp:RegularExpressionValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label3" runat="server" Text='<%# Bind("Email") %>'></asp:Label>
@@ -209,6 +208,7 @@
         <SortedDescendingCellStyle BackColor="#FFFDF8" />
         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
+                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="userDetails" />
         <asp:SqlDataSource ID="sqlSearchLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
             SelectCommand="SELECT [UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus] FROM [Users] WHERE ([LastName] LIKE '%' + @LastName + '%') ORDER BY [LastName]" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Users] WHERE [UserID] = @original_UserID AND (([UserName] = @original_UserName) OR ([UserName] IS NULL AND @original_UserName IS NULL)) AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND (([UserType] = @original_UserType) OR ([UserType] IS NULL AND @original_UserType IS NULL)) AND (([AccountStatus] = @original_AccountStatus) OR ([AccountStatus] IS NULL AND @original_AccountStatus IS NULL))" InsertCommand="INSERT INTO [Users] ([UserID], [UserName], [FirstName], [LastName], [Email], [UserType], [AccountStatus]) VALUES (@UserID, @UserName, @FirstName, @LastName, @Email, @UserType, @AccountStatus)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Users] SET [UserName] = @UserName, [FirstName] = @FirstName, [LastName] = @LastName, [Email] = @Email, [UserType] = @UserType, [AccountStatus] = @AccountStatus WHERE [UserID] = @original_UserID AND (([UserName] = @original_UserName) OR ([UserName] IS NULL AND @original_UserName IS NULL)) AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND (([UserType] = @original_UserType) OR ([UserType] IS NULL AND @original_UserType IS NULL)) AND (([AccountStatus] = @original_AccountStatus) OR ([AccountStatus] IS NULL AND @original_AccountStatus IS NULL))">
             <DeleteParameters>
