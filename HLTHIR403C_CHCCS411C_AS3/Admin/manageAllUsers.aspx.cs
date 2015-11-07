@@ -77,6 +77,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
         }
         
 
+        // Yusuf - 4105558614
         protected void GridView1_RowUpdating1(object sender, GridViewUpdateEventArgs e)
         {
             
@@ -86,9 +87,9 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
 
                 // Retrives value of UserID
                 string userID = GridView1.Rows[GridView1.EditIndex].Cells[0].Text.ToString();
-           
-           
 
+
+            // adds you to Admin role and remove other roles
             if (UserAccountType == "Admin")
             {
                 try
@@ -102,6 +103,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
                 
             }
 
+            // adds you to Support Officer role and remove other roles
             else if (UserAccountType == "Support Officer")
             {
                 try
@@ -114,6 +116,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
                 }
             }
 
+            // adds you to technician role and remove other roles
             else if (UserAccountType == "Technician")
             {
                 try
@@ -127,8 +130,8 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
             }
         }
 
-        
 
+        // Yusuf - 4105558614
         protected void GridViewDisplayUsers_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             // Retrieves updated Account Type from Gridview and updates Role in ASPNETDB
@@ -139,7 +142,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
             string userID = GridViewDisplayUsers.Rows[GridViewDisplayUsers.EditIndex].Cells[0].Text.ToString();
 
 
-
+            // adds you to Admin role and remove other roles
             if (UserAccountType == "Admin")
             {
                 try
@@ -153,6 +156,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
 
             }
 
+            // adds you to Support Officer role and remove other roles
             else if (UserAccountType == "Support Officer")
             {
                 try
@@ -165,6 +169,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
                 }
             }
 
+            // adds you to technician role and remove other roles
             else if (UserAccountType == "Technician")
             {
                 try
