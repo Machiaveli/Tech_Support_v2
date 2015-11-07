@@ -76,21 +76,21 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         protected global::System.Web.UI.WebControls.SqlDataSource sqlAllProducts;
         
         /// <summary>
-        /// gvSearch control.
+        /// gvResults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvSearch;
+        protected global::System.Web.UI.WebControls.GridView gvResults;
         
         /// <summary>
-        /// sqlSearchProducts control.
+        /// sqlProductSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlSearchProducts;
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlProductSearch;
     }
 }

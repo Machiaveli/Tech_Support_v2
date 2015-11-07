@@ -20,7 +20,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             gvProducts.Visible = true;
-            gvSearch.Visible = false;
+            gvResults.Visible = false;
             lblMatch.Visible = false;
         }
 
@@ -28,10 +28,12 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
         {
             try
             {
+                gvResults.DataSourceID = "sqlProductSearch";
+                gvResults.DataBind();
                 lblMatch.Text = "The following products matched your search: ";
                 lblMatch.Visible = true;
                 gvProducts.Visible = false;
-                gvSearch.Visible = true;
+                gvResults.Visible = true;
             }
             catch (Exception ex)
             {
@@ -46,9 +48,17 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
         }
 
-        protected void gvSearch_RowEditing(object sender, GridViewEditEventArgs e)
+        protected void gvResults_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            gvProducts.Enabled = false;
+            gvProducts.Visible = false;
+            gvResults.Visible = true;
             btnSearch.UseSubmitBehavior = false;
+        }
+
+        protected void gvResults_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+        {
+            Response.Redirect("products.aspx");
         }
 
     }
