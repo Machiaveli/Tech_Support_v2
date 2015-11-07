@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     &nbsp;<asp:Label ID="lblSearchRecords" runat="server" Text="Search all customers: "></asp:Label>
-    &nbsp;<asp:TextBox ID="txtSearchQuery" runat="server" style="margin-bottom: 0px" Width="181px"></asp:TextBox>
+    &nbsp;<asp:TextBox ID="txtSearchQuery" runat="server" style="margin-bottom: 0px" Width="181px" OnTextChanged="txtSearchQuery_TextChanged"></asp:TextBox>
     &nbsp;&nbsp;&nbsp;
     <asp:DropDownList ID="dropDownSearchFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropDownSearchFilter_SelectedIndexChanged">
         <asp:ListItem Selected="True" Value="customerLastName">Last Name</asp:ListItem>
@@ -13,6 +13,8 @@
     &nbsp;&nbsp;
     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" Width="74px" />
     <br />
+    <br />
+            <asp:Label ID="lblCustomerRegistrationResults" runat="server" Font-Size="Large" Text="The following customers matched your search:"></asp:Label>
     <br />
     <asp:GridView ID="GridViewCustomers" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridViewCustomers_SelectedIndexChanged">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
@@ -86,8 +88,6 @@
             <asp:Parameter Name="original_AccountStatus" Type="String" />
         </UpdateParameters>
     </asp:SqlDataSource>
-            <br />
-            <asp:Label ID="lblCustomerRegistrationResults" runat="server" Font-Size="Large" Text="The following customers matched your search:"></asp:Label>
 
     <asp:GridView ID="GridViewDisplayCustomers" runat="server" AllowPaging="True" AllowSorting="True" CellPadding="4" DataKeyNames="CustomerID" DataSourceID="DataSourceSearchCustByLastName" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewDisplayCustomers_SelectedIndexChanged">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
@@ -178,7 +178,7 @@
         <SortedDescendingCellStyle BackColor="#FFFDF8" />
         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
-            <asp:SqlDataSource ID="DataSourceSearchCustByLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Customers] WHERE ([LastName] LIKE '%' + @LastName + '%')" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Customers] WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL))" InsertCommand="INSERT INTO [Customers] ([FirstName], [LastName], [Address], [City], [State], [ZipCode], [Phone], [Email]) VALUES (@FirstName, @LastName, @Address, @City, @State, @ZipCode, @Phone, @Email)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Customers] SET [FirstName] = @FirstName, [LastName] = @LastName, [Address] = @Address, [City] = @City, [State] = @State, [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL))">
+            <asp:SqlDataSource ID="DataSourceSearchCustByLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Customers] WHERE ([LastName] LIKE @LastName + '%')" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Customers] WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL))" InsertCommand="INSERT INTO [Customers] ([FirstName], [LastName], [Address], [City], [State], [ZipCode], [Phone], [Email]) VALUES (@FirstName, @LastName, @Address, @City, @State, @ZipCode, @Phone, @Email)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Customers] SET [FirstName] = @FirstName, [LastName] = @LastName, [Address] = @Address, [City] = @City, [State] = @State, [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL))">
                 <DeleteParameters>
                     <asp:Parameter Name="original_CustomerID" Type="Int32" />
                     <asp:Parameter Name="original_FirstName" Type="String" />

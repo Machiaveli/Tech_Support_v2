@@ -21,24 +21,35 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
         {
             gvProducts.Visible = true;
             gvSearch.Visible = false;
-            btnSearch.UseSubmitBehavior = true;
+            lblMatch.Visible = false;
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            gvProducts.Visible = false;
-            gvSearch.Visible = true;
+            try
+            {
+                lblMatch.Text = "The following products matched your search: ";
+                lblMatch.Visible = true;
+                gvProducts.Visible = false;
+                gvSearch.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                lblMatch.Text = ex.Message;
+                lblMatch.Visible = true;
+            }
         }
 
         protected void gvProducts_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            btnSearch.UseSubmitBehavior = false;            
-        
+            btnSearch.UseSubmitBehavior = false;
+
         }
 
-        protected void gvProducts_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+        protected void gvSearch_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            btnSearch.UseSubmitBehavior = true;
+            btnSearch.UseSubmitBehavior = false;
         }
+
     }
 }

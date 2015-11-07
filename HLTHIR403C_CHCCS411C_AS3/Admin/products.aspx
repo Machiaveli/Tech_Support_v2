@@ -15,7 +15,9 @@
     <br />
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="White" ValidationGroup="editProduct" />
     <br />
-    <asp:GridView ID="gvProducts" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ProductCode" DataSourceID="sqlAllProducts" CellPadding="4" ForeColor="#333333" GridLines="None" Width="60%" OnRowEditing="gvProducts_RowEditing" OnRowUpdated="gvProducts_RowUpdated">
+                <asp:Label ID="lblMatch" runat="server" Font-Size="Large" Text="The following products matched your search:" Visible="False"></asp:Label>
+    <br />
+    <asp:GridView ID="gvProducts" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ProductCode" DataSourceID="sqlAllProducts" CellPadding="4" ForeColor="#333333" GridLines="None" Width="60%" OnRowEditing="gvProducts_RowEditing">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" ReadOnly="True" SortExpression="ProductCode" />
@@ -102,7 +104,7 @@
     </asp:SqlDataSource>
              
     <br />
-    <asp:GridView ID="gvSearch" runat="server" CellPadding="4" DataSourceID="sqlSearchProducts" ForeColor="#333333" GridLines="None" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ProductCode">
+    <asp:GridView ID="gvSearch" runat="server" CellPadding="4" DataSourceID="sqlSearchProducts" ForeColor="#333333" GridLines="None" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ProductCode" OnRowEditing="gvSearch_RowEditing">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" ReadOnly="True" SortExpression="ProductCode" />
