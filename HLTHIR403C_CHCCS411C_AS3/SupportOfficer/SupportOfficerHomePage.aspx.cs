@@ -16,6 +16,10 @@
  * Added: ConvertSortDirectionToSql, GridViewCustomers_PageIndexChanged, GridViewCustomers_Sorting
  * 
  * Changed: SqlDataSource - DataSourceSearchCustByLastName and DataSourceSearchCustByID, changed the sql select query.
+ * 
+ * Edited: Eunice Yeh - 6100439115
+ * Last edit: 07/11/2015
+ * - Added validation
  * */
 using System;
 using System.Collections.Generic;
@@ -38,7 +42,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
             lblCustomerRegistrationResults.Visible = false;
             btnAddIncident.Visible = false;
             lblinactiveAccount.Visible = false;
-            
+
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -47,32 +51,58 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
             GridViewDisplayCustomers.DataSourceID = "";
             // binds the correct data source to the correct GridView depending on the dropdownlist Selection
             if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("customerID"))
-            {              
-                GridViewDisplayCustomers.DataSourceID = "DataSourceSearchCustByID";
-                GridViewDisplayCustomers.DataBind();
-                GridViewCustomers.Visible = false;
-                GridViewDisplayCustomers.Visible = true;
-                lblOpenIncidents.Visible = false;
-                lblCustomerRegistrationResults.Visible = true;
-                    
+            {
+                try
+                {
+                    GridViewDisplayCustomers.DataSourceID = "DataSourceSearchCustByID";
+                    GridViewDisplayCustomers.DataBind();
+                    GridViewCustomers.Visible = false;
+                    GridViewDisplayCustomers.Visible = true;
+                    lblOpenIncidents.Visible = false;
+                    lblCustomerRegistrationResults.Text = "The following customers matched your search:";
+                    lblCustomerRegistrationResults.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    lblCustomerRegistrationResults.Text = ex.Message + " Please ensure that you have entered a valid customer ID.";
+                    lblCustomerRegistrationResults.Visible = true;
+                }
+
             }
 
             else if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("customerLastName"))
             {
+                try
+                {
                     GridViewDisplayCustomers.DataSourceID = "DataSourceSearchCustByLastName";
                     GridViewDisplayCustomers.DataBind();
                     GridViewCustomers.Visible = false;
                     GridViewDisplayCustomers.Visible = true;
                     lblOpenIncidents.Visible = false;
+                    lblCustomerRegistrationResults.Text = "The following customers matched your search:";
                     lblCustomerRegistrationResults.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    lblCustomerRegistrationResults.Text = ex.Message;
+                    lblCustomerRegistrationResults.Visible = true;
+                }
             }
             else if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("ListMyIncidents"))
             {
-                GridViewCustomers.Visible = true;
-                GridViewDisplayCustomers.Visible = false;
-                DetailsView1.Visible = false;
-                lblOpenIncidents.Visible = true;
-                lblCustomerRegistrationResults.Visible = false;
+                try
+                {
+                    GridViewCustomers.Visible = true;
+                    GridViewDisplayCustomers.Visible = false;
+                    DetailsView1.Visible = false;
+                    lblOpenIncidents.Visible = true;
+                    lblCustomerRegistrationResults.Visible = false;
+                }
+                catch (Exception ex)
+                {
+                    lblCustomerRegistrationResults.Text = ex.Message;
+                    lblCustomerRegistrationResults.Visible = true;
+                }
             }
         }
 
@@ -95,7 +125,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
             else
             {
                 txtSearchQuery.Enabled = true;
-                lblSearchRecords.ForeColor = System.Drawing.Color.Yellow;
                 btnSearch.Text = "Search";
             }
         }
@@ -181,6 +210,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
                 GridViewCustomers.DataSource = dataView;
                 GridViewCustomers.DataBind();
             }
-        } 
+        }
     }
 }

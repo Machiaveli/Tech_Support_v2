@@ -49,6 +49,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
+        /// lblCustomerRegistrationResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCustomerRegistrationResults;
+        
+        /// <summary>
         /// GridViewCustomers control.
         /// </summary>
         /// <remarks>
@@ -65,15 +74,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
-        
-        /// <summary>
-        /// lblCustomerRegistrationResults control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCustomerRegistrationResults;
         
         /// <summary>
         /// GridViewDisplayCustomers control.
