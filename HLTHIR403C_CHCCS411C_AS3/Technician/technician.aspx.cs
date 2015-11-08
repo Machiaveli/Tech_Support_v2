@@ -117,7 +117,9 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician
 
         protected void GridViewIncidentsDisplay_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblIncidentID.Text = GridViewIncidentsDisplay.SelectedRow.Cells[0].Text;
+            LastModified.Text = DateTime.Now.ToString();
+            IncidentHistoryID.Text = GridViewIncidentsDisplay.SelectedRow.Cells[0].Text;
+            IncidentID.Text = GridViewIncidentsDisplay.SelectedValue.ToString();
         }
     }
 }
