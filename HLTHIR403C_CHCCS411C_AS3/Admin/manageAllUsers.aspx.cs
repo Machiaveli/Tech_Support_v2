@@ -1,14 +1,16 @@
 ﻿/*
  * Author: Yusuf Bhyat - 4105558614
  *  Purpose: ASP.NET C# Web_Based Application - TechSupport Project 
- *  This page is used by the Admin to manage all users accounts
- *  Known bugs: Allows fields to be updated with null value, even with validator (suspected to be database problem) 
- *              
+ *  This page is used by the Admin to manage all user accounts
+ *  Known bugs: None at time of testing
  *  Version: 1.0
-  
+ *  
  * Edit: Eunice Yeh - 6100439115
- * Added search bar and search function, as well as ability to edit after search
- * Last Edit Date: 03/11/2015
+ * - Added search bar and search function
+ * - Edited gridview to show more fields
+ * - Enabled ability to edit after search
+ * - Added validation
+ * Last Edit Date: 07/11/2015
  * 
 */
 using System;
@@ -25,7 +27,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lblMatch.Visible = false;
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -35,21 +37,43 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
             // binds the correct data source to the correct GridView depending on the dropdownlist Selection
             if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("userID"))
             {
-                GridViewDisplayUsers.DataSourceID = "sqlSearchUserID";
-                GridViewDisplayUsers.DataBind();
-                GridView1.Visible = false;
-                GridViewDisplayUsers.Visible = true;
-                lblMatch.Visible = true;
+                try
+                {
+                    GridViewDisplayUsers.DataSourceID = "sqlSearchUserID";
+                    GridViewDisplayUsers.DataBind();
+                    GridView1.Visible = false;
+                    GridViewDisplayUsers.Visible = true;
+                    lblMatch.Text = "The following users matched your search: ";
+                    lblMatch.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    lblMatch.Text = ex.Message + " Please ensure you have entered a valid user ID.";
+                    lblMatch.Visible = true;
+                    GridView1.Visible = false;
+                    GridViewDisplayUsers.Visible = false;
+                }
 
             }
 
             else if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("userLastName"))
             {
-                GridViewDisplayUsers.DataSourceID = "sqlSearchLastName";
-                GridViewDisplayUsers.DataBind();
-                GridView1.Visible = false;
-                GridViewDisplayUsers.Visible = true;
-                lblMatch.Visible = true;
+                try
+                {
+                    GridViewDisplayUsers.DataSourceID = "sqlSearchLastName";
+                    GridViewDisplayUsers.DataBind();
+                    GridView1.Visible = false;
+                    GridViewDisplayUsers.Visible = true;
+                    lblMatch.Text = "The following users matched your search: ";
+                    lblMatch.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    lblMatch.Text = ex.Message;
+                    lblMatch.Visible = true;
+                    GridView1.Visible = false;
+                    GridViewDisplayUsers.Visible = false;
+                }
             }
             else if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("ListAllUsers"))
             {
@@ -57,7 +81,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
                 GridViewDisplayUsers.Visible = false;
                 lblMatch.Visible = false;
             }
-      
+
         }
 
         protected void dropDownSearchFilter_SelectedIndexChanged(object sender, EventArgs e)
@@ -73,6 +97,27 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
             {
                 txtSearch.Enabled = true;
                 btnSearch.Text = "Search";
+            }
+        }
+
+        protected void GridViewDisplayUsers_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            btnSearch.UseSubmitBehavior = false;
+        }
+
+        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            btnSearch.UseSubmitBehavior = false;
+
+        }
+
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            DropDownList accountType = (DropDownList)GridView1.FindControl("DropDownList1");
+            string UserAccountType = accountType.SelectedValue.ToString();
+            if (UserAccountType == "Admin")
+            {
+                accountType.Enabled = false;
             }
         }
 
@@ -130,6 +175,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
         }
 
 
+
         // Yusuf - 4105558614
         protected void GridViewDisplayUsers_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
@@ -152,6 +198,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
                 catch
                 {
                 }
+
             }
 
             // adds you to Support Officer role and remove other roles
@@ -182,5 +229,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
 
         }
 
+    
     }
 }
