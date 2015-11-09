@@ -27,6 +27,7 @@
             <asp:BoundField DataField="Phone" HeaderText="Phone" SortExpression="Phone" />
             <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
             <asp:BoundField DataField="AccountStatus" HeaderText="AccountStatus" SortExpression="AccountStatus" />
+            <asp:CommandField ShowEditButton="True" ShowSelectButton="True" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -223,10 +224,29 @@
                     <asp:Parameter Name="original_Email" Type="String" />
                 </UpdateParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="DataSourceSearchCustByID" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Customers] WHERE ([CustomerID] = @CustomerID)">
+            <asp:SqlDataSource ID="DataSourceSearchCustByID" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Customers] WHERE ([CustomerID] = @CustomerID)" ConflictDetection="CompareAllValues" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Customers] SET [FirstName] = @FirstName, [LastName] = @LastName, [Address] = @Address, [City] = @City, [State] = @State, [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL))">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="txtSearchQuery" Name="CustomerID" PropertyName="Text" Type="Int32" />
                 </SelectParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="FirstName" Type="String" />
+                    <asp:Parameter Name="LastName" Type="String" />
+                    <asp:Parameter Name="Address" Type="String" />
+                    <asp:Parameter Name="City" Type="String" />
+                    <asp:Parameter Name="State" Type="String" />
+                    <asp:Parameter Name="ZipCode" Type="String" />
+                    <asp:Parameter Name="Phone" Type="String" />
+                    <asp:Parameter Name="Email" Type="String" />
+                    <asp:Parameter Name="original_CustomerID" Type="Int32" />
+                    <asp:Parameter Name="original_FirstName" Type="String" />
+                    <asp:Parameter Name="original_LastName" Type="String" />
+                    <asp:Parameter Name="original_Address" Type="String" />
+                    <asp:Parameter Name="original_City" Type="String" />
+                    <asp:Parameter Name="original_State" Type="String" />
+                    <asp:Parameter Name="original_ZipCode" Type="String" />
+                    <asp:Parameter Name="original_Phone" Type="String" />
+                    <asp:Parameter Name="original_Email" Type="String" />
+                </UpdateParameters>
             </asp:SqlDataSource>
     <asp:DetailsView ID="DetailsView1" runat="server" AllowPaging="True" CellPadding="4" DataSourceID="SqlDataSource2" ForeColor="#333333" GridLines="None" Height="50px" Width="735px">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
@@ -242,6 +262,11 @@
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT c.CustomerID, c.FirstName, c.LastName, r.ProductCode, r.RegistrationDate, p.Name, p.Version, p.ReleaseDate, p.ProductSupported FROM Customers c INNER JOIN Registrations r ON c.CustomerID = r.CustomerID INNER JOIN Products p ON r.ProductCode = p.ProductCode WHERE (c.CustomerID = @selectedCustID)">
         <SelectParameters>
             <asp:ControlParameter ControlID="GridViewDisplayCustomers" Name="selectedCustID" PropertyName="SelectedValue" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="DataSourceUpperGridViewSelectedCustomer" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT c.CustomerID, c.FirstName, c.LastName, r.ProductCode, r.RegistrationDate, p.Name, p.Version, p.ReleaseDate, p.ProductSupported FROM Customers c INNER JOIN Registrations r ON c.CustomerID = r.CustomerID INNER JOIN Products p ON r.ProductCode = p.ProductCode WHERE (c.CustomerID = @selectedCustID)">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="GridViewCustomers" Name="selectedCustID" PropertyName="SelectedValue" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="insertValid" />
