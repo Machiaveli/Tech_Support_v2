@@ -1,16 +1,11 @@
 ﻿/*
- * Author: Yusuf Bhyat - 4105558614
+ * Author(s): Yusuf Bhyat - 4105558614 , Eunice Yeh - 6100439115
  *  Purpose: ASP.NET C# Web_Based Application - TechSupport Project 
  *  This page is used by the Admin to manage all user accounts
  *  Known bugs: None at time of testing
  *  Version: 1.0
  *  
- * Edit: Eunice Yeh - 6100439115
- * - Added search bar and search function
- * - Edited gridview to show more fields
- * - Enabled ability to edit after search
- * - Added validation
- * Last Edit Date: 07/11/2015
+ * Last Edit: 07/11/2015
  * 
 */
 using System;
@@ -30,6 +25,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
             lblMatch.Visible = false;
         }
 
+        // Eunice Yeh - 6100439115
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             //clear the current datasourceID
@@ -109,16 +105,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
         {
             btnSearch.UseSubmitBehavior = false;
 
-        }
-
-        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            DropDownList accountType = (DropDownList)GridView1.FindControl("DropDownList1");
-            string UserAccountType = accountType.SelectedValue.ToString();
-            if (UserAccountType == "Admin")
-            {
-                accountType.Enabled = false;
-            }
         }
 
         // Yusuf - 4105558614
