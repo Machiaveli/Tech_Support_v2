@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AccManage\pswReset.aspx" />
+    <Content Include="Admin\AddCustomerSuccessPage.aspx" />
     <Content Include="Admin\addProduct.aspx" />
     <Content Include="Admin\link.aspx" />
     <Content Include="Admin\manageAllUsers.aspx" />
@@ -89,6 +90,12 @@
     </Compile>
     <Compile Include="AccManage\pswReset.aspx.designer.cs">
       <DependentUpon>pswReset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AddCustomerSuccessPage.aspx.cs">
+      <DependentUpon>AddCustomerSuccessPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AddCustomerSuccessPage.aspx.designer.cs">
+      <DependentUpon>AddCustomerSuccessPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\addProduct.aspx.cs">
       <DependentUpon>addProduct.aspx</DependentUpon>

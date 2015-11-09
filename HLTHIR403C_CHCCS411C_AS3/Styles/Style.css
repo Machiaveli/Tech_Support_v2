@@ -64,3 +64,7 @@ h1 {
 #menuPanel {
     background-color: #fff;
 }
+
+.centered {
+    text-align: center;
+}

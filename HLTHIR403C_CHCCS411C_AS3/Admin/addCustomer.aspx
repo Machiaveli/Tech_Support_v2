@@ -5,7 +5,10 @@ private void InsertCustomer (object source, EventArgs e) {
     try
     {
         SqlDataSource3.Insert();
-        Response.Redirect("customers.aspx");
+        Session["custFirstName"] = txtFirstName.Text;
+        Session["custLastName"] = txtLastName.Text;
+        Session["custEmail"] = txtEmail.Text;
+        Response.Redirect("AddCustomerSuccessPage.aspx");
     }
     catch (Exception)
     {
