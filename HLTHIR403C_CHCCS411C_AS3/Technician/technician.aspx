@@ -48,7 +48,7 @@
         }
         catch (Exception ex)
         {
-            lblError.Text = "The person you are trying to insert already exists in the database." + ex.Message;
+            lblError.Text = ex.Message;
         }
     }
 </script>
@@ -101,11 +101,11 @@
             <asp:Label ID="lblFilter" runat="server" Text="Filter: "></asp:Label>
             &nbsp;&nbsp;
             <asp:DropDownList ID="dropDownFilter" runat="server" AutoPostBack="True" OnSelectedIndexChanged="dropDownFilter_SelectedIndexChanged">
-                <asp:ListItem Selected="True" Value="ListMyOpenIncidents">List My Open Incidents</asp:ListItem>
+                <asp:ListItem Value="ListAllIncidentsInProgress">List Incidents In Progress</asp:ListItem>
                 <asp:ListItem Value="ListMyClosedIncidents">List My Closed Incidents</asp:ListItem>
                 <asp:ListItem Value="ListAllOpenIncidents">List All Open Incidents</asp:ListItem>
                 <asp:ListItem Value="ListAllClosedIncidents">List All Closed Incidents</asp:ListItem>
-                <asp:ListItem Value="ListAllIncidentsInProgress">List All Incidents In Progress</asp:ListItem>
+
             </asp:DropDownList>
             &nbsp;&nbsp;
             <%--<asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click1" Text="Search" />--%>
