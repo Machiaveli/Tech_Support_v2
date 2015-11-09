@@ -26,7 +26,7 @@
                 <br />
                 <asp:Label ID="lblMatch" runat="server" Font-Size="Large" Text="The following users matched your search:" Visible="False"></asp:Label>
                 <br />
-                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="1" DataKeyNames="UserID" DataSourceID="SqlDataSource1" Font-Size="Medium" ForeColor="#333333" GridLines="None" style="text-align: center" Width="900px" OnRowUpdating="GridView1_RowUpdating1" OnRowEditing="GridView1_RowEditing">
+                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserID" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" style="text-align: center" Width="900px" OnRowUpdating="GridView1_RowUpdating1" OnRowEditing="GridView1_RowEditing">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
 
