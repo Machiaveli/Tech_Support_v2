@@ -2,13 +2,24 @@
  * Last Edit: 11/2/2015
  * 
  * Purpose: 
- * 
+ * Allows Admin users to list all customers, and also search for specific customers based on customer last name or customer ID. Once a customer has been selected
+ * from the returned search query, this page will also display a list of all previous incidents linked to the selected customer, as well as give the user a list of
+ * all products the user has registered. The user can then click the 'ARegister Product' button in order to register a product to a particular user.
  * 
  * Edit: Eunice Yeh - 6100439115
  * Added search bar and search function, as well as ability to edit after search
  * Date: 01/11/2015
  * 
-
+ * Edit: Kevin Ewald - 8103677414
+ * Date: 9/11/2015
+ * Enabled selection and edit/update capabilities on remaining GridViews and dataSources
+ * Made the customer ID of ther selected customer auto-fill on customer ID text field on link.aspc page (for registering products to customers)
+ * Added GridView which allows the user to also see all previous incidents of the selected user
+ * Ensured that the 'Register Product' button is only displayed when a customer has been selected from a GridView
+ * Did minor layout changes just to make the layout a bit clearer (more needs to be done)
+ * 
+ * Known Bugs:
+ * None
  */
 
 using System;
@@ -97,7 +108,12 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             DetailsView1.DataBind();
 
             if (GridViewDisplayCustomers.SelectedIndex != -1)
+            {
                 btnRegister.Visible = true;
+                GridViewPreviousIncidents.DataSourceID = "";
+                GridViewPreviousIncidents.DataSourceID = "DataSourcePrevIncidentsFromGridViewDisplayCustomers";
+                GridViewPreviousIncidents.DataBind();
+            }
             else
                 btnRegister.Visible = false;
         }
@@ -110,7 +126,12 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             DetailsView1.DataBind();
 
             if (GridViewCustomers.SelectedIndex != -1)
+            {
                 btnRegister.Visible = true;
+                GridViewPreviousIncidents.DataSourceID = "";
+                GridViewPreviousIncidents.DataSourceID = "DataSourcePrevIncidentsFromGridViewCustomers";
+                GridViewPreviousIncidents.DataBind();
+            }
             else
                 btnRegister.Visible = false;
         }
