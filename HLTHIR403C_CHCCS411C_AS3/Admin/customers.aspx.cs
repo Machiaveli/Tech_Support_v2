@@ -26,7 +26,12 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
         object selectedCustID = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (dropDownSearchFilter.SelectedValue.Trim().Equals("ListAllCustomers"))
+            {
+                txtSearchQuery.Enabled = false;
+                lblSearchRecords.ForeColor = System.Drawing.Color.Gray;
+            }
+            btnRegister.Visible = false;
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -72,12 +77,14 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                 lblSearchRecords.Enabled = false;
                 lblSearchRecords.ForeColor = System.Drawing.Color.Gray;
                 btnSearch.Text = "Get";
+                txtSearchQuery.Enabled = false;
             }
             else
             {
                 txtSearchQuery.Enabled = true;
                 lblSearchRecords.ForeColor = System.Drawing.Color.Yellow;
                 btnSearch.Text = "Search";
+                txtSearchQuery.Enabled = true;
             }
         }
 
@@ -88,7 +95,11 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
             DetailsView1.DataSourceID = "SqlDataSource2";
             DetailsView1.DataBind();
-            //selectedCustID = GridViewDisplayCustomers.SelectedRow.Cells[0].Text;
+
+            if (GridViewDisplayCustomers.SelectedIndex != -1)
+                btnRegister.Visible = true;
+            else
+                btnRegister.Visible = false;
         }
 
         protected void GridViewCustomers_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,7 +108,11 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
             DetailsView1.DataSourceID = "DataSourceUpperGridViewSelectedCustomer";
             DetailsView1.DataBind();
-            //selectedCustID = GridViewCustomers.SelectedRow.Cells[0].Text;
+
+            if (GridViewCustomers.SelectedIndex != -1)
+                btnRegister.Visible = true;
+            else
+                btnRegister.Visible = false;
         }
 
         protected void btnRegister_Click(object sender, EventArgs e)

@@ -6,9 +6,9 @@
     &nbsp;<asp:TextBox ID="txtSearchQuery" runat="server" style="margin-bottom: 0px" Width="181px"></asp:TextBox>
     &nbsp;&nbsp;&nbsp;
     <asp:DropDownList ID="dropDownSearchFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropDownSearchFilter_SelectedIndexChanged">
-        <asp:ListItem Selected="True" Value="customerLastName">Last Name</asp:ListItem>
+        <asp:ListItem Value="customerLastName">Last Name</asp:ListItem>
         <asp:ListItem Value="customerID">Customer ID</asp:ListItem>
-        <asp:ListItem Value="ListAllCustomers">List All Customers</asp:ListItem>
+        <asp:ListItem Value="ListAllCustomers" Selected="True">List All Customers</asp:ListItem>
     </asp:DropDownList>
     &nbsp;&nbsp;
     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" Width="74px" />

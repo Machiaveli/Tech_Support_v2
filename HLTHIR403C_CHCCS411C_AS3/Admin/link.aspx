@@ -9,8 +9,8 @@
         {
             txtCustomerID.Text = Session["selectedCustomer"].ToString();
         }
-        //else
-        //    Response.Redirect("customers.aspx"); // ensures this page cannot be accessed unless going through customers.aspx 
+        else
+            Response.Redirect("customers.aspx"); // ensures this page cannot be accessed unless going through customers.aspx 
         
     }
 
