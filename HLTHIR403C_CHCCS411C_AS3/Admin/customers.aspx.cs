@@ -36,7 +36,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 {
     public partial class newCustomer : System.Web.UI.Page
     {
-        object selectedCustID = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (dropDownSearchFilter.SelectedValue.Trim().Equals("ListAllCustomers"))
