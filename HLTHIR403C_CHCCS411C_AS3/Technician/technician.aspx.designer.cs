@@ -103,6 +103,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician {
         protected global::System.Web.UI.WebControls.SqlDataSource DataSourceAllClosedIncidents;
         
         /// <summary>
+        /// DataSourceAllIncidentsInProgress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DataSourceAllIncidentsInProgress;
+        
+        /// <summary>
         /// DetailsView1 control.
         /// </summary>
         /// <remarks>
@@ -110,6 +119,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DetailsView DetailsView1;
+        
+        /// <summary>
+        /// tableIncidentsHistory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tableIncidentsHistory;
         
         /// <summary>
         /// lblIncidentHistoryID control.
@@ -157,13 +175,13 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician {
         protected global::System.Web.UI.WebControls.Label lblUserID;
         
         /// <summary>
-        /// txtUserID control.
+        /// UserID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUserID;
+        protected global::System.Web.UI.WebControls.Label UserID;
         
         /// <summary>
         /// lblLastModified control.
@@ -211,13 +229,13 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician {
         protected global::System.Web.UI.WebControls.Label lblJobStatus;
         
         /// <summary>
-        /// txtJobStatus control.
+        /// dLJobStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtJobStatus;
+        protected global::System.Web.UI.WebControls.DropDownList dLJobStatus;
         
         /// <summary>
         /// lblSolutionApplied control.
@@ -245,15 +263,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
-        
-        /// <summary>
-        /// DataSourceDetailsView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource DataSourceDetailsView;
         
         /// <summary>
         /// lblError control.

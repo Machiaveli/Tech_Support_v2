@@ -27,6 +27,8 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician
         {
             lblUserName.Visible = false;
             lblUserName.Text = User.Identity.Name.ToString();
+            UserID.Text = User.Identity.Name.ToString();
+            tableIncidentsHistory.Visible = false;
         }
 
         // refreshes grid view and unselects row
@@ -65,6 +67,11 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician
             {
                 GridViewIncidentsDisplay.DataSourceID = "DataSourceAllClosedIncidents";
                 lblDisplayedInfoMessage.Text = "All Closed Incidents";
+            }
+            else if (dropDownFilter.SelectedValue.ToString().Trim().Equals("ListAllIncidentsInProgress"))
+            {
+                GridViewIncidentsDisplay.DataSourceID = "DataSourceAllIncidentsInProgress";
+                lblDisplayedInfoMessage.Text = "All Incidents In Progress";
             }
             //Bind new data source to the GridView
             GridViewIncidentsDisplay.DataBind();
@@ -120,6 +127,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician
             LastModified.Text = DateTime.Now.ToString();
             IncidentHistoryID.Text = GridViewIncidentsDisplay.SelectedRow.Cells[0].Text;
             IncidentID.Text = GridViewIncidentsDisplay.SelectedValue.ToString();
+            tableIncidentsHistory.Visible = true;
         }
     }
 }
