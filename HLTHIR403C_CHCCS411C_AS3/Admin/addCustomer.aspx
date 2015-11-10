@@ -4,7 +4,7 @@
 private void InsertCustomer (object source, EventArgs e) {
     try
     {
-        SqlDataSource3.Insert();
+        SqlDataSource3.DataBind();
         Session["custFirstName"] = txtFirstName.Text;
         Session["custLastName"] = txtLastName.Text;
         Session["custEmail"] = txtEmail.Text;

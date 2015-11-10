@@ -45,15 +45,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
         {
         }
 
-        private bool IsValid()
-        {
-            if (txtTitle.Text == null)
-            {
-                lblError.Text = "You must enter a title.";
-                return false;
-            }
-            return true;
-        }
 
     }
 }

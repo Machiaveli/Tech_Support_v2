@@ -4,6 +4,8 @@
 
     private void Page_Load(object source, EventArgs e)
     {
+        DropDownList3.DataSourceID = "SqlDataSource3";
+        DropDownList3.DataBind();
         lblLastModified.Text = DateTime.Now.ToString("MM/dd/yyyy");
         if (Session["selectedCustomer"] != null)
         {
@@ -30,14 +32,12 @@
         }
     }
 
-private void AddIncident(object source, EventArgs e) {
+private void AddIncident(object source, EventArgs e) { 
     try
     {
-        //txtLastModified.Text = DateTime.Now.ToString("MM/dd/yyyy");
-        
-        string LastModified = DateTime.Now.ToString("MM/dd/yyyy");
-        SqlDataSource3.Insert();
-        SqlDataSource5.Insert();
+        //DataSourceAddIncident.DataBind();
+        DataSourceInsertIncident.Insert();
+        DataSourceAddIncientHistory.Insert();
         Session["selectedCustomer"] = null;
         Response.Redirect("SupportOfficerHomePage.aspx");
     }
@@ -47,6 +47,7 @@ private void AddIncident(object source, EventArgs e) {
     }
 }
 </script>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
@@ -72,7 +73,7 @@ private void AddIncident(object source, EventArgs e) {
                 <asp:Label ID="lblCustomerID" runat="server" Text="Customer ID:"></asp:Label>
             </td>
             <td>
-                <asp:TextBox ID="txtCustomerID" runat="server" Enabled="False"></asp:TextBox>
+                <asp:TextBox ID="txtCustomerID" runat="server" Enabled="False" ></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -112,26 +113,40 @@ private void AddIncident(object source, EventArgs e) {
         <tr>
             <td class="auto-style4">
                 <asp:Label ID="lblLastModified" runat="server" Visible="False"></asp:Label>
+                <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource3" DataTextField="Column1" DataValueField="Column1">
+                </asp:DropDownList>
             </td>
             <td>
                 <asp:Button ID="btnAddIncident" runat="server" OnClick="AddIncident" Text="Add Incident" />
-                <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO Incidents(CustomerID, ProductCode, Title) VALUES (@CustomerID, @ProductCode, @Title)" SelectCommand="SELECT * FROM [Incidents]">
+                <asp:Label ID="lblError" runat="server"></asp:Label>
+                <asp:SqlDataSource ID="DataSourceAddIncident" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="BEGIN TRANSACTION;
+INSERT INTO Incidents (CustomerID, ProductCode, Title) VALUES (@CustomerID, @ProductCode, @Title);
+INSERT INTO IncidentsHistory (IncidentID, UserID, LastModified, Description, JobStatus, SolutionApplied) VALUES (@IncidentID, @UserID, @LastModified, @Description, 'Open', NULL);
+COMMIT TRANSACTION;">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="txtCustomerID" Name="CustomerID" PropertyName="Text" />
+                        <asp:ControlParameter ControlID="DropDownList2" Name="ProductCode" PropertyName="SelectedValue" />
+                        <asp:ControlParameter ControlID="txtTitle" Name="Title" PropertyName="Text" />
+                        <asp:ControlParameter ControlID="DropDownList3" Name="IncidentID" PropertyName="SelectedValue" />
+                        <asp:ControlParameter ControlID="lblCurrentUser" Name="UserID" PropertyName="Text" />
+                        <asp:ControlParameter ControlID="lblLastModified" Name="LastModified" PropertyName="Text" />
+                        <asp:ControlParameter ControlID="txtDescription" Name="Description" PropertyName="Text" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+                <asp:SqlDataSource ID="DataSourceInsertIncident" runat="server" InsertCommand="INSERT INTO Incidents(CustomerID, ProductCode, Title) VALUES (@CustomerID, @ProductCode, @Title)" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Incidents.*, IncidentsHistory.* FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID">
                     <InsertParameters>
                         <asp:ControlParameter ControlID="txtCustomerID" Name="CustomerID" PropertyName="Text" />
                         <asp:ControlParameter ControlID="DropDownList2" Name="ProductCode" PropertyName="SelectedValue" />
                         <asp:ControlParameter ControlID="txtTitle" Name="Title" PropertyName="Text" />
                     </InsertParameters>
                 </asp:SqlDataSource>
-                <asp:Label ID="lblError" runat="server"></asp:Label>
-                <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [UserID] FROM [Users] WHERE ([UserName] = @UserName)">
-                    <SelectParameters>
-                        <asp:ControlParameter ControlID="lblCurrentUser" Name="UserName" PropertyName="Text" Type="String" />
-                    </SelectParameters>
+                <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT MAX (IncidentID + 1) FROM Incidents">
                 </asp:SqlDataSource>
-                <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO IncidentsHistory(UserID, LastModified, Description, JobStatus, SolutionApplied) VALUES (@UserID, @LastModified, @Description, 'Open', NULL)" SelectCommand="SELECT * FROM [IncidentsHistory]">
+                <asp:SqlDataSource ID="DataSourceAddIncientHistory" runat="server" InsertCommand="INSERT INTO IncidentsHistory (IncidentID, UserID, LastModified, Description, JobStatus, SolutionApplied) VALUES (@IncidentID, @UserID, @LastModified, @Description, 'Open', NULL);" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Incidents.*, IncidentsHistory.* FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID">
                     <InsertParameters>
+                        <asp:ControlParameter ControlID="DropDownList3" Name="IncidentID" PropertyName="SelectedValue" />
                         <asp:ControlParameter ControlID="lblCurrentUser" Name="UserID" PropertyName="Text" />
-                        <asp:ControlParameter ControlID="lblLastModified" Name="LastModified" PropertyName="Text" Type="DateTime" />
+                        <asp:ControlParameter ControlID="lblLastModified" Name="LastModified" PropertyName="Text" />
                         <asp:ControlParameter ControlID="txtDescription" Name="Description" PropertyName="Text" />
                     </InsertParameters>
                 </asp:SqlDataSource>
