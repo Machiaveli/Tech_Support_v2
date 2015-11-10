@@ -84,6 +84,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
             else if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("ListAllUsers"))
             {
                 GridView1.Visible = true;
+                GridView1.DataBind();
                 GridViewDisplayUsers.Visible = false;
                 lblMatch.Visible = false;
                 GridView1.EditIndex = -1;
