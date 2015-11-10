@@ -20,9 +20,11 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
 {
     public partial class manageAllUsers : System.Web.UI.Page
     {
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             lblMatch.Visible = false;
+            lblUserType.Visible = false;
         }
 
         // Eunice Yeh - 6100439115
@@ -37,6 +39,10 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
                 {
                     GridViewDisplayUsers.DataSourceID = "sqlSearchUserID";
                     GridViewDisplayUsers.DataBind();
+
+                    // deselects gridview row - Yusuf - 4105558614
+                    GridViewDisplayUsers.EditIndex = -1;
+
                     GridView1.Visible = false;
                     GridViewDisplayUsers.Visible = true;
                     lblMatch.Text = "The following users matched your search: ";
@@ -58,6 +64,10 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
                 {
                     GridViewDisplayUsers.DataSourceID = "sqlSearchLastName";
                     GridViewDisplayUsers.DataBind();
+
+                    // deselects gridview row - Yusuf - 4105558614
+                    GridViewDisplayUsers.EditIndex = -1;
+
                     GridView1.Visible = false;
                     GridViewDisplayUsers.Visible = true;
                     lblMatch.Text = "The following users matched your search: ";
@@ -76,6 +86,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
                 GridView1.Visible = true;
                 GridViewDisplayUsers.Visible = false;
                 lblMatch.Visible = false;
+                GridView1.EditIndex = -1;
             }
 
         }
@@ -86,6 +97,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
             {
                 lblSearch.Enabled = false;
                 txtSearch.Enabled = false;
+                txtSearch.Text = "";
                 lblSearch.ForeColor = System.Drawing.Color.Gray;
                 btnSearch.Text = "Get";
             }
@@ -93,18 +105,32 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
             {
                 txtSearch.Enabled = true;
                 btnSearch.Text = "Search";
+                lblSearch.ForeColor = System.Drawing.Color.White;
             }
         }
 
         protected void GridViewDisplayUsers_RowEditing(object sender, GridViewEditEventArgs e)
         {
             btnSearch.UseSubmitBehavior = false;
+
+            // retrives selected rows UserRole - Yusuf - 4105558614
+            Label userType = (Label)GridViewDisplayUsers.Rows[e.NewEditIndex].Cells[5].FindControl("Label4");
+
+            // stores selected userRole in hidden label - Yusuf - 4105558614
+            lblUserType.Text = userType.Text;
+            
         }
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
             btnSearch.UseSubmitBehavior = false;
 
+            // retrives selected rows UserRole - Yusuf - 4105558614
+            Label userType = (Label)GridView1.Rows[e.NewEditIndex].Cells[5].FindControl("Label4");
+
+            // stores selected userRole in hidden label - Yusuf - 4105558614
+            lblUserType.Text = userType.Text;
+           
         }
 
         // Yusuf - 4105558614
@@ -215,6 +241,50 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
 
         }
 
-    
+
+        // removes Item from UserType dropdown based on Role - Yusuf - 4105558614
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DropDownList ddl = (DropDownList)e.Row.FindControl("DropDownList1");
+                if (ddl != null)
+
+                    // retrives accountType from label
+                    if (lblUserType.Text == "Admin")
+                    {
+                        ddl.Items.Remove("Technician");
+                        ddl.Items.Remove("Support Officer");
+                    }
+
+                    else
+                    {
+                        ddl.Items.Remove("Admin");
+                    }
+            }        
+        }
+
+
+        // removes Item from UserType dropdown based on Role - Yusuf - 4105558614
+        protected void GridViewDisplayUsers_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DropDownList ddl = (DropDownList)e.Row.FindControl("DropDownList3");
+                if (ddl != null)
+
+                    // retrives accountType from label
+                    if (lblUserType.Text == "Admin")
+                    {
+                        ddl.Items.Remove("Technician");
+                        ddl.Items.Remove("Support Officer");
+                    }
+
+                    else
+                    {
+                        ddl.Items.Remove("Admin");
+                    }
+            }        
+        }
     }
 }
