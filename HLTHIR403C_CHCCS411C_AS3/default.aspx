@@ -28,11 +28,7 @@ a:link, a:visited {
             font-size: 20pt;
         }
 
-        .auto-style5 {
-            width: 43px;
-        }
-
-    </style>
+        </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -95,7 +91,7 @@ a:link, a:visited {
                                 <td>
 
                                     <asp:TextBox ID="UserName" runat="server" style="text-align: left" Width="170px" TabIndex="1"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="Login5">*</asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="User Name is required." ToolTip="User Name is required." Display="Dynamic">*</asp:RequiredFieldValidator>
 
                                 </td>
                             </tr>
@@ -108,19 +104,25 @@ a:link, a:visited {
                                 </td>
                                 <td ;>
                                        <asp:TextBox ID="Password" runat="server" TextMode="Password" Width="170px" style="text-align: left" TabIndex="2"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" ErrorMessage="Password is required." ToolTip="Password is required." ValidationGroup="Login5">*</asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" ErrorMessage="Password is required." ToolTip="Password is required." Display="Dynamic">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
     <tr>
-       <td></td><td><asp:Button ID="LoginButton0" runat="server" CommandName="Login" Text="Log In" ValidationGroup="Login5" style="text-align: right; margin-left: 0px" Height="27px" TabIndex="3" /></td>
+       <td></td><td><asp:Button ID="LoginButton0" runat="server" CommandName="Login" Text="Log In" style="text-align: right; margin-left: 0px" Height="27px" TabIndex="3" /></td>
          
     </tr>                        
                           
                             <tr>
-                                <td align="center" colspan="2" style="color:Red;">
+                                <td align="center" colspan="2" style="color:yellow; text-align: center;">
                                     <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
                                 </td>
                           
+                            </tr>
+                            
+                            <tr>
+                                <td align="center" colspan="2" style="color:Red;">
+                                    <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Yellow" style="text-align: left" />
+                                </td>
                             </tr>
                             
                         </table>
@@ -136,6 +138,7 @@ a:link, a:visited {
             <tr>
                 <td width="33.3%">&nbsp;</td>
                 <td align="center" width="33.3%" >
+                    <br />
                     <br />
                     <br />
                     <br />
