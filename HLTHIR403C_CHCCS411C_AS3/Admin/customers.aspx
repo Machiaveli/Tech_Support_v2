@@ -291,7 +291,7 @@
     <br />
     <hr />
     <br />
-    <asp:Label ID="Label9" runat="server" Text="The selected customer has the following product registrations:" Font-Size="Large"></asp:Label>
+    <asp:Label ID="lblProductRegistrations" runat="server" Text="The selected customer has the following product registrations:" Font-Size="Large"></asp:Label>
     <br />
     <asp:DetailsView ID="DetailsView1" runat="server" AllowPaging="True" CellPadding="4" DataSourceID="SqlDataSource2" ForeColor="#333333" GridLines="None" Height="50px" Width="735px">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />

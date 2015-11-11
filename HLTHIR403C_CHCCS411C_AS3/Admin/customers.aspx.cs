@@ -1,5 +1,5 @@
-﻿/* Author: Sasha Graham - 5105498214
- * Last Edit: 11/2/2015
+﻿/* Author: Sasha Graham - 5105498214, Eunice Yeh - 6100439115, Kevin Ewald - 8103677414
+ * Last Edit: 12/11/2015
  * 
  * Purpose: 
  * Allows Admin users to list all customers, and also search for specific customers based on customer last name or customer ID. Once a customer has been selected
@@ -15,7 +15,7 @@
  * Edit: Kevin Ewald - 8103677414
  * Date: 9/11/2015
  * Enabled selection and edit/update capabilities on remaining GridViews and dataSources
- * Made the customer ID of ther selected customer auto-fill on customer ID text field on link.aspc page (for registering products to customers)
+ * Made the customer ID of ther selected customer auto-fill on customer ID text field on link.aspx page (for registering products to customers)
  * Added GridView which allows the user to also see all previous incidents of the selected user
  * Ensured that the 'Register Product' button is only displayed when a customer has been selected from a GridView
  * Did minor layout changes just to make the layout a bit clearer (more needs to be done)
@@ -44,6 +44,9 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                 lblSearchRecords.ForeColor = System.Drawing.Color.Gray;
             }
             btnRegister.Visible = false;
+            lblCustomerRegistrationResults.Visible = false;
+            lblProductRegistrations.Visible = false;
+            lblSelectedCustomersIncidents.Visible = false;
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -53,20 +56,23 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             // binds the correct data source to the correct GridView depending on the dropdownlist Selection
             if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("customerID"))
             {
+                lblCustomerRegistrationResults.Visible = true;
+                lblProductRegistrations.Visible = false;
+                lblSelectedCustomersIncidents.Visible = false;
+
                 try
                 {
                     GridViewDisplayCustomers.DataSourceID = "DataSourceSearchCustByID";
                     GridViewDisplayCustomers.DataBind();
                     GridViewCustomers.Visible = false;
                     GridViewDisplayCustomers.Visible = true;
-                    lblCustomerRegistrationResults.Visible = true;
+                    lblCustomerRegistrationResults.Text = "The following customers matched your search: ";
                     GridViewDisplayCustomers.SelectedIndex = -1;
                     GridViewCustomers.SelectedIndex = -1;
                 }
                 catch (Exception ex)
                 {
                     lblCustomerRegistrationResults.Text = ex.Message + " Please ensure that you have entered a valid customer ID.";
-                    lblCustomerRegistrationResults.Visible = true;
                     GridViewCustomers.Visible = false;
                     GridViewDisplayCustomers.Visible = false;
                     btnRegister.Visible = false;
@@ -75,20 +81,25 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
             else if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("customerLastName"))
             {
+                lblCustomerRegistrationResults.Visible = true;
+                lblProductRegistrations.Visible = false;
+                lblSelectedCustomersIncidents.Visible = false;
+
                 try
                 {
                     GridViewDisplayCustomers.DataSourceID = "DataSourceSearchCustByLastName";
                     GridViewDisplayCustomers.DataBind();
                     GridViewCustomers.Visible = false;
                     GridViewDisplayCustomers.Visible = true;
-                    lblCustomerRegistrationResults.Visible = true;
+                    lblCustomerRegistrationResults.Text = "The following customers matched your search: ";
                     GridViewDisplayCustomers.SelectedIndex = -1;
                     GridViewCustomers.SelectedIndex = -1;
                 }
                 catch (Exception ex)
                 {
                     lblCustomerRegistrationResults.Text = ex.Message;
-                    lblCustomerRegistrationResults.Visible = true;
+                    lblCustomerRegistrationResults.Text = "The following customers matched your search: ";
+
                 }
             }
             else if (dropDownSearchFilter.SelectedValue.ToString().Trim().Equals("ListAllCustomers"))
@@ -98,6 +109,8 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                     GridViewCustomers.Visible = true;
                     GridViewDisplayCustomers.Visible = false;
                     lblCustomerRegistrationResults.Visible = false;
+                    lblProductRegistrations.Visible = false;
+                    lblSelectedCustomersIncidents.Visible = false;
                     GridViewDisplayCustomers.SelectedIndex = -1;
                     GridViewCustomers.SelectedIndex = -1;
                 }
@@ -105,6 +118,8 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                 {
                     lblCustomerRegistrationResults.Text = ex.Message;
                     lblCustomerRegistrationResults.Visible = true;
+                    lblProductRegistrations.Visible = false;
+                    lblSelectedCustomersIncidents.Visible = false;
                     GridViewCustomers.Visible = false;
                     GridViewDisplayCustomers.Visible = false;
                     btnRegister.Visible = false;
@@ -114,6 +129,11 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
         protected void dropDownSearchFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lblCustomerRegistrationResults.Visible = false;
+            lblProductRegistrations.Visible = false;
+            lblSelectedCustomersIncidents.Visible = false;
+
+
             if (dropDownSearchFilter.SelectedValue.Trim().Equals("ListAllCustomers"))
             {
                 lblSearchRecords.Enabled = false;
@@ -137,9 +157,12 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
             DetailsView1.DataSourceID = "SqlDataSource2";
             DetailsView1.DataBind();
+            lblCustomerRegistrationResults.Visible = true;
 
             if (GridViewDisplayCustomers.SelectedIndex != -1)
             {
+                lblProductRegistrations.Visible = true;
+                lblSelectedCustomersIncidents.Visible = true;
                 btnRegister.Visible = true;
                 GridViewPreviousIncidents.DataSourceID = "";
                 GridViewPreviousIncidents.DataSourceID = "DataSourcePrevIncidentsFromGridViewDisplayCustomers";
@@ -152,12 +175,13 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
         protected void GridViewCustomers_SelectedIndexChanged(object sender, EventArgs e)
         {
             DetailsView1.DataSourceID = "";
-
             DetailsView1.DataSourceID = "DataSourceUpperGridViewSelectedCustomer";
             DetailsView1.DataBind();
 
             if (GridViewCustomers.SelectedIndex != -1)
             {
+                lblSelectedCustomersIncidents.Visible = true;
+                lblProductRegistrations.Visible = true;
                 btnRegister.Visible = true;
                 GridViewPreviousIncidents.DataSourceID = "";
                 GridViewPreviousIncidents.DataSourceID = "DataSourcePrevIncidentsFromGridViewCustomers";
