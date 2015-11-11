@@ -1,7 +1,8 @@
 ﻿/**
  * Author: Sasha Graham - 5105498214
  * 
- * Purpose: Allows the user to register a new incident for a customer
+ * Purpose: Allows the user to add a new customer to the database. Cannot add a new customer with the same email as someone else.
+ *          added validation and regex.
  * 
  * Known Bugs: None
  * */

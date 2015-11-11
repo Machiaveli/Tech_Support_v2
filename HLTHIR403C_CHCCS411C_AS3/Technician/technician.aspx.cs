@@ -1,4 +1,4 @@
-﻿// Author(s): Kevin Ewald - 8103677414, Yusuf Bhyat - 4105558614 
+﻿// Author(s): Sasha Graham - 5105498214, Kevin Ewald - 8103677414, Yusuf Bhyat - 4105558614 
 // Purpose: ASP.NET C# Web_Based Application - TechSupport Project 
 //          This is the homepage for Technicians
 // Known bugs: None at the time of testing
@@ -9,6 +9,10 @@
 // however i cannot select any other fields for it to update. To see what i mean, Select "DataSourceDetailsView" and look at its properties.
 // Looks at the "UpdateQuery" property and open it then select query builder. You are only able to select column from the Incidents table, meaning i can only update those.
 // Let me know if you have any questions or find a solution, - Kevin 
+
+// Sasha - Changed slq statements in gridview to display only open incidents that aren't in progress and that aren't closed. Changed sql query in gridview to display only 
+//         incidents in progress that aren't closed. Changed details view to one smaller details view and a table. Changed background in table. Put a method in which links the
+//         sqlDataSource insert query with the button.
 
 using System;
 using System.Collections.Generic;
@@ -124,10 +128,10 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician
 
         protected void GridViewIncidentsDisplay_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LastModified.Text = DateTime.Now.ToString();
-            IncidentHistoryID.Text = GridViewIncidentsDisplay.SelectedRow.Cells[0].Text;
-            IncidentID.Text = GridViewIncidentsDisplay.SelectedValue.ToString();
-            tableIncidentsHistory.Visible = true;
+            LastModified.Text = DateTime.Now.ToString(); // Gets the current date and puts it into the LastModified label
+            IncidentHistoryID.Text = GridViewIncidentsDisplay.SelectedRow.Cells[0].Text; // Gets incidentHistoryID from selected row and cell position in gridView and puts it into the label
+            IncidentID.Text = GridViewIncidentsDisplay.SelectedValue.ToString(); // Gets the IncidentID from the selected value in grid view
+            tableIncidentsHistory.Visible = true; // makes the incidentsHistory table visable
         }
     }
 }
