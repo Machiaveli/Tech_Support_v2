@@ -77,13 +77,6 @@
         .auto-style10 {
             height: 21px;
         }
-        .auto-style13 {
-            width: 233px;
-            height: 26px;
-        }
-        .auto-style14 {
-            width: 233px;
-        }
         .auto-style15 {
             width: 212px;
             height: 26px;
@@ -141,19 +134,14 @@
                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
-            <asp:SqlDataSource ID="DataSourceMyOpenIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT IncidentsHistory.IncidentsHistoryID, Incidents.IncidentID, Incidents.CustomerID, Incidents.ProductCode, Incidents.Title, IncidentsHistory.UserID, IncidentsHistory.LastModified, IncidentsHistory.Description, IncidentsHistory.JobStatus, IncidentsHistory.SolutionApplied, Customers.FirstName, Customers.LastName, Users.UserName FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID INNER JOIN Customers ON Incidents.CustomerID = Customers.CustomerID INNER JOIN Users ON IncidentsHistory.UserID = Users.UserID WHERE (Users.UserName = @techName) AND (IncidentsHistory.JobStatus = 'Open')">
-                <SelectParameters>
-                    <asp:ControlParameter ControlID="lblUserName" Name="techName" PropertyName="Text" />
-                </SelectParameters>
-            </asp:SqlDataSource>
             <asp:SqlDataSource ID="DataSourceMyClosedIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT IncidentsHistory.IncidentsHistoryID, Incidents.IncidentID, Incidents.CustomerID, Incidents.ProductCode, Incidents.Title, IncidentsHistory.UserID, IncidentsHistory.LastModified, IncidentsHistory.Description, IncidentsHistory.JobStatus, IncidentsHistory.SolutionApplied, Customers.CustomerID AS Expr1, Customers.FirstName, Customers.LastName, Users.UserName FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID INNER JOIN Customers ON Incidents.CustomerID = Customers.CustomerID INNER JOIN Users ON IncidentsHistory.UserID = Users.UserID WHERE (Users.UserName = @techName) AND (IncidentsHistory.JobStatus = 'Closed')">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="lblUserName" Name="techName" PropertyName="Text" />
                 </SelectParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="DataSourceAllOpenIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT IncidentsHistory.IncidentsHistoryID, Incidents.IncidentID, Incidents.CustomerID, Incidents.ProductCode, Incidents.Title, IncidentsHistory.UserID, IncidentsHistory.LastModified, IncidentsHistory.Description, IncidentsHistory.JobStatus, IncidentsHistory.SolutionApplied, Customers.CustomerID AS Expr1, Customers.FirstName, Customers.LastName, Users.UserName FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID INNER JOIN Customers ON Incidents.CustomerID = Customers.CustomerID INNER JOIN Users ON IncidentsHistory.UserID = Users.UserID WHERE (IncidentsHistory.JobStatus = 'Open') ORDER BY Incidents.IncidentID"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="DataSourceAllOpenIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT h.IncidentsHistoryID, i.IncidentID, h.UserID, i.CustomerID, c.FirstName, c.LastName, i.ProductCode, h.LastModified, i.Title, h.Description, h.JobStatus, h.SolutionApplied FROM Incidents AS i INNER JOIN Customers AS c ON c.CustomerID = i.CustomerID INNER JOIN IncidentsHistory AS h ON h.IncidentID = i.IncidentID WHERE (NOT EXISTS (SELECT IncidentsHistoryID, IncidentID, UserID, LastModified, Description, JobStatus, SolutionApplied FROM IncidentsHistory AS h WHERE (IncidentID = i.IncidentID) AND (JobStatus = 'Closed'))) AND (NOT EXISTS (SELECT IncidentsHistoryID, IncidentID, UserID, LastModified, Description, JobStatus, SolutionApplied FROM IncidentsHistory AS h WHERE (IncidentID = i.IncidentID) AND (JobStatus = 'In Progress'))) ORDER BY i.IncidentID"></asp:SqlDataSource>
             <asp:SqlDataSource ID="DataSourceAllClosedIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT IncidentsHistory.IncidentsHistoryID, Incidents.IncidentID, Incidents.CustomerID, Incidents.ProductCode, Incidents.Title, IncidentsHistory.UserID, IncidentsHistory.LastModified, IncidentsHistory.Description, IncidentsHistory.JobStatus, IncidentsHistory.SolutionApplied, Customers.CustomerID AS Expr1, Customers.FirstName, Customers.LastName, Users.UserName FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID INNER JOIN Customers ON Incidents.CustomerID = Customers.CustomerID INNER JOIN Users ON IncidentsHistory.UserID = Users.UserID WHERE (IncidentsHistory.JobStatus = 'Closed') ORDER BY Incidents.IncidentID"></asp:SqlDataSource>
-            <asp:SqlDataSource ID="DataSourceAllIncidentsInProgress" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT IncidentsHistory.IncidentsHistoryID, IncidentsHistory.IncidentID, IncidentsHistory.UserID, Customers.CustomerID, Customers.FirstName, Customers.LastName, Incidents.ProductCode, Incidents.Title, IncidentsHistory.Description, IncidentsHistory.LastModified, IncidentsHistory.JobStatus, IncidentsHistory.SolutionApplied FROM Customers INNER JOIN Incidents ON Customers.CustomerID = Incidents.CustomerID INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID WHERE IncidentsHistory.JobStatus = 'In Progress' ORDER BY Incidents.IncidentID"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="DataSourceAllIncidentsInProgress" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT h.IncidentsHistoryID, i.IncidentID, h.UserID, i.CustomerID, c.FirstName, c.LastName, i.ProductCode, h.LastModified, i.Title, h.Description, h.JobStatus, h.SolutionApplied FROM Incidents AS i INNER JOIN Customers AS c ON c.CustomerID = i.CustomerID INNER JOIN IncidentsHistory AS h ON h.IncidentID = i.IncidentID WHERE (h.JobStatus = 'In Progress') AND (NOT EXISTS (SELECT IncidentsHistoryID, IncidentID, UserID, LastModified, Description, JobStatus, SolutionApplied FROM IncidentsHistory AS h WHERE (IncidentID = i.IncidentID) AND (JobStatus = 'Closed'))) ORDER BY i.IncidentID"></asp:SqlDataSource>
             <asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="420px" AutoGenerateRows="False" CellPadding="4" DataKeyNames="IncidentID" DataSourceID="DataSourceIncidents" ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <CommandRowStyle BackColor="#E2DED6" Font-Bold="True" />
