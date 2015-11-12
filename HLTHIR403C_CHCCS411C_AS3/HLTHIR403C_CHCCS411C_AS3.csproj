@@ -70,6 +70,10 @@
     <Content Include="App_Data\aspnetdb_log.ldf">
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
     </Content>
+    <Content Include="App_Data\TechSupport.mdf" />
+    <Content Include="App_Data\TechSupport_log.ldf">
+      <DependentUpon>TechSupport.mdf</DependentUpon>
+    </Content>
     <Content Include="default.aspx" />
     <Content Include="disabled.aspx" />
     <Content Include="Global.asax" />
