@@ -113,7 +113,7 @@ private void AddIncident(object source, EventArgs e) {
         <tr>
             <td class="auto-style4">
                 <asp:Label ID="lblLastModified" runat="server" Visible="False"></asp:Label>
-                <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource3" DataTextField="Column1" DataValueField="Column1">
+                <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource3" DataTextField="Column1" DataValueField="Column1" Visible="False">
                 </asp:DropDownList>
             </td>
             <td>

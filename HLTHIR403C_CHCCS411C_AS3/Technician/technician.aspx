@@ -57,9 +57,9 @@
             <asp:Label ID="lblFilter" runat="server" Text="Filter: "></asp:Label>
             &nbsp;&nbsp;
             <asp:DropDownList ID="dropDownFilter" runat="server" AutoPostBack="True" OnSelectedIndexChanged="dropDownFilter_SelectedIndexChanged">
+                <asp:ListItem Value="ListMyClosedIncidents">List My Closed Incidents</asp:ListItem>
                 <asp:ListItem Value="ListAllClosedIncidents">List All Closed Incidents</asp:ListItem>
                 <asp:ListItem Value="ListAllIncidentsInProgress">List Incidents In Progress</asp:ListItem>
-                <asp:ListItem Value="ListMyClosedIncidents">List My Closed Incidents</asp:ListItem>
                 <asp:ListItem Value="ListAllOpenIncidents">List All Open Incidents</asp:ListItem>
                 
 
@@ -67,9 +67,9 @@
             &nbsp;&nbsp;
             <br />
             <br />
-            <asp:Label ID="lblDisplayedInfoMessage" runat="server" Font-Size="Large" Text="All Closed Incidents"></asp:Label>
+            <asp:Label ID="lblDisplayedInfoMessage" runat="server" Font-Size="Large" Text="All My Closed Incidents"></asp:Label>
             <br />
-            <asp:GridView ID="GridViewIncidentsDisplay" runat="server" AllowPaging="True" AllowSorting="True" OnSorting="GridViewIncidentsDisplay_Sorting" AutoGenerateColumns="False" DataSourceID="DataSourceMyClosedIncidents" CellPadding="4" DataKeyNames="IncidentID" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridViewIncidentsDisplay_SelectedIndexChanged">
+            <asp:GridView ID="GridViewIncidentsDisplay" runat="server" AllowPaging="True" AllowSorting="True" OnSorting="GridViewIncidentsDisplay_Sorting" AutoGenerateColumns="False" DataSourceID="DataSourceMyClosedIncidents" CellPadding="4" DataKeyNames="IncidentID, CustomerID" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridViewIncidentsDisplay_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:BoundField DataField="IncidentsHistoryID" HeaderText="IncidentsHistoryID" InsertVisible="False" ReadOnly="True" SortExpression="IncidentsHistoryID" />
@@ -97,6 +97,40 @@
                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
+            <br />
+            <asp:GridView ID="GridViewCustomersIncidents" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IncidentID" DataSourceID="DataSourceListAllIncidents" ForeColor="#333333" GridLines="None">
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                <Columns>
+                    <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" SortExpression="CustomerID" />
+                    <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
+                    <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
+                    <asp:BoundField DataField="IncidentID" HeaderText="IncidentID" InsertVisible="False" ReadOnly="True" SortExpression="IncidentID" />
+                    <asp:BoundField DataField="IncidentsHistoryID" HeaderText="IncidentsHistoryID" InsertVisible="False" ReadOnly="True" SortExpression="IncidentsHistoryID" />
+                    <asp:BoundField DataField="UserID" HeaderText="UserID" SortExpression="UserID" />
+                    <asp:BoundField DataField="LastModified" HeaderText="LastModified" SortExpression="LastModified" />
+                    <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" SortExpression="ProductCode" />
+                    <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
+                    <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
+                    <asp:BoundField DataField="JobStatus" HeaderText="JobStatus" SortExpression="JobStatus" />
+                    <asp:BoundField DataField="SolutionApplied" HeaderText="SolutionApplied" SortExpression="SolutionApplied" />
+                </Columns>
+                <EditRowStyle BackColor="#999999" />
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+            </asp:GridView>
+            <br />
+            <asp:SqlDataSource ID="DataSourceListAllIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Incidents.CustomerID, Customers.FirstName, Customers.LastName, Incidents.IncidentID, IncidentsHistory.IncidentsHistoryID, IncidentsHistory.UserID, IncidentsHistory.LastModified, Incidents.ProductCode, Incidents.Title, IncidentsHistory.Description, IncidentsHistory.JobStatus, IncidentsHistory.SolutionApplied FROM Customers INNER JOIN Incidents ON Customers.CustomerID = Incidents.CustomerID INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID WHERE (Incidents.IncidentID = @IncidentID)">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="GridViewIncidentsDisplay" Name="IncidentID" PropertyName="SelectedValue" />
+                </SelectParameters>
+            </asp:SqlDataSource>
             <asp:SqlDataSource ID="DataSourceMyClosedIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT IncidentsHistory.IncidentsHistoryID, Incidents.IncidentID, Incidents.CustomerID, Incidents.ProductCode, Incidents.Title, IncidentsHistory.UserID, IncidentsHistory.LastModified, IncidentsHistory.Description, IncidentsHistory.JobStatus, IncidentsHistory.SolutionApplied, Customers.CustomerID AS Expr1, Customers.FirstName, Customers.LastName, Users.UserName FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID INNER JOIN Customers ON Incidents.CustomerID = Customers.CustomerID INNER JOIN Users ON IncidentsHistory.UserID = Users.UserID WHERE (Users.UserName = @techName) AND (IncidentsHistory.JobStatus = 'Closed')">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="lblUserName" Name="techName" PropertyName="Text" />
@@ -190,7 +224,9 @@
                     </td>
                 </tr>
             </table>
+            <br />
             <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
+            <br />
             <asp:SqlDataSource ID="DataSourceIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Incidents.IncidentID, Incidents.CustomerID, Incidents.ProductCode, Incidents.Title, Customers.FirstName, Customers.LastName FROM Customers INNER JOIN Incidents ON Customers.CustomerID = Incidents.CustomerID WHERE ([IncidentID] = @IncidentID)">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="GridViewIncidentsDisplay" Name="IncidentID" PropertyName="SelectedValue" />

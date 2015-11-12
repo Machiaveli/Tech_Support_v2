@@ -67,6 +67,24 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician {
         protected global::System.Web.UI.WebControls.GridView GridViewIncidentsDisplay;
         
         /// <summary>
+        /// GridViewCustomersIncidents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewCustomersIncidents;
+        
+        /// <summary>
+        /// DataSourceListAllIncidents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DataSourceListAllIncidents;
+        
+        /// <summary>
         /// DataSourceMyClosedIncidents control.
         /// </summary>
         /// <remarks>
