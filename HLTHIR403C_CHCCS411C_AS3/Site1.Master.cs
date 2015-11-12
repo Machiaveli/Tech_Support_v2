@@ -17,7 +17,7 @@ namespace HLTHIR403C_CHCCS411C_AS3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            Page.Title = Page.Title;
         }
     }
 }
