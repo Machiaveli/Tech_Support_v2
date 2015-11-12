@@ -26,6 +26,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician
 {
     public partial class technician : System.Web.UI.Page
     {
+        DataTable dt = new DataTable();
         // gets login user details and stores in hidden label
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,6 +34,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician
             lblUserName.Text = User.Identity.Name.ToString();
             UserID.Text = User.Identity.Name.ToString();
             tableIncidentsHistory.Visible = false;
+            GridViewCustomersIncidents.Visible = false;
         }
 
         // refreshes grid view and unselects row
@@ -128,6 +130,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Technician
 
         protected void GridViewIncidentsDisplay_SelectedIndexChanged(object sender, EventArgs e)
         {
+            GridViewCustomersIncidents.Visible = true;
             LastModified.Text = DateTime.Now.ToString(); // Gets the current date and puts it into the LastModified label
             IncidentHistoryID.Text = GridViewIncidentsDisplay.SelectedRow.Cells[0].Text; // Gets incidentHistoryID from selected row and cell position in gridView and puts it into the label
             IncidentID.Text = GridViewIncidentsDisplay.SelectedValue.ToString(); // Gets the IncidentID from the selected value in grid view
