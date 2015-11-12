@@ -1,11 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!--// Author: Yusuf Bhyat - 4105558614
+ Purpose: ASP.NET C# Web_Based Application - TechSupport Project
+          This page controls the Navigation Menu for the website
+ Known bugs: None at the time of testing
+ Version: 1.0-->
+
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <siteMapNode url="landingPage.aspx" title="Home">
     <!--support officer only--> 
-    <siteMapNode url="SupportOfficer/SupportOfficerHomePage.aspx" title="Search Customers"  description="Search customer" roles="SupportOfficer"  />
+    <!--<siteMapNode url="SupportOfficer/SupportOfficerHomePage.aspx" title="Search Customers"  description="Search customer" roles="SupportOfficer"  />-->
     <!--<siteMapNode url="SupportOfficer/addIncident.aspx" title="Add Incident"  description="Add new incident" roles="SupportOfficer" />-->
     <!--technician only-->
-    <siteMapNode url="Technician/technician.aspx" title="Technician"  description="Technician incidents" roles="Technician" />
+    <!--<siteMapNode url="Technician/technician.aspx" title="Technician"  description="Technician incidents" roles="Technician" />-->
     <!--admin only-->
     <siteMapNode url="Admin/addCustomer.aspx" title="Add Customer"  description="Add new customer" roles="Admin"  />
     <siteMapNode url="Admin/addProduct.aspx" title="Add Product"  description="Add new product" roles="Admin"  />
@@ -17,5 +24,3 @@
     <siteMapNode url="AccManage/pswReset.aspx" title="Reset Password"  description="Reset your password"  />
    </siteMapNode>
 </siteMap>
-
-
