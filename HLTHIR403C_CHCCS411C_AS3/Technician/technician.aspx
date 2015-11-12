@@ -1,44 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="technician.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.Technician.technician" %>
 <%@ Import Namespace="System.Data" %>
 <script runat="server">
-    private string ConvertSortDirectionToSql(SortDirection sortDirection)
-    {
-        string newSortDirection = String.Empty;
-
-        switch (sortDirection)
-        {
-            case SortDirection.Ascending:
-                newSortDirection = "ASC";
-                break;
-
-            case SortDirection.Descending:
-                newSortDirection = "DESC";
-                break;
-        }
-
-        return newSortDirection;
-    }
-
-    protected void GridIncidentsDisplay(object sender, GridViewPageEventArgs e)
-    {
-        GridViewIncidentsDisplay.PageIndex = e.NewPageIndex;
-        GridViewIncidentsDisplay.DataBind();
-    }
-
-    protected void GridIncidentsDisplay_Sorting(object sender, GridViewSortEventArgs e)
-    {
-        DataTable dataTable = GridViewIncidentsDisplay.DataSource as DataTable;
-
-        if (dataTable != null)
-        {
-            DataView dataView = new DataView(dataTable);
-            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
-
-            GridViewIncidentsDisplay.DataSource = dataView;
-            GridViewIncidentsDisplay.DataBind();
-        }
-    }
-
+    // Method to insert the updated incident into incidentsHistory table
     private void UpdateIncident(object source, EventArgs e)
     {
         try
@@ -94,17 +57,17 @@
             <asp:Label ID="lblFilter" runat="server" Text="Filter: "></asp:Label>
             &nbsp;&nbsp;
             <asp:DropDownList ID="dropDownFilter" runat="server" AutoPostBack="True" OnSelectedIndexChanged="dropDownFilter_SelectedIndexChanged">
+                <asp:ListItem Value="ListAllClosedIncidents">List All Closed Incidents</asp:ListItem>
                 <asp:ListItem Value="ListAllIncidentsInProgress">List Incidents In Progress</asp:ListItem>
                 <asp:ListItem Value="ListMyClosedIncidents">List My Closed Incidents</asp:ListItem>
                 <asp:ListItem Value="ListAllOpenIncidents">List All Open Incidents</asp:ListItem>
-                <asp:ListItem Value="ListAllClosedIncidents">List All Closed Incidents</asp:ListItem>
+                
 
             </asp:DropDownList>
             &nbsp;&nbsp;
-            <%--<asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click1" Text="Search" />--%>
             <br />
             <br />
-            <asp:Label ID="lblDisplayedInfoMessage" runat="server" Font-Size="Large" Text="Your Open Incidents"></asp:Label>
+            <asp:Label ID="lblDisplayedInfoMessage" runat="server" Font-Size="Large" Text="All Closed Incidents"></asp:Label>
             <br />
             <asp:GridView ID="GridViewIncidentsDisplay" runat="server" AllowPaging="True" AllowSorting="True" OnSorting="GridViewIncidentsDisplay_Sorting" AutoGenerateColumns="False" DataSourceID="DataSourceMyClosedIncidents" CellPadding="4" DataKeyNames="IncidentID" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridViewIncidentsDisplay_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />

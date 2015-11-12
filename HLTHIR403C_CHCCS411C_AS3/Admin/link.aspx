@@ -4,16 +4,17 @@
 
     private void Page_Load(object source, EventArgs e)
     {
-        txtDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
+        txtDate.Text = DateTime.Now.ToString("MM/dd/yyyy"); // Puts the current date into textbox
         if (Session["selectedCustomer"] != null)
         {
-            txtCustomerID.Text = Session["selectedCustomer"].ToString();
+            txtCustomerID.Text = Session["selectedCustomer"].ToString(); // Gets the selected customersID from previous page
         }
         else
             Response.Redirect("customers.aspx"); // ensures this page cannot be accessed unless going through customers.aspx 
         
     }
 
+    // Method that gets the insert query from the sqlDataSource and then rediriects the user to the customers page. Is linked with button on_click
     private void RegisterProduct(object source, EventArgs e)
     {
         try
@@ -21,9 +22,9 @@
             SqlDataSource2.Insert();
             Response.Redirect("customers.aspx");
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            lblError.Text = "This product is already registered to this customer" + ex.Message;
+            lblError.Text = "This product is already registered to this customer";
         }
         
     }
