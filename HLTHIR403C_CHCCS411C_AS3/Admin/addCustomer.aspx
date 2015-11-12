@@ -62,7 +62,7 @@ private void InsertCustomer (object source, EventArgs e) {
             <td>
                 <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldFirstName" runat="server" ControlToValidate="txtFirstName" ErrorMessage="First name is a required field" ForeColor="Red"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtFirstName" ErrorMessage="You must enter a valid first name" ForeColor="Red" ValidationExpression="^[a-zA-Z]+$" ValidationGroup="invalidInput">*</asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtFirstName" ErrorMessage="You must enter a valid first name" ForeColor="Red" ValidationExpression="^[a-zA-Z]+$">*</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -72,7 +72,7 @@ private void InsertCustomer (object source, EventArgs e) {
             <td class="auto-style8">
                 <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldLastName" runat="server" ControlToValidate="txtLastName" ErrorMessage="Last name is a required field" ForeColor="Red"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="You must enter a valid last name" ForeColor="Red" ValidationExpression="^[a-zA-Z]+$" ControlToValidate="txtLastName" ValidationGroup="invalidInput">*</asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="You must enter a valid last name" ForeColor="Red" ValidationExpression="^[a-zA-Z]+$" ControlToValidate="txtLastName">*</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -115,7 +115,7 @@ private void InsertCustomer (object source, EventArgs e) {
             <td class="auto-style8">
                 <asp:TextBox ID="txtZipCode" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldZipCode" runat="server" ControlToValidate="txtZipCode" ErrorMessage="Zip code is a required field" ForeColor="Red"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtZipCode" ErrorMessage="You must enter a valid zip code" ForeColor="Red" ValidationExpression="^[a-zA-Z0-9]+$" ValidationGroup="invalidInput">*</asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtZipCode" ErrorMessage="You must enter a valid zip code" ForeColor="Red" ValidationExpression="^[a-zA-Z0-9]+$">*</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -125,7 +125,7 @@ private void InsertCustomer (object source, EventArgs e) {
             <td>
                 <asp:TextBox ID="txtPhone" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldPhone" runat="server" ControlToValidate="txtPhone" ErrorMessage="Phone number is a required field" ForeColor="Red"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtPhone" ErrorMessage="You must enter a valid phone number" ForeColor="Red" ValidationExpression="^[0-9]*$" ValidationGroup="invalidInput">*</asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtPhone" ErrorMessage="You must enter a valid phone number" ForeColor="Red" ValidationExpression="^[0-9]*$" >*</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -135,7 +135,7 @@ private void InsertCustomer (object source, EventArgs e) {
             <td class="auto-style6">
                 <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Email address is a required field" ForeColor="Red"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtEmail" ErrorMessage="You must enter a valid email" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="invalidInput"> *</asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtEmail" ErrorMessage="You must enter a valid email" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"> *</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -143,7 +143,7 @@ private void InsertCustomer (object source, EventArgs e) {
            id="btnAddCustomer"
            runat="server"
            text="Add Customer"
-           onclick="InsertCustomer" ValidationGroup="invalidInput" />
+           onclick="InsertCustomer" />
 
     
                 </td>
@@ -165,7 +165,7 @@ private void InsertCustomer (object source, EventArgs e) {
                 </td>
             </tr>
     </table>
-    <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="invalidInput" />
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
     <br />
     <br />
 </asp:Content>
