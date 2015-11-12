@@ -1,6 +1,6 @@
 ﻿// Author: Yusuf Bhyat - 4105558614
 // Purpose: ASP.NET C# Web_Based Application - TechSupport Project 
-// Useded by logout control - this page is redirected to defaut.aspx 
+// Used by logout control - this page is redirected to defaut.aspx 
 // Known bugs: None at the time of testing
 // Version: 1.0
 
