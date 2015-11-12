@@ -36,6 +36,7 @@
             <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
             <asp:Panel ID="menuPanel" runat="server">
                 <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1" Orientation="Horizontal" StaticDisplayLevels="2" CssClass="menu">
+                    <staticselectedstyle ForeColor ="#0033CC"/>
                 </asp:Menu>
             </asp:Panel>
             <asp:Panel ID="Panel1" runat="server">
