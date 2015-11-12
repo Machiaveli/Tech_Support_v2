@@ -6,22 +6,6 @@
  * from the returned search query, this page will also display a list of all previous incidents linked to the selected customer, as well as give the user a list of
  * all products the user has registered. The user can then click the 'ARegister Product' button in order to register a product to a particular user.
  * 
- * Edit: Eunice Yeh - 6100439115
- * Date: 09/11/2015
- * - Added search bar and search function
- * - Enabled ability to edit after search
- * - Added validation
- * 
- * Edit: Kevin Ewald - 8103677414
- * Date: 9/11/2015
- * Enabled selection and edit/update capabilities on remaining GridViews and dataSources
- * Made the customer ID of ther selected customer auto-fill on customer ID text field on link.aspx page (for registering products to customers)
- * Added GridView which allows the user to also see all previous incidents of the selected user
- * Ensured that the 'Register Product' button is only displayed when a customer has been selected from a GridView
- * Did minor layout changes just to make the layout a bit clearer (more needs to be done)
- * 
- * Known Bugs:
- * None
  */
 
 using System;
