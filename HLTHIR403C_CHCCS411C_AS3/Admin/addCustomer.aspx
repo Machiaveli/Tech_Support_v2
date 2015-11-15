@@ -6,6 +6,7 @@ private void InsertCustomer (object source, EventArgs e) {
     try
     {
         SqlDataSource3.DataBind();
+        SqlDataSource3.Insert();
         Session["custFirstName"] = txtFirstName.Text;
         Session["custLastName"] = txtLastName.Text;
         Session["custEmail"] = txtEmail.Text;
