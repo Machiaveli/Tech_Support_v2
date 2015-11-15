@@ -131,13 +131,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
 
             // stores selected userRole in hidden label - Yusuf - 4105558614
             lblUserType.Text = userType.Text;
+
+            // disables enter key for GridView when row in edit mode - Yusuf - 4105558614
+            GridView1.Attributes.Add("onkeydown", "if(event.keyCode==13)return false;");
            
         }
 
         // Yusuf - 4105558614
         protected void GridView1_RowUpdating1(object sender, GridViewUpdateEventArgs e)
         {
-
             // Retrieves updated Account Type from Gridview and updates Role in ASPNETDB
             DropDownList accountType = (DropDownList)GridView1.Rows[e.RowIndex].FindControl("DropDownList1");
             string UserAccountType = accountType.SelectedValue.ToString();

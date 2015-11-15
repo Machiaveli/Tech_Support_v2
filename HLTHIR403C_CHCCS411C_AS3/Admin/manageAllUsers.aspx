@@ -2,6 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    
+
     <h1>User Administration</h1>
     <div style="width: 900px; margin-left: auto; margin-right:auto; font-weight: 700;">
         <asp:Label ID="lblSearch" runat="server" Text="Search users:"></asp:Label>
@@ -25,6 +28,7 @@
                 <br />
                 <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserID" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" style="text-align: center" Width="900px" OnRowUpdating="GridView1_RowUpdating1" OnRowEditing="GridView1_RowEditing" OnRowDataBound="GridView1_RowDataBound">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                    
                     <Columns>
 
                         <asp:BoundField DataField="UserID" HeaderText="UserID" ReadOnly="True" SortExpression="UserID" />
