@@ -126,9 +126,9 @@
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
             <br />
-            <asp:SqlDataSource ID="DataSourceListAllIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Incidents.CustomerID, Customers.FirstName, Customers.LastName, Incidents.IncidentID, IncidentsHistory.IncidentsHistoryID, IncidentsHistory.UserID, IncidentsHistory.LastModified, Incidents.ProductCode, Incidents.Title, IncidentsHistory.Description, IncidentsHistory.JobStatus, IncidentsHistory.SolutionApplied FROM Customers INNER JOIN Incidents ON Customers.CustomerID = Incidents.CustomerID INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID WHERE (Incidents.IncidentID = @IncidentID)">
+            <asp:SqlDataSource ID="DataSourceListAllIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Incidents.CustomerID, Customers.FirstName, Customers.LastName, Incidents.IncidentID, IncidentsHistory.IncidentsHistoryID, IncidentsHistory.UserID, IncidentsHistory.LastModified, Incidents.ProductCode, Incidents.Title, IncidentsHistory.Description, IncidentsHistory.JobStatus, IncidentsHistory.SolutionApplied FROM Customers INNER JOIN Incidents ON Customers.CustomerID = Incidents.CustomerID INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID WHERE (Incidents.CustomerID = @CustomerID) ORDER BY LastModified">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="GridViewIncidentsDisplay" Name="IncidentID" PropertyName="SelectedValue" />
+                    <asp:ControlParameter ControlID="CustomerID" Name="CustomerID" PropertyName="Text" />
                 </SelectParameters>
             </asp:SqlDataSource>
             <asp:SqlDataSource ID="DataSourceMyClosedIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT IncidentsHistory.IncidentsHistoryID, Incidents.IncidentID, Incidents.CustomerID, Incidents.ProductCode, Incidents.Title, IncidentsHistory.UserID, IncidentsHistory.LastModified, IncidentsHistory.Description, IncidentsHistory.JobStatus, IncidentsHistory.SolutionApplied, Customers.CustomerID AS Expr1, Customers.FirstName, Customers.LastName, Users.UserName FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID INNER JOIN Customers ON Incidents.CustomerID = Customers.CustomerID INNER JOIN Users ON IncidentsHistory.UserID = Users.UserID WHERE (Users.UserName = @techName) AND (IncidentsHistory.JobStatus = 'Closed')">
@@ -146,7 +146,7 @@
                 <FieldHeaderStyle BackColor="#E9ECF1" Font-Bold="True" />
                 <Fields>
                     <asp:BoundField DataField="IncidentID" HeaderText="IncidentID" InsertVisible="False" ReadOnly="True" SortExpression="IncidentID" Visible="False" />
-                    <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" SortExpression="CustomerID" />
+                    <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" SortExpression="CustomerID" Visible="False" />
                     <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" SortExpression="ProductCode" />
                     <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
                     <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
@@ -160,49 +160,57 @@
             <table id="tableIncidentsHistory" class="auto-style3" runat="server">
                 <tr>
                     <td class="auto-style15">
-                        <asp:Label ID="lblIncidentHistoryID" runat="server" ForeColor="#333333" Text="IncidentsHistoryID" Font-Bold="True"></asp:Label>
+                        <asp:Label ID="lblCustomerID" runat="server" Font-Bold="True" ForeColor="#333333" Text="CustomerID"></asp:Label>
                     </td>
                     <td style="background-color: #F7F6F3" class="auto-style8">
-                        <asp:Label ID="IncidentHistoryID" runat="server" Font-Bold="True" ForeColor="#333333"></asp:Label>
+                        <asp:Label ID="CustomerID" runat="server" Font-Bold="True" ForeColor="#333333"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style15">
+                        <asp:Label ID="lblIncidentHistoryID" runat="server" Font-Bold="True" ForeColor="#004080" Text="IncidentsHistoryID"></asp:Label>
+                    </td>
+                    <td class="auto-style8" style="background-color: white">
+                        <asp:Label ID="IncidentHistoryID" runat="server" Font-Bold="True" ForeColor="#004080"></asp:Label>
                     </td>
                 </tr>
                 <tr>
                     <td class="auto-style9">
-                        <asp:Label ID="lblIncidentID" runat="server" Font-Bold="True" ForeColor="#004080" Text="IncidentID"></asp:Label>
+                        <asp:Label ID="lblIncidentID" runat="server" Font-Bold="True" ForeColor="#333333" Text="IncidentID"></asp:Label>
                     </td>
-                    <td style="background-color: white" class="auto-style10">
-                        <asp:Label ID="IncidentID" runat="server" Font-Bold="True" ForeColor="#003366"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="auto-style16">
-                        <asp:Label ID="lblUserID" runat="server" Font-Bold="True" ForeColor="#333333" Text="UserID"></asp:Label>
-                    </td>
-                    <td style="background-color: #F7F6F3">
-                        <asp:Label ID="UserID" runat="server" Font-Bold="True" ForeColor="#333333"></asp:Label>
+                    <td style="background-color: #F7F6F3" class="auto-style10">
+                        <asp:Label ID="IncidentID" runat="server" Font-Bold="True" ForeColor="#333333"></asp:Label>
                     </td>
                 </tr>
                 <tr>
                     <td class="auto-style16">
-                        <asp:Label ID="lblLastModified" runat="server" Font-Bold="True" ForeColor="#004080" Text="LastModified"></asp:Label>
+                        <asp:Label ID="lblUserID" runat="server" Font-Bold="True" ForeColor="#004080" Text="UserID"></asp:Label>
                     </td>
                     <td style="background-color: white">
-                        <asp:Label ID="LastModified" runat="server" Font-Bold="True" ForeColor="#003366"></asp:Label>
+                        <asp:Label ID="UserID" runat="server" Font-Bold="True" ForeColor="#004080"></asp:Label>
                     </td>
                 </tr>
                 <tr>
                     <td class="auto-style16">
-                        <asp:Label ID="lblDescription" runat="server" Font-Bold="True" ForeColor="#333333" Text="Description"></asp:Label>
+                        <asp:Label ID="lblLastModified" runat="server" Font-Bold="True" ForeColor="#333333" Text="LastModified"></asp:Label>
                     </td>
                     <td style="background-color: #F7F6F3">
-                        <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" Font-Bold="True" ForeColor="#333333"></asp:TextBox>
+                        <asp:Label ID="LastModified" runat="server" Font-Bold="True" ForeColor="#333333"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style16">
+                        <asp:Label ID="lblDescription" runat="server" Font-Bold="True" ForeColor="#004080" Text="Description"></asp:Label>
+                    </td>
+                    <td style="background-color: white">
+                        <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" Font-Bold="True" ForeColor="#004080"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td class="auto-style5">
-                        <asp:Label ID="lblJobStatus" runat="server" Font-Bold="True" ForeColor="#004080" Text="JobStatus"></asp:Label>
+                        <asp:Label ID="lblJobStatus" runat="server" Font-Bold="True" ForeColor="#333333" Text="JobStatus"></asp:Label>
                     </td>
-                    <td style="background-color: white" class="auto-style6">
+                    <td style="background-color: #F7F6F3" class="auto-style6">
                         <asp:DropDownList ID="dLJobStatus" runat="server">
                             <asp:ListItem>In Progress</asp:ListItem>
                             <asp:ListItem>Closed</asp:ListItem>
@@ -211,15 +219,15 @@
                 </tr>
                 <tr>
                     <td class="auto-style15">
-                        <asp:Label ID="lblSolutionApplied" runat="server" Font-Bold="True" ForeColor="#333333" Text="SolutionApplied"></asp:Label>
+                        <asp:Label ID="lblSolutionApplied" runat="server" Font-Bold="True" ForeColor="#004080" Text="SolutionApplied"></asp:Label>
                     </td>
-                    <td style="background-color: #F7F6F3" class="auto-style8">
-                        <asp:TextBox ID="txtSolutionApplied" runat="server" Font-Bold="True" ForeColor="#333333"></asp:TextBox>
+                    <td style="background-color: white" class="auto-style8">
+                        <asp:TextBox ID="txtSolutionApplied" runat="server" Font-Bold="True" ForeColor="#004080"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td class="auto-style16">&nbsp;</td>
-                    <td style="background-color: white">
+                    <td style="background-color: #F7F6F3">
                         <asp:Button ID="Button1" runat="server" Text="Update Incident" OnClick="UpdateIncident" />
                     </td>
                 </tr>
