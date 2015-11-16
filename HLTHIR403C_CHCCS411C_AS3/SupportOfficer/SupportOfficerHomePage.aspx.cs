@@ -62,9 +62,9 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
                     lblCustomerRegistrationResults.Text = "The following customers matched your search:";
                     lblCustomerRegistrationResults.Visible = true;
                 }
-                catch (Exception ex)
+                catch
                 {
-                    lblCustomerRegistrationResults.Text = ex.Message + " Please ensure that you have entered a valid customer ID.";
+                    lblCustomerRegistrationResults.Text = "Customer ID must be numeric. Please try again";
                     lblCustomerRegistrationResults.Visible = true;
                 }
 
@@ -114,6 +114,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.SupportOfficer
 
         protected void dropDownSearchFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txtSearchQuery.Text = string.Empty;
             // changes search button text, enables/disables text box and changes label color depending on dropdown list selection
             if (dropDownSearchFilter.SelectedValue.Trim().Equals("ListMyIncidents"))
             {

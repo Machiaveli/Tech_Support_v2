@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="SupportOfficerHomePage.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.SupportOfficer.SupportOfficerHomePage" %>
+﻿<%@ Page Title="Home - Create New Incident" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="SupportOfficerHomePage.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.SupportOfficer.SupportOfficerHomePage" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -11,6 +11,7 @@
         <ContentTemplate>
             &nbsp;
             <br />
+            <div class="Margin10Percent">
             <asp:Label ID="lblSearchRecords" runat="server" Text="Search all customers: "></asp:Label>
             &nbsp;<asp:TextBox ID="txtSearchQuery" runat="server" style="margin-bottom: 0px" Width="181px"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;
@@ -21,11 +22,12 @@
             </asp:DropDownList>
             &nbsp;&nbsp;
             <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" Width="74px" />
+            </div>
             <br />
             <br />
-            <asp:Label ID="lblOpenIncidents" runat="server" Font-Size="Large" Text="Your Open Incidents"></asp:Label>
+            <asp:Label ID="lblOpenIncidents" runat="server" CssClass="Margin10Percent" Font-Size="Large" Text="Your Open Incidents"></asp:Label>
             <br />
-            <asp:GridView ID="GridViewCustomers" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="IncidentID,Expr2" DataSourceID="DataSourceListMyIncidents" OnPageIndexChanging="GridViewCustomers_PageIndexChanged" OnSorting="GridViewCustomers_Sorting" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <asp:GridView ID="GridViewCustomers" runat="server" CssClass="GridViewStyleLarge centered" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="IncidentID,Expr2" DataSourceID="DataSourceListMyIncidents" OnPageIndexChanging="GridViewCustomers_PageIndexChanged" OnSorting="GridViewCustomers_Sorting" CellPadding="4" ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:BoundField DataField="IncidentID" HeaderText="IncidentID" InsertVisible="False" ReadOnly="True" SortExpression="IncidentID" />
@@ -56,10 +58,10 @@
                 </SelectParameters>
             </asp:SqlDataSource>
             <br />
-            <asp:Label ID="lblCustomerRegistrationResults" runat="server" Font-Size="Large" Text="The following customers matched your search:"></asp:Label>
+            <asp:Label ID="lblCustomerRegistrationResults" runat="server" CssClass="Margin10Percent" Font-Size="Large" Text="The following customers matched your search:"></asp:Label>
             <br />
-            <asp:GridView ID="GridViewDisplayCustomers" runat="server" AllowPaging="True" AllowSorting="True" DataKeyNames="CustomerID" DataSourceID="DataSourceSearchCustByLastName" OnSelectedIndexChanged="GridViewDisplayCustomers_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False">
-                <AlternatingRowStyle BackColor="White" />
+            <asp:GridView ID="GridViewDisplayCustomers" runat="server" CssClass="GridViewStyleLarge" AllowPaging="True" AllowSorting="True" DataKeyNames="CustomerID" DataSourceID="DataSourceSearchCustByLastName" OnSelectedIndexChanged="GridViewDisplayCustomers_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False">
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>         
                     <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" InsertVisible="false" ReadOnly="true" SortExpression="CustomerID" />
                     <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
@@ -73,16 +75,16 @@
                     <asp:BoundField DataField="AccountStatus" HeaderText="AccountStatus" SortExpression="AccountStatus" />
                     <asp:CommandField ShowSelectButton="True" />
                 </Columns>
-                <EditRowStyle BackColor="#2461BF" />
-                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#EFF3FB" />
-                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-                <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                <EditRowStyle BackColor="#999999" />
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
             <asp:SqlDataSource ID="DataSourceSearchCustByLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT CustomerID, FirstName, LastName, Address, City, State, ZipCode, Phone, Email, AccountStatus FROM Customers WHERE (LastName LIKE '%' + @custLastName + '%')">
                 <SelectParameters>
@@ -100,7 +102,7 @@
                 </SelectParameters>
             </asp:SqlDataSource>
             <br />
-            <asp:DetailsView ID="DetailsView1" runat="server" AllowPaging="True" AutoGenerateRows="False" DataKeyNames="IncidentID" DataSourceID="DataSourceSelectedCustomersIncidents" Height="50px" Width="735px" OnPageIndexChanged="DetailsView1_PageIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <asp:DetailsView ID="DetailsView1" runat="server" CssClass="Margin10Percent" AllowPaging="True" AutoGenerateRows="False" DataKeyNames="IncidentID" DataSourceID="DataSourceSelectedCustomersIncidents" Height="50px" Width="735px" OnPageIndexChanged="DetailsView1_PageIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <CommandRowStyle BackColor="#E2DED6" Font-Bold="True" />
                 <EditRowStyle BackColor="#999999" />
@@ -129,7 +131,7 @@
                 </SelectParameters>
             </asp:SqlDataSource>
             <br />
-            <asp:Button ID="btnAddIncident" runat="server" OnClick="btnAddIncident_Click" Text="Add Incident" />
+            <asp:Button ID="btnAddIncident" runat="server" CssClass="Margin10Percent" OnClick="btnAddIncident_Click" Text="Add Incident" />
             &nbsp;&nbsp;&nbsp;
             <asp:Label ID="lblinactiveAccount" runat="server" ForeColor="#CC0000" Text="Label"></asp:Label>
             <br />
