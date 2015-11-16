@@ -49,7 +49,7 @@ namespace HLTHIR403C_CHCCS411C_AS3
                     // redirects user based on role to home page
                     if (Roles.IsUserInRole(User.Identity.Name.ToString(), "Admin"))
                     {
-                        Response.Redirect("~/Admin/addCustomer.aspx");
+                        Response.Redirect("~/Technician/technician.aspx");
                     }
 
                     else if (Roles.IsUserInRole(User.Identity.Name.ToString(), "Technician"))
