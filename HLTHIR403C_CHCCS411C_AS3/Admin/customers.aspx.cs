@@ -48,6 +48,10 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                 {
                     GridViewDisplayCustomers.DataSourceID = "DataSourceSearchCustByID";
                     GridViewDisplayCustomers.DataBind();
+
+                    // deselects gridview row - Yusuf - 4105558614
+                    GridViewDisplayCustomers.EditIndex = -1;
+
                     GridViewCustomers.Visible = false;
                     GridViewDisplayCustomers.Visible = true;
                     lblCustomerRegistrationResults.Text = "Customer ID '" + txtSearchQuery.Text + "' Returned " + ReturnedResultRowCount(DataSourceSearchCustByID) + " Result(s)";
@@ -73,6 +77,10 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                 {
                     GridViewDisplayCustomers.DataSourceID = "DataSourceSearchCustByLastName";
                     GridViewDisplayCustomers.DataBind();
+
+                    // deselects gridview row - Yusuf - 4105558614
+                    GridViewDisplayCustomers.EditIndex = -1;
+
                     GridViewCustomers.Visible = false;
                     GridViewDisplayCustomers.Visible = true;
                     lblCustomerRegistrationResults.Text = "Customer Last Name '" + txtSearchQuery.Text + "' returned " + ReturnedResultRowCount(DataSourceSearchCustByLastName) + " result(s)";
@@ -97,6 +105,9 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                     lblSelectedCustomersIncidents.Visible = false;
                     GridViewDisplayCustomers.SelectedIndex = -1;
                     GridViewCustomers.SelectedIndex = -1;
+
+                    // deselects gridview row - Yusuf - 4105558614
+                    GridViewCustomers.EditIndex = -1;
                 }
                 catch (Exception ex)
                 {
@@ -124,12 +135,13 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                 lblSearchRecords.ForeColor = System.Drawing.Color.Gray;
                 btnSearch.Text = "Get";
                 txtSearchQuery.Enabled = false;
+                txtSearchQuery.Text = "";
             }
             else
             {
                 txtSearchQuery.Enabled = true;
-                lblSearchRecords.ForeColor = System.Drawing.Color.White;
                 btnSearch.Text = "Search";
+                lblSearchRecords.ForeColor = System.Drawing.Color.White;
                 txtSearchQuery.Enabled = true;
             }
         }
