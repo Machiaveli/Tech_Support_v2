@@ -71,14 +71,33 @@ h1 {
     text-align: center;
 }
 
+.FullWidth {
+    width: 100%;
+}
+
+.test {
+    position: relative;
+    width: 100%;
+    right: 10%;
+    left: 10%;
+}
+
+.GridViewStyleXLarge {
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
 /*Used to set the width of a gridview and align it in the centre of the screen (best used with gridViews that have many columns or have rows that are content heavy such as description)*/
 /* Use the indent10Percent class in order to align controls with a gridview that uses this class */
 .GridViewStyleLarge {
     width: 80%;
     padding-left: 10%;
     padding-right: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
+    /*margin-left: 10%;
+    margin-right: 10%;*/
 }
 
 /* Used to set the width of a gridview and align it in the centre of the screen (best used with gridViews that have a moderate amount of columns with data that is of moderate size such as address) */
@@ -87,8 +106,8 @@ h1 {
     width : 60%;
     padding-left : 20%;
     padding-right : 20%;
-    margin-left : 20%;
-    margin-right: 20%;
+    /*margin-left : 20%;
+    margin-right: 20%;*/
 }
 
 /* Used to set the width of a gridview and align it in the centre of the screen (best used with gridViews that have a small amount of columns with small data such as customer ID) */
@@ -101,12 +120,22 @@ h1 {
     margin-right: 30%;
 }
 
+.Indent5Percent {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.Margin5Percent {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
 /* Can be used to ensure things such as detailsView align neatly with GridView or other item with a padding & margin of 10% of screen size */
 .indent10Percent {
     padding-left: 10%;
     padding-right: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
+    /*margin-left: 10%;
+    margin-right: 10%;*/
 }
 
 /* Can be used to ensure things such as detailsView align neatly with GridView or other item with a padding & margin of 20% of screen size */

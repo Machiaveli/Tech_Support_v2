@@ -1,4 +1,4 @@
-﻿/* Author: Sasha Graham - 5105498214, Eunice Yeh - 6100439115, Kevin Ewald - 8103677414
+﻿/* Author: Kevin Ewald - 8103677414, Sasha Graham - 5105498214, Eunice Yeh - 6100439115
  * Last Edit: 12/11/2015
  * 
  * Purpose: 
@@ -50,7 +50,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                     GridViewDisplayCustomers.DataBind();
                     GridViewCustomers.Visible = false;
                     GridViewDisplayCustomers.Visible = true;
-                    lblCustomerRegistrationResults.Text = "The following customers matched your search: ";
+                    lblCustomerRegistrationResults.Text = "Customer ID '" + txtSearchQuery.Text + "' Returned " + ReturnedResultRowCount(DataSourceSearchCustByID) + " Result(s)";
                     GridViewDisplayCustomers.SelectedIndex = -1;
                     GridViewCustomers.SelectedIndex = -1;
                 }
@@ -75,7 +75,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                     GridViewDisplayCustomers.DataBind();
                     GridViewCustomers.Visible = false;
                     GridViewDisplayCustomers.Visible = true;
-                    lblCustomerRegistrationResults.Text = "The following customers matched your search: ";
+                    lblCustomerRegistrationResults.Text = "Customer Last Name '" + txtSearchQuery.Text + "' returned " + ReturnedResultRowCount(DataSourceSearchCustByLastName) + " result(s)";
                     GridViewDisplayCustomers.SelectedIndex = -1;
                     GridViewCustomers.SelectedIndex = -1;
                 }
@@ -151,6 +151,9 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                 GridViewPreviousIncidents.DataSourceID = "";
                 GridViewPreviousIncidents.DataSourceID = "DataSourcePrevIncidentsFromGridViewDisplayCustomers";
                 GridViewPreviousIncidents.DataBind();
+
+                lblSelectedCustomersIncidents.Text = "The selected customer has " + ReturnedResultRowCount(DataSourcePrevIncidentsFromGridViewDisplayCustomers) + " previous incident(s)";
+                lblProductRegistrations.Text = "The selected customer has " + ReturnedResultRowCount(SqlDataSource2) + " product registration(s)";
             }
             else
                 btnRegister.Visible = false;
@@ -170,6 +173,9 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                 GridViewPreviousIncidents.DataSourceID = "";
                 GridViewPreviousIncidents.DataSourceID = "DataSourcePrevIncidentsFromGridViewCustomers";
                 GridViewPreviousIncidents.DataBind();
+
+                lblSelectedCustomersIncidents.Text = "The selected customer has " + ReturnedResultRowCount(DataSourcePrevIncidentsFromGridViewCustomers) + " previous inicdent(s)";
+                lblProductRegistrations.Text = "The selected customer has " + ReturnedResultRowCount(DataSourceUpperGridViewSelectedCustomer) + " product registration(s)";
             }
             else
                 btnRegister.Visible = false;
@@ -185,6 +191,14 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                 Session["selectedCustomer"] = null;
 
             Response.Redirect("link.aspx");
+        }
+
+        // returns a count of the number of results returned by an sql datasource.
+        // @params: SqlDataSource
+        public static int ReturnedResultRowCount(SqlDataSource dataSource)
+        {
+            DataView result = (DataView)dataSource.Select(DataSourceSelectArguments.Empty);
+            return result.Count;
         }
 
 
