@@ -62,11 +62,19 @@
                 
             </tr>
             <tr>
-                <td width="33.3%">&nbsp;</td>
+                <td width="33.3%">
+                    <br />
+                    <br />
+                </td>
                 <td align="center" width="33.3%" >
                     <h2>Please contact the TechSupport HeadOffice.</h2>
                     <br />
                     <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <asp:LinkButton ID="LinkButton1" runat="server" Font-Size="Medium" ForeColor="Yellow" PostBackUrl="~/default.aspx">Click here to go back to the Login Page</asp:LinkButton>
                     <br />
                     <br />
                     <br />
