@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="Indent5Percent">
+    <div class="Margin5Percent">
     &nbsp;<asp:Label ID="lblSearchRecords" runat="server" Text="Search all customers: "></asp:Label>
     &nbsp;<asp:TextBox ID="txtSearchQuery" runat="server" style="margin-bottom: 0px" Width="181px"></asp:TextBox>
     &nbsp;&nbsp;&nbsp;
@@ -165,7 +165,7 @@
         </UpdateParameters>
     </asp:SqlDataSource>
     <br />
-            <asp:Label ID="lblCustomerRegistrationResults" runat="server" CssClass="Indent5Percent" Font-Size="Large" Text="The following customers matched your search:"></asp:Label>
+            <asp:Label ID="lblCustomerRegistrationResults" runat="server" CssClass="Margin5Percent" Font-Size="Large" Text="The following customers matched your search:"></asp:Label>
 
     <asp:GridView ID="GridViewDisplayCustomers" runat="server" CssClass="GridViewStyleXLarge centered" AllowPaging="True" AllowSorting="True" CellPadding="4" DataKeyNames="CustomerID" DataSourceID="DataSourceSearchCustByLastName" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewDisplayCustomers_SelectedIndexChanged">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
@@ -345,7 +345,7 @@
                 </UpdateParameters>
             </asp:SqlDataSource>
     <br />
-    <asp:Label ID="lblSelectedCustomersIncidents" runat="server" CssClass="Indent5Percent" Font-Size="Large" Text="Selected customers previous incidents: "></asp:Label>
+    <asp:Label ID="lblSelectedCustomersIncidents" runat="server" CssClass="Margin5Percent" Font-Size="Large" Text="Selected customers previous incidents: "></asp:Label>
     <asp:GridView ID="GridViewPreviousIncidents" runat="server" CssClass="GridViewStyleXLarge centered" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IncidentID" DataSourceID="DataSourcePrevIncidentsFromGridViewDisplayCustomers" ForeColor="#333333" GridLines="None">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>

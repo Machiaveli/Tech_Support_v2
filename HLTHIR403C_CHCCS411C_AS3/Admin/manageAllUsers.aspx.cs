@@ -48,9 +48,9 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
                     lblMatch.Text = "The following users matched your search: ";
                     lblMatch.Visible = true;
                 }
-                catch (Exception ex)
+                catch
                 {
-                    lblMatch.Text = ex.Message + " Please ensure you have entered a valid user ID.";
+                    lblMatch.Text = "User ID must be numeric. Please try again";
                     lblMatch.Visible = true;
                     GridView1.Visible = false;
                     GridViewDisplayUsers.Visible = false;
