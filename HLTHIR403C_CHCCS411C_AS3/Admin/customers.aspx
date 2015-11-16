@@ -1,7 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="customers.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.Admin.newCustomer" %>
+﻿<%@ Page Title="Manage Customers" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="customers.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.Admin.newCustomer" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="Indent5Percent">
     &nbsp;<asp:Label ID="lblSearchRecords" runat="server" Text="Search all customers: "></asp:Label>
     &nbsp;<asp:TextBox ID="txtSearchQuery" runat="server" style="margin-bottom: 0px" Width="181px"></asp:TextBox>
     &nbsp;&nbsp;&nbsp;
@@ -12,9 +13,10 @@
     </asp:DropDownList>
     &nbsp;&nbsp;
     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" Width="74px" />
+     </div>
     <br />
     <br />
-    <asp:GridView ID="GridViewCustomers" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridViewCustomers_SelectedIndexChanged">
+    <asp:GridView ID="GridViewCustomers" runat="server" CssClass="GridViewStyleXLarge centered" EditRowStyle-CssClass="GridViewStyleXLarge" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridViewCustomers_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" InsertVisible="False" ReadOnly="True" SortExpression="CustomerID" />
@@ -163,11 +165,9 @@
         </UpdateParameters>
     </asp:SqlDataSource>
     <br />
-    <hr />
-    <br />
-            <asp:Label ID="lblCustomerRegistrationResults" runat="server" Font-Size="Large" Text="The following customers matched your search:"></asp:Label>
+            <asp:Label ID="lblCustomerRegistrationResults" runat="server" CssClass="Indent5Percent" Font-Size="Large" Text="The following customers matched your search:"></asp:Label>
 
-    <asp:GridView ID="GridViewDisplayCustomers" runat="server" AllowPaging="True" AllowSorting="True" CellPadding="4" DataKeyNames="CustomerID" DataSourceID="DataSourceSearchCustByLastName" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewDisplayCustomers_SelectedIndexChanged">
+    <asp:GridView ID="GridViewDisplayCustomers" runat="server" CssClass="GridViewStyleXLarge centered" AllowPaging="True" AllowSorting="True" CellPadding="4" DataKeyNames="CustomerID" DataSourceID="DataSourceSearchCustByLastName" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewDisplayCustomers_SelectedIndexChanged">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
            <Columns>
             <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" InsertVisible="False" ReadOnly="True" SortExpression="CustomerID" />
@@ -345,10 +345,8 @@
                 </UpdateParameters>
             </asp:SqlDataSource>
     <br />
-    <hr />
-    <br />
-    <asp:Label ID="lblSelectedCustomersIncidents" runat="server" Font-Size="Large" Text="Selected customers previous incidents: "></asp:Label>
-    <asp:GridView ID="GridViewPreviousIncidents" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IncidentID" DataSourceID="DataSourcePrevIncidentsFromGridViewDisplayCustomers" ForeColor="#333333" GridLines="None">
+    <asp:Label ID="lblSelectedCustomersIncidents" runat="server" CssClass="Indent5Percent" Font-Size="Large" Text="Selected customers previous incidents: "></asp:Label>
+    <asp:GridView ID="GridViewPreviousIncidents" runat="server" CssClass="GridViewStyleXLarge centered" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IncidentID" DataSourceID="DataSourcePrevIncidentsFromGridViewDisplayCustomers" ForeColor="#333333" GridLines="None">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="IncidentID" HeaderText="IncidentID" InsertVisible="False" ReadOnly="True" SortExpression="IncidentID" />
@@ -383,11 +381,10 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <br />
-    <hr />
     <br />
-    <asp:Label ID="lblProductRegistrations" runat="server" Text="The selected customer has the following product registrations:" Font-Size="Large"></asp:Label>
+    <asp:Label ID="lblProductRegistrations" runat="server" CssClass="Margin5Percent" Text="The selected customer has the following product registrations:" Font-Size="Large"></asp:Label>
     <br />
-    <asp:DetailsView ID="DetailsView1" runat="server" AllowPaging="True" CellPadding="4" DataSourceID="SqlDataSource2" ForeColor="#333333" GridLines="None" Height="50px" Width="735px">
+    <asp:DetailsView ID="DetailsView1" runat="server" CssClass="Margin5Percent" AllowPaging="True" CellPadding="4" DataSourceID="SqlDataSource2" ForeColor="#333333" GridLines="None" Height="50px" Width="735px">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <CommandRowStyle BackColor="#E2DED6" Font-Bold="True" />
         <EditRowStyle BackColor="#999999" />
@@ -397,7 +394,7 @@
         <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
         <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
     </asp:DetailsView>
-    <asp:Button ID="btnRegister" runat="server" OnClick="btnRegister_Click" Text="Register Product" />
+    <asp:Button ID="btnRegister" runat="server" CssClass="Margin5Percent" OnClick="btnRegister_Click" Text="Register Product" />
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT c.CustomerID, c.FirstName, c.LastName, r.ProductCode, r.RegistrationDate, p.Name, p.Version, p.ReleaseDate, p.ProductSupported FROM Customers c INNER JOIN Registrations r ON c.CustomerID = r.CustomerID INNER JOIN Products p ON r.ProductCode = p.ProductCode WHERE (c.CustomerID = @selectedCustID)">
         <SelectParameters>
             <asp:ControlParameter ControlID="GridViewDisplayCustomers" Name="selectedCustID" PropertyName="SelectedValue" />
@@ -409,7 +406,6 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <br />
-    <hr />
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
     <br />
 &nbsp;
