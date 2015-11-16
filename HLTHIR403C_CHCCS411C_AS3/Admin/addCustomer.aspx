@@ -18,12 +18,8 @@ private void InsertCustomer (object source, EventArgs e) {
     }
 }
 </script>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
-        .auto-style3 {
-            width: 100%;
-        }
         .auto-style4 {
             width: 245px;
         }
@@ -33,6 +29,7 @@ private void InsertCustomer (object source, EventArgs e) {
         }
         .auto-style6 {
             height: 26px;
+            width: 358px;
         }
         .auto-style7 {
             width: 245px;
@@ -40,17 +37,23 @@ private void InsertCustomer (object source, EventArgs e) {
         }
         .auto-style8 {
             height: 29px;
+            width: 358px;
+        }
+        .auto-style9 {
+            width: 358px;
         }
     </style>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <table class="auto-style3">
+    <h1>Add Customer</h1>
+    <table style="width: 400px; margin-left: auto; margin-right:auto; font-weight: 600;">
         <tr>
             <td class="auto-style4">
                 <asp:Label ID="lblCountry" runat="server" Text="Country:"></asp:Label>
             </td>
-            <td>
-                <asp:DropDownList ID="dLCountries" runat="server" DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="CountryCode" AutoPostBack="True" OnSelectedIndexChanged="dLCountries_SelectedIndexChanged">
+            <td class="auto-style9">
+                <asp:DropDownList ID="dLCountries" runat="server" DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="CountryCode" AutoPostBack="True" OnSelectedIndexChanged="dLCountries_SelectedIndexChanged" Width="150px">
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="RequiredFieldCountries" runat="server" ControlToValidate="dLCountries" ErrorMessage="You must select a country" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [CountryCode], [Name] FROM [Countries] ORDER BY [Name]" OnSelecting="SqlDataSource1_Selecting"></asp:SqlDataSource>
@@ -60,7 +63,7 @@ private void InsertCustomer (object source, EventArgs e) {
             <td class="auto-style4">
                 <asp:Label ID="lblFirstName" runat="server" Text="First Name:"></asp:Label>
             </td>
-            <td>
+            <td class="auto-style9">
                 <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldFirstName" runat="server" ControlToValidate="txtFirstName" ErrorMessage="First name is a required field" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtFirstName" ErrorMessage="You must enter a valid first name" ForeColor="Red" ValidationExpression="^[a-zA-Z]+$">*</asp:RegularExpressionValidator>
@@ -80,7 +83,7 @@ private void InsertCustomer (object source, EventArgs e) {
             <td class="auto-style4">
                 <asp:Label ID="lblAddress" runat="server" Text="Address:"></asp:Label>
             </td>
-            <td>
+            <td class="auto-style9">
                 <asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldAddress" runat="server" ControlToValidate="txtAddress" ErrorMessage="Address is a required field" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
@@ -98,7 +101,7 @@ private void InsertCustomer (object source, EventArgs e) {
             <td class="auto-style4">
                 <asp:Label ID="lblState" runat="server" Text="State:"></asp:Label>
             </td>
-            <td>
+            <td class="auto-style9">
                 <asp:DropDownList ID="dLStates" runat="server" DataSourceID="SqlDataSource2" DataTextField="StateName" DataValueField="StateCode" AutoPostBack="True">
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="RequiredFieldState" runat="server" ControlToValidate="dLStates" ErrorMessage="State is a required field" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -123,7 +126,7 @@ private void InsertCustomer (object source, EventArgs e) {
             <td class="auto-style4">
                 <asp:Label ID="lblPhone" runat="server" Text="Phone:"></asp:Label>
             </td>
-            <td>
+            <td class="auto-style9">
                 <asp:TextBox ID="txtPhone" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldPhone" runat="server" ControlToValidate="txtPhone" ErrorMessage="Phone number is a required field" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtPhone" ErrorMessage="You must enter a valid phone number" ForeColor="Red" ValidationExpression="^[0-9]*$" >*</asp:RegularExpressionValidator>
@@ -148,7 +151,7 @@ private void InsertCustomer (object source, EventArgs e) {
 
     
                 </td>
-                <td>
+                <td class="auto-style9">
                     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
                         InsertCommand="INSERT INTO Customers(FirstName, LastName, Address, City, State, ZipCode, Phone, Email, AccountStatus) VALUES (@FirstName, @LastName, @Address, @City, @State, @ZipCode, @Phone, @Email, 'Active')" SelectCommand="SELECT * FROM [Customers]" >
                         <InsertParameters>
@@ -166,7 +169,8 @@ private void InsertCustomer (object source, EventArgs e) {
                 </td>
             </tr>
     </table>
-    <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" Style="text-align: center" />
     <br />
     <br />
+    
 </asp:Content>
