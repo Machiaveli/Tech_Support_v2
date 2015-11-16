@@ -31,12 +31,14 @@
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:BoundField DataField="IncidentID" HeaderText="IncidentID" InsertVisible="False" ReadOnly="True" SortExpression="IncidentID" />
+                    <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" SortExpression="CustomerID" />
+                    <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
+                    <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
                     <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" SortExpression="ProductCode" />
                     <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
                     <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-                    <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" SortExpression="CustomerID" />
                     <asp:BoundField DataField="JobStatus" HeaderText="JobStatus" SortExpression="JobStatus" />
-                    <asp:BoundField DataField="LastModified" HeaderText="LastModified" SortExpression="LastModified" />
+                    <asp:BoundField DataField="LastModified" HeaderText="LastModified" SortExpression="LastModified" DataFormatString="{0:d}"/>
                     <asp:BoundField DataField="SolutionApplied" HeaderText="SolutionApplied" SortExpression="SolutionApplied" />
                     <asp:BoundField DataField="Expr2" HeaderText="UserID" SortExpression="Expr2" ReadOnly="True" />
                 </Columns>
@@ -52,7 +54,7 @@
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
             <br />
-            <asp:SqlDataSource ID="DataSourceListMyIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Incidents.IncidentID, Incidents.ProductCode, Incidents.Title, Incidents.CustomerID, IncidentsHistory.LastModified, IncidentsHistory.JobStatus, IncidentsHistory.Description, IncidentsHistory.SolutionApplied, Users.UserID AS Expr2 FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID INNER JOIN Users ON IncidentsHistory.UserID = Users.UserID AND IncidentsHistory.UserID = Users.UserID WHERE (Users.UserName = @userName) AND (IncidentsHistory.JobStatus = 'Open')">
+            <asp:SqlDataSource ID="DataSourceListMyIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT i.IncidentID, i.CustomerID, c.FirstName, c.LastName, i.ProductCode, i.Title, h.LastModified, h.JobStatus, h.Description, h.SolutionApplied, Users.UserID AS Expr2 FROM Incidents i INNER JOIN IncidentsHistory h ON i.IncidentID = h.IncidentID INNER JOIN Users ON h.UserID = Users.UserID INNER JOIN Customers c ON i.CustomerID = c.CustomerID AND h.UserID = Users.UserID WHERE (Users.UserName = @userName) AND (h.JobStatus = 'Open') ORDER BY LastModified DESC">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="lblHiddenUserName" Name="userName" PropertyName="Text" />
                 </SelectParameters>
@@ -86,7 +88,7 @@
                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
-            <asp:SqlDataSource ID="DataSourceSearchCustByLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT CustomerID, FirstName, LastName, Address, City, State, ZipCode, Phone, Email, AccountStatus FROM Customers WHERE (LastName LIKE '%' + @custLastName + '%')">
+            <asp:SqlDataSource ID="DataSourceSearchCustByLastName" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT CustomerID, FirstName, LastName, Address, City, State, ZipCode, Phone, Email, AccountStatus FROM Customers WHERE (LastName LIKE @custLastName + '%') ORDER BY LastName ASC">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="txtSearchQuery" Name="custLastName" PropertyName="Text" />
                 </SelectParameters>
@@ -96,7 +98,7 @@
                     <asp:ControlParameter ControlID="GridViewCustomers" Name="CustomerID" PropertyName="SelectedValue" />
                 </SelectParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="DataSourceSearchCustByID" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM Customers WHERE (Customers.CustomerID = @custID)">
+            <asp:SqlDataSource ID="DataSourceSearchCustByID" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM Customers WHERE (Customers.CustomerID = @custID) ORDER BY CustomerID ASC">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="txtSearchQuery" Name="custID" PropertyName="Text" />
                 </SelectParameters>
