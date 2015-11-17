@@ -67,7 +67,7 @@
             <td class="auto-style9">
                 <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldFirstName" runat="server" ControlToValidate="txtFirstName" ErrorMessage="First name is a required field" ForeColor="Yellow">*</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtFirstName" ErrorMessage="You must enter a valid first name" ForeColor="Yellow" ValidationExpression="^[a-zA-Z]+$">*</asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtFirstName" ErrorMessage="You must enter a valid first name" ForeColor="Yellow" ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$">*</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -77,7 +77,7 @@
             <td class="auto-style8">
                 <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldLastName" runat="server" ControlToValidate="txtLastName" ErrorMessage="Last name is a required field" ForeColor="Yellow">*</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="You must enter a valid last name" ForeColor="Yellow" ValidationExpression="^[a-zA-Z]+$" ControlToValidate="txtLastName">*</asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="You must enter a valid last name" ForeColor="Yellow" ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$" ControlToValidate="txtLastName">*</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
