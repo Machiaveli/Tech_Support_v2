@@ -31,15 +31,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         protected global::System.Web.UI.WebControls.DropDownList dLCountries;
         
         /// <summary>
-        /// RequiredFieldCountries control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldCountries;
-        
-        /// <summary>
         /// SqlDataSource1 control.
         /// </summary>
         /// <remarks>
@@ -191,15 +182,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dLStates;
-        
-        /// <summary>
-        /// RequiredFieldState control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldState;
         
         /// <summary>
         /// SqlDataSource2 control.

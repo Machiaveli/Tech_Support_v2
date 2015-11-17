@@ -44,18 +44,7 @@
         .auto-style10 {
             width: 556px;
         }
-        .auto-style11 {
-            width: 557px;
-        }
-        .auto-style12 {
-            height: 29px;
-            width: 557px;
-        }
-        .auto-style13 {
-            height: 26px;
-            width: 557px;
-        }
-    </style>
+        </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -68,7 +57,6 @@
             <td class="auto-style9">
                 <asp:DropDownList ID="dLCountries" runat="server" DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="CountryCode" AutoPostBack="True" OnSelectedIndexChanged="dLCountries_SelectedIndexChanged" Width="150px">
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator ID="RequiredFieldCountries" runat="server" ControlToValidate="dLCountries" ErrorMessage="You must select a country" ForeColor="Red">*</asp:RequiredFieldValidator>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [CountryCode], [Name] FROM [Countries] ORDER BY [Name]" OnSelecting="SqlDataSource1_Selecting"></asp:SqlDataSource>
             </td>
         </tr>
@@ -78,8 +66,8 @@
             </td>
             <td class="auto-style9">
                 <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldFirstName" runat="server" ControlToValidate="txtFirstName" ErrorMessage="First name is a required field" ForeColor="Red">*</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtFirstName" ErrorMessage="You must enter a valid first name" ForeColor="Red" ValidationExpression="^[a-zA-Z]+$">*</asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldFirstName" runat="server" ControlToValidate="txtFirstName" ErrorMessage="First name is a required field" ForeColor="Yellow">*</asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtFirstName" ErrorMessage="You must enter a valid first name" ForeColor="Yellow" ValidationExpression="^[a-zA-Z]+$">*</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -88,8 +76,8 @@
             </td>
             <td class="auto-style8">
                 <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldLastName" runat="server" ControlToValidate="txtLastName" ErrorMessage="Last name is a required field" ForeColor="Red">*</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="You must enter a valid last name" ForeColor="Red" ValidationExpression="^[a-zA-Z]+$" ControlToValidate="txtLastName">*</asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldLastName" runat="server" ControlToValidate="txtLastName" ErrorMessage="Last name is a required field" ForeColor="Yellow">*</asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="You must enter a valid last name" ForeColor="Yellow" ValidationExpression="^[a-zA-Z]+$" ControlToValidate="txtLastName">*</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -98,7 +86,7 @@
             </td>
             <td class="auto-style9">
                 <asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldAddress" runat="server" ControlToValidate="txtAddress" ErrorMessage="Address is a required field" ForeColor="Red">*</asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldAddress" runat="server" ControlToValidate="txtAddress" ErrorMessage="Address is a required field" ForeColor="Yellow">*</asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -107,7 +95,7 @@
             </td>
             <td class="auto-style6">
                 <asp:TextBox ID="txtCity" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldCity" runat="server" ControlToValidate="txtCity" ErrorMessage="City is required field" ForeColor="Red">*</asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldCity" runat="server" ControlToValidate="txtCity" ErrorMessage="City is required field" ForeColor="Yellow">*</asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -117,7 +105,6 @@
             <td class="auto-style9">
                 <asp:DropDownList ID="dLStates" runat="server" DataSourceID="SqlDataSource2" DataTextField="StateName" DataValueField="StateCode" AutoPostBack="True">
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator ID="RequiredFieldState" runat="server" ControlToValidate="dLStates" ErrorMessage="State is a required field" ForeColor="Red">*</asp:RequiredFieldValidator>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [StateCode], [CountryCode], [StateName] FROM [States] WHERE ([CountryCode] = @CountryCode) ORDER BY [StateName]">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="dLCountries" Name="CountryCode" PropertyName="SelectedValue" Type="String" />
@@ -131,8 +118,8 @@
             </td>
             <td class="auto-style8">
                 <asp:TextBox ID="txtZipCode" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldZipCode" runat="server" ControlToValidate="txtZipCode" ErrorMessage="Zip code is a required field" ForeColor="Red">*</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtZipCode" ErrorMessage="You must enter a valid zip code" ForeColor="Red" ValidationExpression="^[a-zA-Z0-9]+$">*</asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldZipCode" runat="server" ControlToValidate="txtZipCode" ErrorMessage="Zip code is a required field" ForeColor="Yellow">*</asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtZipCode" ErrorMessage="You must enter a valid zip code" ForeColor="Yellow" ValidationExpression="^[a-zA-Z0-9]+$">*</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -141,8 +128,8 @@
             </td>
             <td class="auto-style9">
                 <asp:TextBox ID="txtPhone" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldPhone" runat="server" ControlToValidate="txtPhone" ErrorMessage="Phone number is a required field" ForeColor="Red">*</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtPhone" ErrorMessage="You must enter a valid phone number" ForeColor="Red" ValidationExpression="^[0-9]*$" >*</asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldPhone" runat="server" ControlToValidate="txtPhone" ErrorMessage="Phone number is a required field" ForeColor="Yellow">*</asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtPhone" ErrorMessage="You must enter a valid phone number" ForeColor="Yellow" ValidationExpression="^[0-9]*$" >*</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -151,8 +138,8 @@
             </td>
             <td class="auto-style6">
                 <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Email address is a required field" ForeColor="Red">*</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtEmail" ErrorMessage="You must enter a valid email" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"> *</asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Email address is a required field" ForeColor="Yellow">*</asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtEmail" ErrorMessage="You must enter a valid email" ForeColor="Yellow" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"> *</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
@@ -182,7 +169,7 @@
                 </td>
             </tr>
     </table>
-    <asp:ValidationSummary ID="ValidationSummary1" runat="server" Style="text-align: center" />
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" style="margin-left: auto; margin-right:auto; font-weight: 600; text-align:left" ForeColor="Yellow" Width="250px" />
     <br />
     <br />
     
