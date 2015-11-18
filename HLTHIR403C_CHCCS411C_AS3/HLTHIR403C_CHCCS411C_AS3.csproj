@@ -66,6 +66,10 @@
     <Content Include="Admin\customers.aspx" />
     <Content Include="Admin\insertCustomer.aspx" />
     <Content Include="Admin\products.aspx" />
+    <Content Include="App_Data\TechSupport.mdf" />
+    <Content Include="App_Data\TechSupport_log.ldf">
+      <DependentUpon>TechSupport.mdf</DependentUpon>
+    </Content>
     <Content Include="default.aspx" />
     <Content Include="disabled.aspx" />
     <Content Include="Global.asax" />
