@@ -32,7 +32,7 @@
             <td>
                 <asp:TextBox ID="txtCode" runat="server"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:RequiredFieldValidator ID="rfvCode" runat="server" ErrorMessage="Product Code is a required field." ControlToValidate="txtCode" style="color: #FF0000"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfvCode" runat="server" ErrorMessage="Product Code is a required field." ControlToValidate="txtCode" style="color: Yellow"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -42,7 +42,7 @@
             <td>
                 <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Product Name is a required field." ControlToValidate="txtName" style="color: #FF0000"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Product Name is a required field." ControlToValidate="txtName" style="color: yellow"></asp:RequiredFieldValidator>
             </td>
         </tr>
                 <tr>
@@ -52,7 +52,8 @@
             <td>
                 <asp:TextBox ID="txtVersion" runat="server"></asp:TextBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:RequiredFieldValidator ID="rfvVersion" runat="server" ErrorMessage="Product Version is a required field." ControlToValidate="txtVersion" style="color: #FF0000"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfvVersion" runat="server" ErrorMessage="Product Version is a required field." ControlToValidate="txtVersion" style="color: yellow"></asp:RequiredFieldValidator>
+                    &nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Please ensure that you have entered a numerical value." ForeColor="Yellow" ControlToValidate="txtVersion" ValidationExpression="^[1-9]\d*(\.\d+)?$"></asp:RegularExpressionValidator>
                     </td>
         </tr>
                 <tr>
@@ -62,8 +63,8 @@
             <td class="auto-style5">
                 <asp:TextBox ID="txtRelease" runat="server"></asp:TextBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:RequiredFieldValidator ID="rfvRelease" runat="server" ErrorMessage="Release Date is a required field." ControlToValidate="txtRelease" style="color: #FF0000"></asp:RequiredFieldValidator>
-                    &nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtRelease" ErrorMessage="Please enter a valid date." ForeColor="Red" ValidationExpression="((1[0-2])|(0?[1-9]))/((0?\d)|([1-2]\d)|(3[0-1]))/(\d{4})"></asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="rfvRelease" runat="server" ErrorMessage="Release Date is a required field." ControlToValidate="txtRelease" style="color: yellow"></asp:RequiredFieldValidator>
+                    &nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtRelease" ErrorMessage="Please enter a valid date." ForeColor="Yellow" ValidationExpression="((1[0-2])|(0?[1-9]))/((0?\d)|([1-2]\d)|(3[0-1]))/(\d{4})"></asp:RegularExpressionValidator>
                     </td>
         </tr>
         <tr>
