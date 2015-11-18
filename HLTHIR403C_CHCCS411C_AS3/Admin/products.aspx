@@ -3,21 +3,22 @@
    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
+    <div class="Margin20Percent">
     &nbsp;<asp:Label ID="lblSearch" runat="server" Text="Product ID:"></asp:Label>
-&nbsp;<asp:TextBox ID="txtSearch" runat="server" AutoPostBack="true"></asp:TextBox>
+&nbsp;<asp:TextBox ID="txtSearch" runat="server" AutoPostBack="true" style="margin-bottom: 0px" Width="181px"></asp:TextBox>
 
 &nbsp;
     
     <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
+        </div>
     <br />
     <br />
 
-    <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="White" ValidationGroup="editProduct" />
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" style="margin-left: auto; margin-right:auto; font-weight: 600; text-align:left" ForeColor="Yellow" Width="250px" ValidationGroup="editProduct" />
     <br />
-                <asp:Label ID="lblMatch" runat="server" Font-Size="Large" Text="The following products matched your search:" Visible="False"></asp:Label>
+                <asp:Label ID="lblMatch" runat="server" CssClass="Margin20Percent" Font-Size="Large" Text="The following products matched your search:" Visible="False"></asp:Label>
     <br />
-    <asp:GridView ID="gvProducts" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ProductCode" DataSourceID="sqlAllProducts" CellPadding="4" ForeColor="#333333" GridLines="None" Width="60%" OnRowEditing="gvProducts_RowEditing">
+    <asp:GridView ID="gvProducts" runat="server" CssClass="GridViewStyleMedium centered" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ProductCode" DataSourceID="sqlAllProducts" CellPadding="4" ForeColor="#333333" GridLines="None" Width="60%" OnRowEditing="gvProducts_RowEditing">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" ReadOnly="True" SortExpression="ProductCode" />
@@ -105,7 +106,7 @@
     </asp:SqlDataSource>
              
     <br />
-    <asp:GridView ID="gvResults" runat="server" AutoGenerateColumns="False" CellPadding="4" Width="60%" DataKeyNames="ProductCode" DataSourceID="sqlProductSearch" ForeColor="#333333" GridLines="None" OnRowEditing="gvResults_RowEditing" OnRowUpdated="gvResults_RowUpdated">
+    <asp:GridView ID="gvResults" runat="server" CssClass="GridViewStyleMedium centered" AutoGenerateColumns="False" CellPadding="4" Width="60%" DataKeyNames="ProductCode" DataSourceID="sqlProductSearch" ForeColor="#333333" GridLines="None" OnRowEditing="gvResults_RowEditing" OnRowUpdated="gvResults_RowUpdated">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="ProductCode" HeaderText="ProductCode" ReadOnly="True" SortExpression="ProductCode" />
