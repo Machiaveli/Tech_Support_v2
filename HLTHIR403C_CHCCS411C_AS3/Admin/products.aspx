@@ -14,7 +14,7 @@
     <br />
     <br />
 
-    <asp:ValidationSummary ID="ValidationSummary1" runat="server" style="margin-left: auto; margin-right:auto; font-weight: 600; text-align:left" ForeColor="Yellow" Width="250px" ValidationGroup="editProduct" />
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" style="margin-left: auto; margin-right:auto; font-weight: 600; text-align:left" ForeColor="Yellow" Width="300px" ValidationGroup="editProduct" />
     <br />
                 <asp:Label ID="lblMatch" runat="server" CssClass="Margin20Percent" Font-Size="Large" Text="The following products matched your search:" Visible="False"></asp:Label>
     <br />
