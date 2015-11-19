@@ -70,6 +70,7 @@
                                         <td>
                                             <asp:TextBox ID="txtfName" runat="server"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtfName" ErrorMessage="First Name is required" ValidationGroup="CreateUserWizard2">*</asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtFName" ErrorMessage="Please input a valid first name." ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$" ValidationGroup="CreateUserWizard2">*</asp:RegularExpressionValidator>
                                         </td>
                                     </tr>
                                     <tr>
@@ -79,6 +80,7 @@
                                         <td>
                                             <asp:TextBox ID="txtLName" runat="server"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtLName" ErrorMessage="Last Name is Required" ValidationGroup="CreateUserWizard2">*</asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtLName" ErrorMessage="Please input a valid last name." ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$" ValidationGroup="CreateUserWizard2">*</asp:RegularExpressionValidator>
                                         </td>
                                     </tr>
                                     <tr>

@@ -76,6 +76,15 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement {
         protected global::System.Web.UI.WebControls.Label lblUserType;
         
         /// <summary>
+        /// ValidationSummary2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary2;
+        
+        /// <summary>
         /// lblMatch control.
         /// </summary>
         /// <remarks>
@@ -101,15 +110,6 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewDisplayUsers;
-        
-        /// <summary>
-        /// ValidationSummary2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary2;
         
         /// <summary>
         /// SqlDataSource1 control.
