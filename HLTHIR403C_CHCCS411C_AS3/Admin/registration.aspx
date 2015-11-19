@@ -39,7 +39,7 @@
             <CreateUserButtonStyle BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" ForeColor="#284775" />
             <TitleTextStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
             <WizardSteps>
-                <asp:CreateUserWizardStep runat="server" >
+                <asp:CreateUserWizardStep ID="CreateUserWizardStep1" runat="server" >
                     <ContentTemplate>
                         <table style="font-family:Verdana;font-size:100%;">
                             <tr>
@@ -66,6 +66,7 @@
                                 <td>
                                     <asp:TextBox ID="txtfName" runat="server"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtfName" ErrorMessage="First Name is required" ValidationGroup="CreateUserWizard2">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtfName" ErrorMessage="Please enter a valid first name." ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$" ValidationGroup="CreateUserWizard2">*</asp:RegularExpressionValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -75,6 +76,7 @@
                                 <td>
                                     <asp:TextBox ID="txtLName" runat="server"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtLName" ErrorMessage="Last Name is Required" ValidationGroup="CreateUserWizard2">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtLName" ErrorMessage="Please enter a valid last name." ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$" ValidationGroup="CreateUserWizard2">*</asp:RegularExpressionValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -166,7 +168,7 @@
                         </table>
                     </ContentTemplate>
                 </asp:CreateUserWizardStep>
-                <asp:CompleteWizardStep runat="server" />
+                <asp:CompleteWizardStep ID="CompleteWizardStep1" runat="server" />
             </WizardSteps>
             <HeaderStyle BackColor="#5D7B9D" BorderStyle="Solid" Font-Bold="True" Font-Size="0.9em" ForeColor="White" HorizontalAlign="Center" />
             <NavigationButtonStyle BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" ForeColor="#284775" />
