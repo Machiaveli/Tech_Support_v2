@@ -7,6 +7,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -26,7 +28,10 @@ namespace HLTHIR403C_CHCCS411C_AS3
             UserName = UserName + 1;
 
             // Prefills UserName field on form with Username - Kevin 
-            CreateUserWizard2.UserName = UserName.ToString();   
+            CreateUserWizard2.UserName = UserName.ToString();
+
+            // Sets email label to blank on load - Yusuf - 4105558614
+            ((Label)CreateUserWizard2.CreateUserStep.ContentTemplateContainer.FindControl("Label5")).Text = "";
         }
 
        
@@ -100,5 +105,51 @@ namespace HLTHIR403C_CHCCS411C_AS3
             SqlDataSource1.InsertParameters["Email"].DefaultValue = CreateUserWizard2.Email.ToString();
         }
 
+
+        // Checks DB id email existings - Yusuf - 4105558614
+        protected void Email_TextChanged(object sender, EventArgs e)
+        {
+            String email = ((TextBox)CreateUserWizard2.CreateUserStep.ContentTemplateContainer.FindControl("Email")).Text;
+
+            DropDownList dropDownRole = ((DropDownList)CreateUserWizard2.CreateUserStep.ContentTemplateContainer.FindControl("DropDownListRole"));
+
+            
+
+            if (!string.IsNullOrWhiteSpace(email))
+            {
+                
+                // sets up connection to DB
+                SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+
+                con.Open();
+
+                SqlCommand cmd = new SqlCommand("Select * from Users where email=@email", con);
+                cmd.Parameters.AddWithValue("@email", email);
+
+
+                SqlDataReader findDuplicate = cmd.ExecuteReader();
+
+
+                if (findDuplicate.HasRows)
+                {
+                    // displays error message
+                   ((Label)CreateUserWizard2.CreateUserStep.ContentTemplateContainer.FindControl("Label5")).Text = "Duplicate E-Mail";
+
+                    // disables Role Dropdown so that user cant create new user without fixing email
+                   dropDownRole.Enabled = false;
+                    
+                }
+                else
+                {
+                    // clears error message
+                    ((Label)CreateUserWizard2.CreateUserStep.ContentTemplateContainer.FindControl("Label5")).Text = "";
+
+                    // enables Role dropdown
+                    dropDownRole.Enabled = true;
+                }
+
+                con.Close();
+            }
+        }
     }
 }
