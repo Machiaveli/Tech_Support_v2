@@ -56,7 +56,7 @@
                 <asp:TextBox ID="txtVersion" runat="server"></asp:TextBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:RequiredFieldValidator ID="rfvVersion" runat="server" ErrorMessage="Product Version is a required field." ControlToValidate="txtVersion" style="color: yellow">*</asp:RequiredFieldValidator>
-                    &nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Please ensure that you have entered a numerical value." ForeColor="Yellow" ControlToValidate="txtVersion" ValidationExpression="^[1-9]\d*(\.\d+)?$">*</asp:RegularExpressionValidator>
+                    &nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Please enter a numerical value for version." ForeColor="Yellow" ControlToValidate="txtVersion" ValidationExpression="^[1-9]\d*(\.\d+)?$">*</asp:RegularExpressionValidator>
                     </td>
         </tr>
                 <tr>

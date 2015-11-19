@@ -1,5 +1,5 @@
 ﻿/* Author: Eunice Yeh - 6100439115
- * Last Edit: 05/11/2015
+ * Last Edit: 19/11/2015
  * 
  * Purpose: This page allows admins to add a new product. All fields are validated.
  * Known bugs: None at time of last edit.
@@ -21,11 +21,14 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
         }
 
+        //add new product to database
         protected void InsertProduct(object sender, EventArgs e)
         {
             try
             {
+                //add
                 SqlDataSource1.Insert();
+                //redirect to manage products page
                 Response.Redirect("products.aspx");
             }
             catch (Exception ex)
