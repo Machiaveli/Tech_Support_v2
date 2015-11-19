@@ -1,9 +1,13 @@
-﻿// Author: Yusuf Bhyat - 4105558614
-// Purpose: ASP.NET C# Web_Based Application - TechSupport Project 
-//          This page allows the Admin to register new users and assign roles
-// Known bugs: None at the time of testing
-// Version: 1.0
-
+﻿/* Author: Yusuf Bhyat - 4105558614
+ * Purpose: ASP.NET C# Web_Based Application - TechSupport Project 
+ * This page allows the Admin to register new users and assign roles
+ * Known bugs: None at the time of testing
+ * Version: 1.0
+ * 
+ * Edit: Eunice Yeh - 6100439115
+ * Date: 19/11/2015
+ * Added regex and validation
+ */
 
 using System;
 using System.Collections.Generic;

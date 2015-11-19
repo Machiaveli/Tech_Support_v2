@@ -56,7 +56,7 @@
                 <td width="33.3%">&nbsp;</td>
                 <td width="33.3%" align="center"> 
                     
-                    <h2>Your Account is Disabled,</h2>
+                    <h2>Your account is disabled.</h2>
                 </td>
                 <td width="33.3%">&nbsp;</td>
                 
@@ -67,7 +67,7 @@
                     <br />
                 </td>
                 <td align="center" width="33.3%" >
-                    <h2>Please contact the TechSupport HeadOffice.</h2>
+                    <h2>Please contact the TechSupport Head Office.</h2>
                     <br />
                     <br />
                     <br />

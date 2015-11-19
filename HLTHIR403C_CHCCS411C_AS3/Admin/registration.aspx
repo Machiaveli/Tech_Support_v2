@@ -17,7 +17,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     &nbsp;<br />
-    <h1>New Account Registration</h1>
+    <h1>New User Registration</h1>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <div style="width: 330px; margin-left: auto; margin-right:auto;">

@@ -5,7 +5,7 @@
 
     
 
-    <h1>User Administration</h1>
+    <h1>Manage Users</h1>
     <div style="width: 900px; margin-left: auto; margin-right:auto; font-weight: 700;">
         <asp:Label ID="lblSearch" runat="server" Text="Search users:"></asp:Label>
 

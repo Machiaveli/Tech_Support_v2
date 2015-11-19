@@ -1,10 +1,12 @@
 ﻿/**
  * Author: Sasha Graham - 5105498214
- * 
  * Purpose: Allows the user to add a new customer to the database. Cannot add a new customer with the same email as someone else.
- *          added validation and regex.
- * 
  * Known Bugs: None
+ * 
+ * Edit: Eunice Yeh - 6100439115
+ * Date: 19/11/2015
+ * Added regex for names.
+ * 
  * */
 
 using System;

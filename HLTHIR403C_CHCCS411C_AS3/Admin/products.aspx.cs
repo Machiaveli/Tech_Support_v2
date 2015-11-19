@@ -1,5 +1,5 @@
 ﻿/* Author: Eunice Yeh - 6100439115
- * Last Edit: 09/11/2015
+ * Last Edit: 19/11/2015
  * 
  * Purpose: This page allows admins to view all products, search by product ID, and manage products. All fields are validated.
  * Known bugs: "Enter" key has been disabled completely instead of only when editing a row.
@@ -17,6 +17,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 {
     public partial class products : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             gvProducts.Visible = true;
@@ -26,6 +27,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            //return results in gridview once search button is clicked
             try
             {
                 gvResults.DataSourceID = "sqlProductSearch";
@@ -44,6 +46,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
         protected void gvProducts_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            //disable enter button so that it doesn't fire the "search" button when user hits enter while updating rows in gridview
             btnSearch.UseSubmitBehavior = false;
 
         }
@@ -58,6 +61,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
         protected void gvResults_RowUpdated(object sender, GridViewUpdatedEventArgs e)
         {
+            //once the item is updated, redirect to list of all products
             Response.Redirect("products.aspx");
         }
 

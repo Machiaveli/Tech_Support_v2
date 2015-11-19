@@ -1,11 +1,13 @@
 ﻿/*
  * Author(s): Yusuf Bhyat - 4105558614 , Eunice Yeh - 6100439115
  *  Purpose: ASP.NET C# Web_Based Application - TechSupport Project 
- *  This page is used by the Admin to manage all user accounts
+ *  This page is used by the Admin to manage all user accounts.
+ *      - Allows admins to search users by last name and customer ID. 
+ *      - Allows admins to edit user details and disable user accounts.
  *  Known bugs: None at time of testing
  *  Version: 1.0
  *  
- * Last Edit: 07/11/2015
+ * Last Edit: 19/11/2015
  * 
 */
 using System;
@@ -37,6 +39,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
             {
                 try
                 {
+                    //bind datasource for user ID search
                     GridViewDisplayUsers.DataSourceID = "sqlSearchUserID";
                     GridViewDisplayUsers.DataBind();
 
@@ -50,7 +53,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
                 }
                 catch
                 {
-                    lblMatch.Text = "User ID must be numeric. Please try again";
+                    lblMatch.Text = "User ID must be numerical. Please try again";
                     lblMatch.Visible = true;
                     GridView1.Visible = false;
                     GridViewDisplayUsers.Visible = false;
@@ -62,6 +65,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.AccountManagement
             {
                 try
                 {
+                    //bind datasource for user last name search
                     GridViewDisplayUsers.DataSourceID = "sqlSearchLastName";
                     GridViewDisplayUsers.DataBind();
 
