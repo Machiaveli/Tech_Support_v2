@@ -24,6 +24,7 @@
                 </asp:ScriptManager>
                 &nbsp;<asp:Label ID="lblUserType" runat="server"></asp:Label>
                 <br />
+                 <asp:ValidationSummary ID="ValidationSummary2" runat="server" ForeColor="Yellow" />
                 <asp:Label ID="lblMatch" runat="server" Font-Size="Large" Text="The following users matched your search:" Visible="False"></asp:Label>
                 <br />
                 <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserID" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" style="text-align: center" Width="900px" OnRowUpdating="GridView1_RowUpdating1" OnRowEditing="GridView1_RowEditing" OnRowDataBound="GridView1_RowDataBound">
@@ -36,6 +37,7 @@
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FirstName") %>'></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="First Name is a required field." ForeColor="Red">*</asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="TextBox1" ErrorMessage="Please enter a valid first name." ForeColor="Red" ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$">*</asp:RegularExpressionValidator>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label1" runat="server" Text='<%# Bind("FirstName") %>'></asp:Label>
@@ -45,6 +47,7 @@
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("LastName") %>'></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBox2" ErrorMessage="Last name is a required field." ForeColor="Red">*</asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="TextBox2" ErrorMessage="Please enter a valid last name." ForeColor="Red" ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$">*</asp:RegularExpressionValidator>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("LastName") %>'></asp:Label>
@@ -105,6 +108,7 @@
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FirstName") %>'></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="TextBox1" ErrorMessage="First Name is Required" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ControlToValidate="TextBox1" ErrorMessage="Please enter a valid first name." ForeColor="Red" ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$">*</asp:RegularExpressionValidator>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label1" runat="server" Text='<%# Bind("FirstName") %>'></asp:Label>
@@ -114,6 +118,7 @@
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("LastName") %>'></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="TextBox2" ErrorMessage="Last name is a required field." ForeColor="Red">*</asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ControlToValidate="TextBox2" ErrorMessage="Please enter a valid last name." ForeColor="Red" ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$">*</asp:RegularExpressionValidator>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("LastName") %>'></asp:Label>
@@ -165,7 +170,7 @@
                     <SortedDescendingCellStyle BackColor="#FFFDF8" />
                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                 </asp:GridView>
-                <asp:ValidationSummary ID="ValidationSummary2" runat="server" ForeColor="Yellow" />
+               
                 <br />
                 <br />
             </ContentTemplate>
