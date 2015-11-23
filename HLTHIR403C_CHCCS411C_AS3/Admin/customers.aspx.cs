@@ -15,11 +15,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace HLTHIR403C_CHCCS411C_AS3.Admin
 {
     public partial class newCustomer : System.Web.UI.Page
     {
+        TextBox txtCountries;
+        DropDownList ddlCountries;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (dropDownSearchFilter.SelectedValue.Trim().Equals("ListAllCustomers"))
@@ -31,6 +35,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             lblCustomerRegistrationResults.Visible = false;
             lblProductRegistrations.Visible = false;
             lblSelectedCustomersIncidents.Visible = false;
+            
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -177,6 +182,8 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             DetailsView1.DataSourceID = "DataSourceUpperGridViewSelectedCustomer";
             DetailsView1.DataBind();
 
+            Session["state"] = GridViewCustomers.SelectedRow.Cells[6].Text;
+
             if (GridViewCustomers.SelectedIndex != -1)
             {
                 lblSelectedCustomersIncidents.Visible = true;
@@ -213,6 +220,151 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             return result.Count;
         }
 
+        protected void GridViewCustomers_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            
+            //Dim index = Convert.ToInt32(e.CommandArgument)
+            //Dim row = ProductsGridView.Rows(index)
+            //Dim labelText = CType(row.FindControl("LabelName"), Label).Text
+            //if (e.CommandName == "Edit")
+            //{
+            //    int rowIndex = ((GridViewRow)((LinkButton)e.CommandSource).NamingContainer).RowIndex;
+            //    GridViewCustomers.EditIndex = rowIndex;
+                
+            //    // Re-bind the GridView to put it in edit mode
+            //    GridViewCustomers.DataSourceID = "SqlDataSource1";
+            //    GridViewCustomers.DataBind();
+
+            //    // Get the row at the index. The row will be the
+            //    // row reflected in edit mode.
+            //    GridViewRow editRow = GridViewCustomers.Rows[rowIndex];
+
+            //    GridViewRow row = GridViewCustomers.Rows[rowIndex];
+
+            //    ListItem item = new ListItem();
+            //    item.Text = Server.HtmlDecode(row.Cells[5].Text) + " " +
+            //    Server.HtmlDecode(row.Cells[5].Text);
+
+            //    DropDownList ddlCountries = editRow.FindControl("ddlCountries") as DropDownList;
+            //    // If the contact is not already in the ListBox, add the ListItem 
+            //    // object to the Items collection of the ListBox control. 
+            //    if (!ddlCountries.Items.Contains(item))
+            //    {
+            //        ddlCountries.Items.Add(item);
+            //    }
+                
+                
+            //    // Find your DropDownLists in this edit row
+                
+
+            //}
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void GridViewCustomers_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+                //Label label1 = (Label)GridViewCustomers.Rows[e.NewEditIndex].FindControl("Label10");
+                //string label1val = label1.Text;
+                //txtCountries = (TextBox)GridViewCustomers.Rows[e.NewEditIndex].FindControl("txtCountries");
+                //ddlCountries = GridViewCustomers.Rows[e.NewEditIndex].FindControl("ddlCountries") as DropDownList;
+                
+
+                //ListItem item = new ListItem();
+                //item.Text = Server.HtmlDecode(row.Cells[5].Text) + " " +
+                //    Server.HtmlDecode(row.Cells[5].Text);
+                //if (!ddlCountries.Items.Contains(item))
+                //{
+                //    ddlCountries.Items.Add(txtCountries.ToString());
+                //}
+                //if (ddlCountries.Items == null)
+                //{
+                //    ddlCountries.Items.Add(txtCountries.ToString());
+                //}
+                GridViewCustomers.EditIndex = e.NewEditIndex;
+                BindGrid();
+            
+        }
+
+        private void BindGrid()
+        {
+            GridViewCustomers.DataSourceID = "SqlDataSource1";
+            GridViewCustomers.DataBind();
+        }
+
+        protected void GridViewCustomers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GridViewCustomers.EditIndex = -1;
+            BindGrid();
+        }
+
+        protected void GridViewCustomers_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if ((e.Row.RowState & DataControlRowState.Edit) > 0)
+                {
+                    ddlCountries = (DropDownList)e.Row.FindControl("ddlCountries");
+                    ddlCountries.DataSourceID = "SqlDataSource3";
+                    ddlCountries.DataValueField = "CountryCode";
+                    ddlCountries.DataTextField = "Name";
+                    ddlCountries.DataBind();
+
+                    ddlCountries.SelectedValue = GridViewCustomers.DataKeys[e.Row.RowIndex].Value.ToString();
+                }
+            }
+        }
+
+        protected void ddlCountries_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList ddlCountries = (DropDownList)sender;
+            GridViewRow row = (GridViewRow)ddlCountries.NamingContainer;
+            if (row != null)
+            {
+                if ((row.RowState & DataControlRowState.Edit) > 0)
+                {
+                    //ddlCountries.DataSourceID = "SqlDataSource3";
+                    //ddlCountries.DataValueField = "CountryCode";
+                    //ddlCountries.DataTextField = "Name";
+                    //ddlCountries.DataBind();
+                    string country = ddlCountries.SelectedValue;
+
+                    DropDownList ddlStates = (DropDownList)row.FindControl("ddlStates");
+                    //ddlStates.DataSourceID = SqlDataSource4(Convert.ToString(ddlCountries.SelectedValue);
+                    //ddlStates.DataValueField = "StateCode";
+                    //ddlStates.DataTextField = "StateName";
+                    //ddlStates.DataBind();
+
+                    string query = "SELECT StateName, StateCode FROM States INNER JOIN Countries ON States.CountryCode = Countries.CountryCode WHERE Countries.CountryCode=" + "'" + country + "'";
+                    string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(constr))
+                    {
+                        using (SqlCommand cmd = new SqlCommand(query))
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.Connection = con;
+                            con.Open();
+                            using (SqlDataReader sdr = cmd.ExecuteReader())
+                            {
+                                while (sdr.Read())
+                                {
+                                    ListItem item = new ListItem();
+                                    item.Text = sdr["StateName"].ToString();
+                                    item.Value = sdr["StateCode"].ToString();
+                                    ddlStates.Items.Add(item);
+                                }
+                            }
+                            con.Close();
+                        }
+                    }
+                    
+                }
+            }
+            
+        }
 
     }
 }

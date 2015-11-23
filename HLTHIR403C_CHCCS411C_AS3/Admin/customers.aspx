@@ -1,4 +1,20 @@
 ﻿<%@ Page Title="Manage Customers" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="customers.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.Admin.newCustomer" %>
+
+<script runat="server">
+    string FillDropDownListCountries()
+    {
+        if (User.Identity.Name == "officer")
+        {
+            return "Approved by Officer";
+        }
+        else if(User.Identity.Name == "some other name")
+        {
+            return "something else";
+        }
+        else return string.Empty;
+    } 
+</script>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -16,7 +32,7 @@
      </div>
     <br />
     <br />
-    <asp:GridView ID="GridViewCustomers" runat="server" CssClass="GridViewStyleXLarge centered" EditRowStyle-CssClass="GridViewStyleXLarge" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridViewCustomers_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
+    <asp:GridView ID="GridViewCustomers" runat="server" CssClass="GridViewStyleXLarge centered" EditRowStyle-CssClass="GridViewStyleXLarge" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridViewCustomers_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowCommand="GridViewCustomers_RowCommand" OnRowEditing="GridViewCustomers_RowEditing" OnRowCancelingEdit="GridViewCustomers_RowCancelingEdit" OnRowDataBound="GridViewCustomers_RowDataBound">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" InsertVisible="False" ReadOnly="True" SortExpression="CustomerID" />
@@ -56,10 +72,23 @@
                     <asp:Label ID="Label4" runat="server" Text='<%# Bind("City") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:TemplateField HeaderText="Countries" SortExpression="Name">
+                <EditItemTemplate>
+                    <asp:TextBox ID="txtCountries" runat="server" Text='<%# Bind("Name") %>' Visible="False"></asp:TextBox>
+                    <asp:DropDownList ID="ddlCountries" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource3" DataTextField="Name" DataValueField="CountryCode" OnSelectedIndexChanged="ddlCountries_SelectedIndexChanged">
+                    </asp:DropDownList>
+                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Countries]"></asp:SqlDataSource>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label10" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="State" SortExpression="State">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("State") %>'></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="TextBox5" ErrorMessage="State is a required field." ForeColor="Red" >*</asp:RequiredFieldValidator>
+                    <asp:DropDownList ID="ddlStates" runat="server" AutoPostBack="True">
+                    </asp:DropDownList>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label5" runat="server" Text='<%# Bind("State") %>'></asp:Label>
@@ -104,7 +133,16 @@
                     <asp:Label ID="Label9" runat="server" Text='<%# Bind("AccountStatus") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:CommandField ShowEditButton="True" ShowSelectButton="True" />
+            <asp:TemplateField ShowHeader="False">
+                <EditItemTemplate>
+                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Update"></asp:LinkButton>
+                    &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" OnClick="LinkButton1_Click" Text="Edit"></asp:LinkButton>
+                    &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -118,7 +156,7 @@
         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
     <br />
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [CustomerID], [FirstName], [LastName], [Address], [City], [State], [ZipCode], [Phone], [Email], [AccountStatus] FROM [Customers]" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Customers] WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND [AccountStatus] = @original_AccountStatus" InsertCommand="INSERT INTO [Customers] ([FirstName], [LastName], [Address], [City], [State], [ZipCode], [Phone], [Email], [AccountStatus]) VALUES (@FirstName, @LastName, @Address, @City, @State, @ZipCode, @Phone, @Email, @AccountStatus)" UpdateCommand="UPDATE [Customers] SET [FirstName] = @FirstName, [LastName] = @LastName, [Address] = @Address, [City] = @City, [State] = @State, [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email, [AccountStatus] = @AccountStatus WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND [AccountStatus] = @original_AccountStatus">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT Customers.CustomerID, Customers.FirstName, Customers.LastName, Customers.Address, Customers.City, Customers.State, Customers.ZipCode, Customers.Phone, Customers.Email, Customers.AccountStatus, Countries.Name FROM Customers INNER JOIN States ON Customers.State = States.StateCode INNER JOIN Countries ON States.CountryCode = Countries.CountryCode" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Customers] WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND [AccountStatus] = @original_AccountStatus" InsertCommand="INSERT INTO [Customers] ([FirstName], [LastName], [Address], [City], [State], [ZipCode], [Phone], [Email], [AccountStatus]) VALUES (@FirstName, @LastName, @Address, @City, @State, @ZipCode, @Phone, @Email, @AccountStatus)" UpdateCommand="UPDATE [Customers] SET [FirstName] = @FirstName, [LastName] = @LastName, [Address] = @Address, [City] = @City, [State] = @State, [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email, [AccountStatus] = @AccountStatus WHERE [CustomerID] = @original_CustomerID AND [FirstName] = @original_FirstName AND [LastName] = @original_LastName AND [Address] = @original_Address AND [City] = @original_City AND [State] = @original_State AND [ZipCode] = @original_ZipCode AND (([Phone] = @original_Phone) OR ([Phone] IS NULL AND @original_Phone IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND [AccountStatus] = @original_AccountStatus">
         <DeleteParameters>
             <asp:Parameter Name="original_CustomerID" Type="Int32" />
             <asp:Parameter Name="original_FirstName" Type="String" />
