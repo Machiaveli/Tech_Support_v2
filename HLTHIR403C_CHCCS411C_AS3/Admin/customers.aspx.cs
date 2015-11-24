@@ -22,8 +22,13 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 {
     public partial class newCustomer : System.Web.UI.Page
     {
+        TextBox txtCountryName;
         TextBox txtCountries;
+        TextBox txtCountry;
         DropDownList ddlCountries;
+        DropDownList ddlCountryName;
+        DropDownList ddlStates;
+        DropDownList ddlStateName;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (dropDownSearchFilter.SelectedValue.Trim().Equals("ListAllCustomers"))
@@ -178,6 +183,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
         protected void GridViewCustomers_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             DetailsView1.DataSourceID = "";
             DetailsView1.DataSourceID = "DataSourceUpperGridViewSelectedCustomer";
             DetailsView1.DataBind();
@@ -223,67 +229,16 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
         protected void GridViewCustomers_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             
-            //Dim index = Convert.ToInt32(e.CommandArgument)
-            //Dim row = ProductsGridView.Rows(index)
-            //Dim labelText = CType(row.FindControl("LabelName"), Label).Text
-            //if (e.CommandName == "Edit")
-            //{
-            //    int rowIndex = ((GridViewRow)((LinkButton)e.CommandSource).NamingContainer).RowIndex;
-            //    GridViewCustomers.EditIndex = rowIndex;
-                
-            //    // Re-bind the GridView to put it in edit mode
-            //    GridViewCustomers.DataSourceID = "SqlDataSource1";
-            //    GridViewCustomers.DataBind();
-
-            //    // Get the row at the index. The row will be the
-            //    // row reflected in edit mode.
-            //    GridViewRow editRow = GridViewCustomers.Rows[rowIndex];
-
-            //    GridViewRow row = GridViewCustomers.Rows[rowIndex];
-
-            //    ListItem item = new ListItem();
-            //    item.Text = Server.HtmlDecode(row.Cells[5].Text) + " " +
-            //    Server.HtmlDecode(row.Cells[5].Text);
-
-            //    DropDownList ddlCountries = editRow.FindControl("ddlCountries") as DropDownList;
-            //    // If the contact is not already in the ListBox, add the ListItem 
-            //    // object to the Items collection of the ListBox control. 
-            //    if (!ddlCountries.Items.Contains(item))
-            //    {
-            //        ddlCountries.Items.Add(item);
-            //    }
-                
-                
-            //    // Find your DropDownLists in this edit row
-                
-
-            //}
         }
 
-        protected void LinkButton1_Click(object sender, EventArgs e)
+        protected void Edit_Click(object sender, EventArgs e)
         {
             
         }
 
         protected void GridViewCustomers_RowEditing(object sender, GridViewEditEventArgs e)
         {
-                //Label label1 = (Label)GridViewCustomers.Rows[e.NewEditIndex].FindControl("Label10");
-                //string label1val = label1.Text;
-                //txtCountries = (TextBox)GridViewCustomers.Rows[e.NewEditIndex].FindControl("txtCountries");
-                //ddlCountries = GridViewCustomers.Rows[e.NewEditIndex].FindControl("ddlCountries") as DropDownList;
                 
-
-                //ListItem item = new ListItem();
-                //item.Text = Server.HtmlDecode(row.Cells[5].Text) + " " +
-                //    Server.HtmlDecode(row.Cells[5].Text);
-                //if (!ddlCountries.Items.Contains(item))
-                //{
-                //    ddlCountries.Items.Add(txtCountries.ToString());
-                //}
-                //if (ddlCountries.Items == null)
-                //{
-                //    ddlCountries.Items.Add(txtCountries.ToString());
-                //}
                 GridViewCustomers.EditIndex = e.NewEditIndex;
                 BindGrid();
             
@@ -294,6 +249,12 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             GridViewCustomers.DataSourceID = "SqlDataSource1";
             GridViewCustomers.DataBind();
         }
+
+        //private void BindGridView()
+        //{
+        //    GridViewDisplayCustomers.DataSourceID = "SqlDataSource1";
+        //    GridViewDisplayCustomers.DataBind();
+        //}
 
         protected void GridViewCustomers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
@@ -312,8 +273,41 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                     ddlCountries.DataValueField = "CountryCode";
                     ddlCountries.DataTextField = "Name";
                     ddlCountries.DataBind();
+                    txtCountry = (TextBox)e.Row.FindControl("txtCountries");
+                    ListItem match = ddlCountries.Items.FindByText(txtCountry.Text);
+                    ddlCountries.SelectedValue = match.Value;
 
-                    ddlCountries.SelectedValue = GridViewCustomers.DataKeys[e.Row.RowIndex].Value.ToString();
+                    ddlStates = (DropDownList)e.Row.FindControl("ddlStates");
+                    DropDownList ddlStateName = (DropDownList)e.Row.FindControl("ddlStateName");
+
+                    string query = "SELECT StateName, StateCode FROM States INNER JOIN Countries ON States.CountryCode = Countries.CountryCode WHERE Countries.CountryCode=" + "'" + match.Value + "'";
+                    string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(constr))
+                    {
+                        using (SqlCommand cmd = new SqlCommand(query))
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.Connection = con;
+                            con.Open();
+                            using (SqlDataReader sdr = cmd.ExecuteReader())
+                            {
+                                while (sdr.Read())
+                                {
+                                    ListItem item = new ListItem();
+                                    item.Text = sdr["StateName"].ToString();
+                                    item.Value = sdr["StateCode"].ToString();
+                                    ddlStates.Items.Add(item);
+                                    ddlStateName.Items.Add(item);
+                                }
+                            }
+                            con.Close();
+                        }
+                    }
+                    TextBox txtStateName = (TextBox)e.Row.FindControl("txtStateName");
+                    string state = txtStateName.Text.Trim();
+                    ListItem matchState = ddlStates.Items.FindByText(state);
+                    ddlStateName.SelectedValue = matchState.Value;
+
                 }
             }
         }
@@ -326,17 +320,12 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             {
                 if ((row.RowState & DataControlRowState.Edit) > 0)
                 {
-                    //ddlCountries.DataSourceID = "SqlDataSource3";
-                    //ddlCountries.DataValueField = "CountryCode";
-                    //ddlCountries.DataTextField = "Name";
-                    //ddlCountries.DataBind();
+                    
                     string country = ddlCountries.SelectedValue;
 
                     DropDownList ddlStates = (DropDownList)row.FindControl("ddlStates");
-                    //ddlStates.DataSourceID = SqlDataSource4(Convert.ToString(ddlCountries.SelectedValue);
-                    //ddlStates.DataValueField = "StateCode";
-                    //ddlStates.DataTextField = "StateName";
-                    //ddlStates.DataBind();
+                    ddlStates.Items.Clear();
+                    
 
                     string query = "SELECT StateName, StateCode FROM States INNER JOIN Countries ON States.CountryCode = Countries.CountryCode WHERE Countries.CountryCode=" + "'" + country + "'";
                     string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -364,6 +353,245 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                 }
             }
             
+        }
+
+        protected void ddlCountries_Load(object sender, EventArgs e)
+        {
+            DropDownList ddlCountries = (DropDownList)sender;
+            GridViewRow row = (GridViewRow)ddlCountries.NamingContainer;
+            if (row != null)
+            {
+                if ((row.RowState & DataControlRowState.Edit) > 0)
+                {
+                    if (ddlCountries.Items == null)
+                    {
+                        ddlCountries.Items.Add(txtCountries.Text);
+                    }
+                    
+                }
+            }
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            
+            
+        }
+
+        protected void GridViewCustomers_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            try
+            {
+                TextBox firstName = (TextBox)GridViewCustomers.Rows[e.RowIndex].FindControl("txtFirstName");
+                TextBox lastName = (TextBox)GridViewCustomers.Rows[e.RowIndex].FindControl("txtLastName");
+                TextBox city = (TextBox)GridViewCustomers.Rows[e.RowIndex].FindControl("txtCity");
+                TextBox address = (TextBox)GridViewCustomers.Rows[e.RowIndex].FindControl("txtAddress");
+                TextBox zipCode = (TextBox)GridViewCustomers.Rows[e.RowIndex].FindControl("txtZipCode");
+                TextBox phone = (TextBox)GridViewCustomers.Rows[e.RowIndex].FindControl("txtPhone");
+                TextBox email = (TextBox)GridViewCustomers.Rows[e.RowIndex].FindControl("txtEmail");
+                DropDownList accountStatus = (DropDownList)GridViewCustomers.Rows[e.RowIndex].FindControl("ddlAccountStatus");
+                DropDownList ddlStates = (DropDownList)GridViewCustomers.Rows[e.RowIndex].FindControl("ddlStates");
+                TextBox customerID = (TextBox)GridViewCustomers.Rows[e.RowIndex].FindControl("txtCustomerID");
+
+
+                SqlConnection Conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+
+                Conn.Open();
+
+                string sqlQuery = "UPDATE [Customers] SET [FirstName] = @FirstName,  [LastName] = @LastName, [Address] = @Address, [City] = @City, [State] = @State," +
+                            " [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email, [AccountStatus] = @AccountStatus WHERE [CustomerID] = @CustomerID";
+
+                SqlCommand cmd = new SqlCommand(sqlQuery, Conn);
+
+                cmd.Parameters.AddWithValue("@CustomerID", customerID.Text);
+                cmd.Parameters.AddWithValue("@FirstName", firstName.Text);
+                cmd.Parameters.AddWithValue("@LastName", lastName.Text);
+                cmd.Parameters.AddWithValue("@Address", address.Text);
+                cmd.Parameters.AddWithValue("@City", city.Text);
+                cmd.Parameters.AddWithValue("@State", ddlStates.SelectedValue);
+                cmd.Parameters.AddWithValue("@ZipCode", zipCode.Text);
+                cmd.Parameters.AddWithValue("@Phone", phone.Text);
+                cmd.Parameters.AddWithValue("@Email", email.Text);
+                cmd.Parameters.AddWithValue("@AccountStatus", accountStatus.SelectedValue);
+
+
+                cmd.ExecuteNonQuery();
+
+                 Conn.Close();
+                 Response.Redirect("customers.aspx");
+
+
+            }
+            catch (Exception ex)
+            {
+                labelError.Text = ex.Message;
+            }
+            
+        }
+
+        protected void ddlCountryName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList ddlCountries = (DropDownList)sender;
+            GridViewRow row = (GridViewRow)ddlCountries.NamingContainer;
+            if (row != null)
+            {
+                if ((row.RowState & DataControlRowState.Edit) > 0)
+                {
+
+                    string country = ddlCountries.SelectedValue;
+
+                    DropDownList ddlStates = (DropDownList)row.FindControl("ddlStates");
+                    ddlStates.Items.Clear();
+
+
+                    string query = "SELECT StateName, StateCode FROM States INNER JOIN Countries ON States.CountryCode = Countries.CountryCode WHERE Countries.CountryCode=" + "'" + country + "'";
+                    string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(constr))
+                    {
+                        using (SqlCommand cmd = new SqlCommand(query))
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.Connection = con;
+                            con.Open();
+                            using (SqlDataReader sdr = cmd.ExecuteReader())
+                            {
+                                while (sdr.Read())
+                                {
+                                    ListItem item = new ListItem();
+                                    item.Text = sdr["StateName"].ToString();
+                                    item.Value = sdr["StateCode"].ToString();
+                                    ddlStates.Items.Add(item);
+                                }
+                            }
+                            con.Close();
+                        }
+                    }
+
+                }
+            }
+        }
+
+        protected void ddlCountryName_Load(object sender, EventArgs e)
+        {
+            DropDownList ddlCountries = (DropDownList)sender;
+            GridViewRow row = (GridViewRow)ddlCountries.NamingContainer;
+            if (row != null)
+            {
+                if ((row.RowState & DataControlRowState.Edit) > 0)
+                {
+                    if (ddlCountries.Items == null)
+                    {
+                        ddlCountries.Items.Add(txtCountries.Text);
+                    }
+
+                }
+            }
+        }
+
+        protected void GridViewDisplayCustomers_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            try
+            {
+                TextBox firstName = (TextBox)GridViewDisplayCustomers.Rows[e.RowIndex].FindControl("txtFirstName");
+                TextBox lastName = (TextBox)GridViewDisplayCustomers.Rows[e.RowIndex].FindControl("txtLastName");
+                TextBox city = (TextBox)GridViewDisplayCustomers.Rows[e.RowIndex].FindControl("txtCity");
+                TextBox address = (TextBox)GridViewDisplayCustomers.Rows[e.RowIndex].FindControl("txtAddress");
+                TextBox zipCode = (TextBox)GridViewDisplayCustomers.Rows[e.RowIndex].FindControl("txtZipCode");
+                TextBox phone = (TextBox)GridViewDisplayCustomers.Rows[e.RowIndex].FindControl("txtPhone");
+                TextBox email = (TextBox)GridViewDisplayCustomers.Rows[e.RowIndex].FindControl("txtEmail");
+                DropDownList accountStatus = (DropDownList)GridViewDisplayCustomers.Rows[e.RowIndex].FindControl("ddlAccountStatus");
+                DropDownList ddlStates = (DropDownList)GridViewDisplayCustomers.Rows[e.RowIndex].FindControl("ddlStates");
+                TextBox customerID = (TextBox)GridViewDisplayCustomers.Rows[e.RowIndex].FindControl("txtCustomerID");
+
+
+                SqlConnection Conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+
+                Conn.Open();
+
+                string sqlQuery = "UPDATE [Customers] SET [FirstName] = @FirstName,  [LastName] = @LastName, [Address] = @Address, [City] = @City, [State] = @State," +
+                            " [ZipCode] = @ZipCode, [Phone] = @Phone, [Email] = @Email, [AccountStatus] = @AccountStatus WHERE [CustomerID] = @CustomerID";
+
+                SqlCommand cmd = new SqlCommand(sqlQuery, Conn);
+
+                cmd.Parameters.AddWithValue("@CustomerID", customerID.Text);
+                cmd.Parameters.AddWithValue("@FirstName", firstName.Text);
+                cmd.Parameters.AddWithValue("@LastName", lastName.Text);
+                cmd.Parameters.AddWithValue("@Address", address.Text);
+                cmd.Parameters.AddWithValue("@City", city.Text);
+                cmd.Parameters.AddWithValue("@State", ddlStates.SelectedValue);
+                cmd.Parameters.AddWithValue("@ZipCode", zipCode.Text);
+                cmd.Parameters.AddWithValue("@Phone", phone.Text);
+                cmd.Parameters.AddWithValue("@Email", email.Text);
+                cmd.Parameters.AddWithValue("@AccountStatus", accountStatus.SelectedValue);
+
+
+                cmd.ExecuteNonQuery();
+
+                Conn.Close();
+                Response.Redirect("customers.aspx");
+
+
+            }
+            catch (Exception ex)
+            {
+                labelError.Text = ex.Message;
+            }
+        }
+
+        protected void GridViewDisplayCustomers_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if ((e.Row.RowState & DataControlRowState.Edit) > 0)
+                {
+                    ddlCountries = (DropDownList)e.Row.FindControl("ddlCountries");
+                    ddlCountries.DataSourceID = "SqlDataSource5";
+                    ddlCountries.DataValueField = "CountryCode";
+                    ddlCountries.DataTextField = "Name";
+                    ddlCountries.DataBind();
+                    txtCountry = (TextBox)e.Row.FindControl("txtCountries");
+                    ListItem match = ddlCountries.Items.FindByText(txtCountry.Text);
+                    ddlCountries.SelectedValue = match.Value;
+
+                    ddlStates = (DropDownList)e.Row.FindControl("ddlStates");
+                    DropDownList ddlStateName = (DropDownList)e.Row.FindControl("ddlStateName");
+
+                    string query = "SELECT StateName, StateCode FROM States INNER JOIN Countries ON States.CountryCode = Countries.CountryCode WHERE Countries.CountryCode=" + "'" + match.Value + "'";
+                    string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(constr))
+                    {
+                        using (SqlCommand cmd = new SqlCommand(query))
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.Connection = con;
+                            con.Open();
+                            using (SqlDataReader sdr = cmd.ExecuteReader())
+                            {
+                                while (sdr.Read())
+                                {
+                                    ListItem item = new ListItem();
+                                    item.Text = sdr["StateName"].ToString();
+                                    item.Value = sdr["StateCode"].ToString();
+                                    ddlStates.Items.Add(item);
+                                    ddlStateName.Items.Add(item);
+                                }
+                            }
+                            con.Close();
+                        }
+                    }
+                    TextBox txtStateName = (TextBox)e.Row.FindControl("txtStateName");
+                    string state = txtStateName.Text.Trim();
+                    ListItem matchState = ddlStates.Items.FindByText(state);
+                    ddlStateName.SelectedValue = matchState.Value;
+
+                }
+            }
+        }
+
+        protected void GridViewDisplayCustomers_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            //GridViewDisplayCustomers.EditIndex = e.NewEditIndex;
+            //BindGrid();
         }
 
     }
