@@ -1,6 +1,6 @@
 ﻿
 
-<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="addProduct.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.Admin.addProduct" %>
+<%@ Page Title="Add New Product" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="addProduct.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.Admin.addProduct" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         .auto-style5 {

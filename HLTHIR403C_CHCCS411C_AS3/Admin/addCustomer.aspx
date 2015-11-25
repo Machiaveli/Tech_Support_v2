@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="addCustomer.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.Admin.addCustomer" %>
+﻿<%@ Page Title="Add New Customer" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="addCustomer.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.Admin.addCustomer" %>
 <%@ Import Namespace="System.Data" %>
 <script runat="server">
     // Method that binds the SqlDataSource and the button with this method which allows the admin to add a new customer to the db

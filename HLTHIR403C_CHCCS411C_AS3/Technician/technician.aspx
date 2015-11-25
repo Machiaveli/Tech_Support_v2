@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="technician.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.Technician.technician" %>
+﻿<%@ Page Title="Technician Incidents" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="technician.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.Technician.technician" %>
 <%@ Import Namespace="System.Data" %>
 <script runat="server">
     // Method to insert the updated incident into incidentsHistory table
@@ -54,6 +54,7 @@
     </asp:ScriptManager>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
+            <div class="Margin5Percent">
             <asp:Label ID="lblFilter" runat="server" Text="Filter: "></asp:Label>
             &nbsp;&nbsp;
             <asp:DropDownList ID="dropDownFilter" runat="server" AutoPostBack="True" OnSelectedIndexChanged="dropDownFilter_SelectedIndexChanged">
@@ -64,12 +65,13 @@
                 
 
             </asp:DropDownList>
+            </div>
             &nbsp;&nbsp;
             <br />
             <br />
-            <asp:Label ID="lblDisplayedInfoMessage" runat="server" Font-Size="Large" Text="All My Closed Incidents"></asp:Label>
+            <asp:Label ID="lblDisplayedInfoMessage" runat="server" CssClass="Margin5Percent" Font-Size="Large" Text="All My Closed Incidents"></asp:Label>
             <br />
-            <asp:GridView ID="GridViewIncidentsDisplay" runat="server" AllowPaging="True" AllowSorting="True" OnSorting="GridViewIncidentsDisplay_Sorting" AutoGenerateColumns="False" DataSourceID="DataSourceMyClosedIncidents" CellPadding="4" DataKeyNames="IncidentID, CustomerID" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridViewIncidentsDisplay_SelectedIndexChanged">
+            <asp:GridView ID="GridViewIncidentsDisplay" runat="server" CssClass="GridViewStyleXLarge centered" AllowPaging="True" AllowSorting="True" OnSorting="GridViewIncidentsDisplay_Sorting" AutoGenerateColumns="False" DataSourceID="DataSourceMyClosedIncidents" CellPadding="4" DataKeyNames="IncidentID, CustomerID" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridViewIncidentsDisplay_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:BoundField DataField="IncidentsHistoryID" HeaderText="IncidentsHistoryID" InsertVisible="False" ReadOnly="True" SortExpression="IncidentsHistoryID" />
@@ -98,7 +100,7 @@
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
             <br />
-            <asp:GridView ID="GridViewCustomersIncidents" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IncidentID" DataSourceID="DataSourceListAllIncidents" ForeColor="#333333" GridLines="None">
+            <asp:GridView ID="GridViewCustomersIncidents" runat="server" CssClass="GridViewStyleXLarge" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IncidentID" DataSourceID="DataSourceListAllIncidents" ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" SortExpression="CustomerID" />
@@ -139,7 +141,7 @@
             <asp:SqlDataSource ID="DataSourceAllOpenIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT h.IncidentsHistoryID, i.IncidentID, h.UserID, i.CustomerID, c.FirstName, c.LastName, i.ProductCode, h.LastModified, i.Title, h.Description, h.JobStatus, h.SolutionApplied FROM Incidents AS i INNER JOIN Customers AS c ON c.CustomerID = i.CustomerID INNER JOIN IncidentsHistory AS h ON h.IncidentID = i.IncidentID WHERE (NOT EXISTS (SELECT IncidentsHistoryID, IncidentID, UserID, LastModified, Description, JobStatus, SolutionApplied FROM IncidentsHistory AS h WHERE (IncidentID = i.IncidentID) AND (JobStatus = 'Closed'))) AND (NOT EXISTS (SELECT IncidentsHistoryID, IncidentID, UserID, LastModified, Description, JobStatus, SolutionApplied FROM IncidentsHistory AS h WHERE (IncidentID = i.IncidentID) AND (JobStatus = 'In Progress'))) ORDER BY h.LastModified ASC"></asp:SqlDataSource>
             <asp:SqlDataSource ID="DataSourceAllClosedIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT IncidentsHistory.IncidentsHistoryID, Incidents.IncidentID, Incidents.CustomerID, Incidents.ProductCode, Incidents.Title, IncidentsHistory.UserID, IncidentsHistory.LastModified, IncidentsHistory.Description, IncidentsHistory.JobStatus, IncidentsHistory.SolutionApplied, Customers.CustomerID AS Expr1, Customers.FirstName, Customers.LastName, Users.UserName FROM Incidents INNER JOIN IncidentsHistory ON Incidents.IncidentID = IncidentsHistory.IncidentID INNER JOIN Customers ON Incidents.CustomerID = Customers.CustomerID INNER JOIN Users ON IncidentsHistory.UserID = Users.UserID WHERE (IncidentsHistory.JobStatus = 'Closed') ORDER BY Incidents.IncidentID"></asp:SqlDataSource>
             <asp:SqlDataSource ID="DataSourceAllIncidentsInProgress" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT h.IncidentsHistoryID, i.IncidentID, h.UserID, i.CustomerID, c.FirstName, c.LastName, i.ProductCode, h.LastModified, i.Title, h.Description, h.JobStatus, h.SolutionApplied FROM Incidents AS i INNER JOIN Customers AS c ON c.CustomerID = i.CustomerID INNER JOIN IncidentsHistory AS h ON h.IncidentID = i.IncidentID WHERE (h.JobStatus = 'In Progress') AND (NOT EXISTS (SELECT IncidentsHistoryID, IncidentID, UserID, LastModified, Description, JobStatus, SolutionApplied FROM IncidentsHistory AS h WHERE (IncidentID = i.IncidentID) AND (JobStatus = 'Closed'))) ORDER BY i.IncidentID"></asp:SqlDataSource>
-            <asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="420px" AutoGenerateRows="False" CellPadding="4" DataKeyNames="IncidentID" DataSourceID="DataSourceIncidents" ForeColor="#333333" GridLines="None">
+            <asp:DetailsView ID="DetailsView1" runat="server" CssClass="Margin5Percent" Height="50px" Width="420px" AutoGenerateRows="False" CellPadding="4" DataKeyNames="IncidentID" DataSourceID="DataSourceIncidents" ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <CommandRowStyle BackColor="#E2DED6" Font-Bold="True" />
                 <EditRowStyle BackColor="#999999" />
@@ -157,7 +159,7 @@
                 <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
                 <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
             </asp:DetailsView>
-            <table id="tableIncidentsHistory" class="auto-style3" runat="server">
+            <table id="tableIncidentsHistory" class="auto-style3 Margin5Percent" runat="server">
                 <tr>
                     <td class="auto-style15">
                         <asp:Label ID="lblCustomerID" runat="server" Font-Bold="True" ForeColor="#333333" Text="CustomerID"></asp:Label>
@@ -233,7 +235,7 @@
                 </tr>
             </table>
             <br />
-            <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
+            <asp:Label ID="lblError" runat="server" CssClass="Margin5Percent" ForeColor="Red"></asp:Label>
             <br />
             <asp:SqlDataSource ID="DataSourceIncidents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Incidents.IncidentID, Incidents.CustomerID, Incidents.ProductCode, Incidents.Title, Customers.FirstName, Customers.LastName FROM Customers INNER JOIN Incidents ON Customers.CustomerID = Incidents.CustomerID WHERE ([IncidentID] = @IncidentID)">
                 <SelectParameters>
