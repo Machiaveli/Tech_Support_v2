@@ -201,7 +201,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             DetailsView1.DataSourceID = "DataSourceUpperGridViewSelectedCustomer";
             DetailsView1.DataBind();
 
-            Session["state"] = GridViewCustomers.SelectedRow.Cells[6].Text;
+            //Session["state"] = GridViewCustomers.SelectedRow.Cells[6].Text;
 
             if (GridViewCustomers.SelectedIndex != -1)
             {
@@ -222,9 +222,9 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
         protected void btnRegister_Click(object sender, EventArgs e)
         {
             if (GridViewCustomers.SelectedIndex != -1)
-                Session["selectedCustomer"] = GridViewCustomers.SelectedRow.Cells[0].Text;
+                Session["selectedCustomer"] = GridViewCustomers.SelectedValue;
             else if (GridViewDisplayCustomers.SelectedIndex != -1)
-                Session["selectedCustomer"] = GridViewDisplayCustomers.SelectedRow.Cells[0].Text;
+                Session["selectedCustomer"] = GridViewDisplayCustomers.SelectedValue;
             else
                 Session["selectedCustomer"] = null;
 
