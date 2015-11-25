@@ -6,6 +6,15 @@
  * from the returned search query, this page will also display a list of all previous incidents linked to the selected customer, as well as give the user a list of
  * all products the user has registered. The user can then click the 'ARegister Product' button in order to register a product to a particular user.
  * 
+ * Author: Eunice Yeh - 6100439115
+ * Last Edit: 26/11/2015
+ * Edited: Added regex and validation to customers page
+ * 
+ * 
+ * Author: Sasha Graham - 5105498214
+ * Last Edit: 24/11/2105
+ * Edited: I changed the text boxes into dropDownLists in edit mode. And made the default country there previous country and default state their previous state.
+ *         I also linked the state dropDownList with the countries dropDownList so that when a country is changed, the states will change to the states in that country.
  */
 
 using System;
@@ -266,6 +275,9 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             BindGrid();
         }
 
+        // Sets the dataSource for dropDownList countries when in edit mode. Searches for the value of the country, and then I have done a select query for dropDownList states
+        // where the countryCode matches the value of countries in the country dropDownList. And made the selected value for both dropDownLists the same as the origional value
+        // - Sasha Graham
         protected void GridViewCustomers_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -316,6 +328,8 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             }
         }
 
+        // When the index is changed in dropDownList countries, I get the new selected value and do another select query for the dropDownList States and add the states to the
+        // dropDownList where the new value of countries selected matches the countryCode in States. - Sasha Graham
         protected void ddlCountries_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList ddlCountries = (DropDownList)sender;
@@ -359,6 +373,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             
         }
 
+
         protected void ddlCountries_Load(object sender, EventArgs e)
         {
             DropDownList ddlCountries = (DropDownList)sender;
@@ -382,6 +397,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             
         }
 
+        // Find the control for all the textboxes and dropDownLists and do an update query with the parameters of the textboxes and dropDownLists - Sasha Graham
         protected void GridViewCustomers_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             try
@@ -434,6 +450,8 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             
         }
 
+        // When the index is changed in dropDownList countries, I get the new selected value and do another select query for the dropDownList States and add the states to the
+        // dropDownList where the new value of countries selected matches the countryCode in States. - Sasha Graham
         protected void ddlCountryName_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList ddlCountries = (DropDownList)sender;
@@ -493,6 +511,7 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             }
         }
 
+        // Find the control for all the textboxes and dropDownLists and do an update query with the parameters of the textboxes and dropDownLists - Sasha Graham
         protected void GridViewDisplayCustomers_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             try
@@ -543,6 +562,9 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
             }
         }
 
+        // Sets the dataSource for dropDownList countries when in edit mode. Searches for the value of the country, and then I have done a select query for dropDownList states
+        // where the countryCode matches the value of countries in the country dropDownList. And made the selected value for both dropDownLists the same as the origional value
+        // - Sasha Graham
         protected void GridViewDisplayCustomers_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
