@@ -16,6 +16,7 @@
     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" Width="74px" />
      </div>
     <br />
+        <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Yellow" />
     <br />
     <asp:GridView ID="GridViewCustomers" runat="server" CssClass="GridViewStyleXLarge centered" EditRowStyle-CssClass="GridViewStyleXLarge" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridViewCustomers_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowCommand="GridViewCustomers_RowCommand" OnRowEditing="GridViewCustomers_RowEditing" OnRowCancelingEdit="GridViewCustomers_RowCancelingEdit" OnRowDataBound="GridViewCustomers_RowDataBound" OnRowUpdating="GridViewCustomers_RowUpdating">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
@@ -33,6 +34,7 @@
                 <EditItemTemplate>
                     <asp:TextBox ID="txtFirstName" runat="server" Text='<%# Bind("FirstName") %>'></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ControlToValidate="txtFirstName" ErrorMessage="First Name is a required field." ForeColor="Red">*</asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="nameRegex1" runat="server" ControlToValidate="txtFirstName" ErrorMessage="Please enter a valid first name." ForeColor="Red" ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$">*</asp:RegularExpressionValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("FirstName") %>'></asp:Label>
@@ -42,6 +44,7 @@
                 <EditItemTemplate>
                     <asp:TextBox ID="txtLastName" runat="server" Text='<%# Bind("LastName") %>'></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtLastName" ErrorMessage="Last Name is a required field." ForeColor="Red" >*</asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="nameRegex2" runat="server" ControlToValidate="txtLastName" ErrorMessage="Please enter a valid last name." ForeColor="Red" ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$">*</asp:RegularExpressionValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("LastName") %>'></asp:Label>
@@ -239,6 +242,7 @@
                 <EditItemTemplate>
                     <asp:TextBox ID="txtFirstName" runat="server" Text='<%# Bind("FirstName") %>'></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtFirstName" ErrorMessage="First Name is a required field." ForeColor="Red" >*</asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="nameRegex3" runat="server" ControlToValidate="txtFirstName" ErrorMessage="Please enter a valid first name." ForeColor="Red" ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$">*</asp:RegularExpressionValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("FirstName") %>'></asp:Label>
@@ -248,6 +252,7 @@
                 <EditItemTemplate>
                     <asp:TextBox ID="txtLastName" runat="server" Text='<%# Bind("LastName") %>'></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtLastName" ErrorMessage="Last Name is a required field." ForeColor="Red">*</asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="nameRegex4" runat="server" ControlToValidate="txtLastName" ErrorMessage="Please enter a valid last name." ForeColor="Red" ValidationExpression="^[-'a-zA-ZÀ-ÖØ-öø-ſ]+$">*</asp:RegularExpressionValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("LastName") %>'></asp:Label>
@@ -316,7 +321,6 @@
                 <EditItemTemplate>
                     <asp:TextBox ID="txtPhone" runat="server" Text='<%# Bind("Phone") %>'></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtPhone" ErrorMessage="Phone is a required field." ForeColor="Red">*</asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtPhone" ErrorMessage="You must enter a valid phone number" ForeColor="Red" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}">*</asp:RegularExpressionValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label7" runat="server" Text='<%# Bind("Phone") %>'></asp:Label>
@@ -502,8 +506,6 @@
             <asp:ControlParameter ControlID="GridViewCustomers" Name="selectedCustID" PropertyName="SelectedValue" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <br />
-    <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
     <br />
 &nbsp;
 </asp:Content>
