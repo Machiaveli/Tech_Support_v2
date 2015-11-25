@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="manageAllUsers.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.AccountManagement.manageAllUsers" %>
+﻿<%@ Page Title="Manage All Users" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="manageAllUsers.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.AccountManagement.manageAllUsers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

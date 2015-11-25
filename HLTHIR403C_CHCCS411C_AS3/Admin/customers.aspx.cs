@@ -36,10 +36,14 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
                 txtSearchQuery.Enabled = false;
                 lblSearchRecords.ForeColor = System.Drawing.Color.Gray;
             }
-            btnRegister.Visible = false;
+            if (GridViewCustomers.SelectedIndex == -1 && GridViewDisplayCustomers.SelectedIndex == -1)
+                btnRegister.Visible = false;
+            else
+                btnRegister.Visible = true;
             lblCustomerRegistrationResults.Visible = false;
             lblProductRegistrations.Visible = false;
             lblSelectedCustomersIncidents.Visible = false;
+            labelError.Visible = false;
             
         }
 
@@ -419,12 +423,13 @@ namespace HLTHIR403C_CHCCS411C_AS3.Admin
 
                  Conn.Close();
                  Response.Redirect("customers.aspx");
-
+                 labelError.Visible = false;
 
             }
             catch (Exception ex)
             {
                 labelError.Text = ex.Message;
+                labelError.Visible = true;
             }
             
         }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="products.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.Admin.products" %>
+﻿<%@ Page Title="Manage Products" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="products.aspx.cs" Inherits="HLTHIR403C_CHCCS411C_AS3.Admin.products" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
    
 </asp:Content>
